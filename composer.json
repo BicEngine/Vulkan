@@ -1,0 +1,29 @@
+{
+    "name": "bic/vulkan",
+    "description": "PHP Vulkan bindings",
+    "require": {
+        "php": ">=7.4",
+        "ext-ffi": "*",
+        "serafim/ffi-loader": "^1.0.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "Bic\\Vulkan\\": "src"
+        }
+    },
+    "require-dev": {
+        "nette/php-generator": "~3.3",
+        "fzaninotto/faker": "~1.9",
+        "serafim/ffi-ide-helper": "^1.0",
+        "phpunit/phpunit": "^9.0",
+        "roave/security-advisories": "dev-master",
+        "symfony/var-dumper": "^5.0"
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Bic\\Vulkan\\Tests\\": "tests"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

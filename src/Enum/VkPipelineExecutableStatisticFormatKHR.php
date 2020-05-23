@@ -1,0 +1,24 @@
+<?php
+
+/**
+ * This file is part of Vulkan package.
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+declare(strict_types=1);
+
+namespace Bic\Vulkan\Enum;
+
+final class VkPipelineExecutableStatisticFormatKHR
+{
+    public const VK_PIPELINE_EXECUTABLE_STATISTIC_FORMAT_BOOL32_KHR = 0;
+    public const VK_PIPELINE_EXECUTABLE_STATISTIC_FORMAT_INT64_KHR = 1;
+    public const VK_PIPELINE_EXECUTABLE_STATISTIC_FORMAT_UINT64_KHR = 2;
+    public const VK_PIPELINE_EXECUTABLE_STATISTIC_FORMAT_FLOAT64_KHR = 3;
+    public const VK_PIPELINE_EXECUTABLE_STATISTIC_FORMAT_BEGIN_RANGE_KHR = self::VK_PIPELINE_EXECUTABLE_STATISTIC_FORMAT_BOOL32_KHR;
+    public const VK_PIPELINE_EXECUTABLE_STATISTIC_FORMAT_END_RANGE_KHR = self::VK_PIPELINE_EXECUTABLE_STATISTIC_FORMAT_FLOAT64_KHR;
+    public const VK_PIPELINE_EXECUTABLE_STATISTIC_FORMAT_RANGE_SIZE_KHR = self::VK_PIPELINE_EXECUTABLE_STATISTIC_FORMAT_FLOAT64_KHR - self::VK_PIPELINE_EXECUTABLE_STATISTIC_FORMAT_BOOL32_KHR + 1;
+    public const VK_PIPELINE_EXECUTABLE_STATISTIC_FORMAT_MAX_ENUM_KHR = 0x7FFFFFFF;
+}

@@ -1,0 +1,37 @@
+<?php
+
+/**
+ * This file is part of Vulkan package.
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+declare(strict_types=1);
+
+namespace Bic\Vulkan\Enum;
+
+/**
+ * @since 1.0
+ */
+final class VkBufferUsageFlagBits
+{
+    public const VK_BUFFER_USAGE_TRANSFER_SRC_BIT = 0x00000001;
+    public const VK_BUFFER_USAGE_TRANSFER_DST_BIT = 0x00000002;
+    public const VK_BUFFER_USAGE_UNIFORM_TEXEL_BUFFER_BIT = 0x00000004;
+    public const VK_BUFFER_USAGE_STORAGE_TEXEL_BUFFER_BIT = 0x00000008;
+    public const VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT = 0x00000010;
+    public const VK_BUFFER_USAGE_STORAGE_BUFFER_BIT = 0x00000020;
+    public const VK_BUFFER_USAGE_INDEX_BUFFER_BIT = 0x00000040;
+    public const VK_BUFFER_USAGE_VERTEX_BUFFER_BIT = 0x00000080;
+    public const VK_BUFFER_USAGE_INDIRECT_BUFFER_BIT = 0x00000100;
+    public const VK_BUFFER_USAGE_SHADER_DEVICE_ADDRESS_BIT = 0x00020000;
+    public const VK_BUFFER_USAGE_TRANSFORM_FEEDBACK_BUFFER_BIT_EXT = 0x00000800;
+    public const VK_BUFFER_USAGE_TRANSFORM_FEEDBACK_COUNTER_BUFFER_BIT_EXT = 0x00001000;
+    public const VK_BUFFER_USAGE_CONDITIONAL_RENDERING_BIT_EXT = 0x00000200;
+    public const VK_BUFFER_USAGE_RAY_TRACING_BIT_KHR = 0x00000400;
+    public const VK_BUFFER_USAGE_RAY_TRACING_BIT_NV = self::VK_BUFFER_USAGE_RAY_TRACING_BIT_KHR;
+    public const VK_BUFFER_USAGE_SHADER_DEVICE_ADDRESS_BIT_EXT = self::VK_BUFFER_USAGE_SHADER_DEVICE_ADDRESS_BIT;
+    public const VK_BUFFER_USAGE_SHADER_DEVICE_ADDRESS_BIT_KHR = self::VK_BUFFER_USAGE_SHADER_DEVICE_ADDRESS_BIT;
+    public const VK_BUFFER_USAGE_FLAG_BITS_MAX_ENUM = 0x7FFFFFFF;
+}
