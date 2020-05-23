@@ -12,7 +12,6 @@
         }
     },
     "require-dev": {
-        "nette/php-generator": "~3.3",
         "fzaninotto/faker": "~1.9",
         "serafim/ffi-ide-helper": "^1.0",
         "phpunit/phpunit": "^9.0",

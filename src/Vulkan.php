@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file is part of Vulkan package.
+ * This file is part of BicEngine package.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -22,6 +22,7 @@ use Bic\Vulkan\Core\Vulkan11MethodsTrait;
 use Bic\Vulkan\Core\Vulkan12Interface;
 use Bic\Vulkan\Core\Vulkan12MethodsTrait;
 use Bic\Vulkan\Support\Library;
+use Serafim\FFILoader\Loader;
 
 /**
  * Class Vulkan
@@ -52,7 +53,7 @@ final class Vulkan implements Vulkan10Interface, Vulkan11Interface, Vulkan12Inte
      */
     public function __construct(int $version = self::VK_API_VERSION_1_0)
     {
-        $this->info = Library::load($version);
+        $this->info = (new Loader())->load(new Library($version));
     }
 
     /**

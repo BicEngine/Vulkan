@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file is part of Vulkan package.
+ * This file is part of BicEngine package.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -11,13 +11,10 @@ declare(strict_types=1);
 
 namespace Bic\Vulkan\Support;
 
+use Bic\Vulkan\Vulkan;
 use Serafim\FFILoader\BitDepth;
 use Serafim\FFILoader\Library as BaseLibrary;
-use Serafim\FFILoader\LibraryInformation;
-use Serafim\FFILoader\Loader;
 use Serafim\FFILoader\OperatingSystem;
-use Serafim\FFILoader\Preprocessor;
-use Bic\Vulkan\Vulkan;
 
 /**
  * Class Library
@@ -37,7 +34,7 @@ final class Library extends BaseLibrary
     /**
      * @var string
      */
-    private const LIB_HEADERS = __DIR__ . '/../../resources/headers/vulkan.h';
+    public const LIB_HEADERS = __DIR__ . '/../../resources/headers/vulkan.h';
 
     /**
      * @var int
@@ -52,30 +49,6 @@ final class Library extends BaseLibrary
     public function __construct(int $version)
     {
         $this->version = $version;
-    }
-
-    /**
-     * @return Loader
-     */
-    public static function loader(): Loader
-    {
-        $loader = new Loader();
-
-        /** @var Preprocessor $pre */
-        $pre = $loader->preprocessor();
-        $pre->tolerant = false;
-        $pre->includeFrom(\dirname(self::LIB_HEADERS));
-
-        return $loader;
-    }
-
-    /**
-     * @param int $version
-     * @return LibraryInformation
-     */
-    public static function load(int $version): LibraryInformation
-    {
-        return self::loader()->load(new static($version));
     }
 
     /**
