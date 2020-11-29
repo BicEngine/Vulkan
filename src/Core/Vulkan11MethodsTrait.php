@@ -11,7 +11,7 @@ declare(strict_types=1);
 
 namespace Bic\Vulkan\Core;
 
-use Bic\Vulkan\Enum\VkFormat;
+use Bic\Vulkan\VkFormat;
 use Bic\Vulkan\Version;
 use Bic\Vulkan\VkAllocationCallbacks;
 use Bic\Vulkan\VkAllocationCallbacksPtr;

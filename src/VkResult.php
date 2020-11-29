@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-namespace Bic\Vulkan\Enum;
+namespace Bic\Vulkan;
 
 /**
  * @since 1.0
@@ -104,7 +104,7 @@ final class VkResult
 
             case self::VK_ERROR_OUT_OF_DEVICE_MEMORY:
                 return 'Out of device memory';
-                
+
             case self::VK_ERROR_INITIALIZATION_FAILED:
                 return 'Initialization failed';
 

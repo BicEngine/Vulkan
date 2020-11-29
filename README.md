@@ -17,8 +17,8 @@ connection between your application and the Vulkan library and creating it invol
 application to the driver.
 
 ```php
-use Bic\Vulkan\Enum\VkResult;
-use Bic\Vulkan\Enum\VkStructureType;
+use Bic\Vulkan\VkResult;
+use Bic\Vulkan\VkStructureType;
 use Bic\Vulkan\VkApplicationInfo;
 use Bic\Vulkan\VkInstance;
 use Bic\Vulkan\VkInstanceCreateInfo;

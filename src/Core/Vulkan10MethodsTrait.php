@@ -11,16 +11,16 @@ declare(strict_types=1);
 
 namespace Bic\Vulkan\Core;
 
-use Bic\Vulkan\Enum\VkFilter;
-use Bic\Vulkan\Enum\VkFormat;
-use Bic\Vulkan\Enum\VkImageLayout;
-use Bic\Vulkan\Enum\VkImageTiling;
-use Bic\Vulkan\Enum\VkImageType;
-use Bic\Vulkan\Enum\VkIndexType;
-use Bic\Vulkan\Enum\VkPipelineBindPoint;
-use Bic\Vulkan\Enum\VkPipelineStageFlagBits;
-use Bic\Vulkan\Enum\VkSampleCountFlagBits;
-use Bic\Vulkan\Enum\VkSubpassContents;
+use Bic\Vulkan\VkFilter;
+use Bic\Vulkan\VkFormat;
+use Bic\Vulkan\VkImageLayout;
+use Bic\Vulkan\VkImageTiling;
+use Bic\Vulkan\VkImageType;
+use Bic\Vulkan\VkIndexType;
+use Bic\Vulkan\VkPipelineBindPoint;
+use Bic\Vulkan\VkPipelineStageFlagBits;
+use Bic\Vulkan\VkSampleCountFlagBits;
+use Bic\Vulkan\VkSubpassContents;
 use Bic\Vulkan\Version;
 use Bic\Vulkan\VkAllocationCallbacks;
 use Bic\Vulkan\VkBindSparseInfo;

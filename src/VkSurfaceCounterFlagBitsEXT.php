@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-namespace Bic\Vulkan\Enum;
+namespace Bic\Vulkan;
 
 final class VkSurfaceCounterFlagBitsEXT
 {
