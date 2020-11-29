@@ -30,5 +30,6 @@ interface Vulkan12Interface extends Vulkan12ExtensionsInterface
      */
     public const
         VK_MAX_DRIVER_NAME_SIZE = 256,
-        VK_MAX_DRIVER_INFO_SIZE = 256;
+        VK_MAX_DRIVER_INFO_SIZE = 256
+    ;
 }

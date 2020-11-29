@@ -11,9 +11,6 @@ declare(strict_types=1);
 
 namespace Bic\Vulkan\Core;
 
-/**
- * Interface Vulkan10ExtensionsInterface
- */
 interface Vulkan10ExtensionsInterface
 {
     /**

@@ -11,21 +11,32 @@ declare(strict_types=1);
 
 namespace Bic\Vulkan\Core;
 
-use FFI\CData;
+use Bic\Vulkan\Version;
+use Bic\Vulkan\VkAllocationCallbacks;
 use Bic\Vulkan\VkAllocationCallbacksPtr;
 use Bic\Vulkan\VkBuffer;
+use Bic\Vulkan\VkBufferDeviceAddressInfo;
 use Bic\Vulkan\VkBufferDeviceAddressInfoPtr;
 use Bic\Vulkan\VkCommandBuffer;
 use Bic\Vulkan\VkDevice;
+use Bic\Vulkan\VkDeviceMemoryOpaqueCaptureAddressInfo;
 use Bic\Vulkan\VkDeviceMemoryOpaqueCaptureAddressInfoPtr;
 use Bic\Vulkan\VkQueryPool;
+use Bic\Vulkan\VkRenderPassBeginInfo;
 use Bic\Vulkan\VkRenderPassBeginInfoPtr;
+use Bic\Vulkan\VkRenderPassCreateInfo2;
 use Bic\Vulkan\VkRenderPassCreateInfo2Ptr;
 use Bic\Vulkan\VkSemaphore;
+use Bic\Vulkan\VkSemaphoreSignalInfo;
 use Bic\Vulkan\VkSemaphoreSignalInfoPtr;
+use Bic\Vulkan\VkSemaphoreWaitInfo;
 use Bic\Vulkan\VkSemaphoreWaitInfoPtr;
+use Bic\Vulkan\VkSubpassBeginInfo;
 use Bic\Vulkan\VkSubpassBeginInfoPtr;
+use Bic\Vulkan\VkSubpassEndInfo;
 use Bic\Vulkan\VkSubpassEndInfoPtr;
+use FFI\CData;
+use FFI\CPointer;
 
 /**
  * @mixin Vulkan12Interface
@@ -34,17 +45,17 @@ use Bic\Vulkan\VkSubpassEndInfoPtr;
 trait Vulkan12MethodsTrait
 {
     /**
+     * @param CData|VkCommandBuffer $commandBuffer
+     * @param CData|VkBuffer $buffer
+     * @param int $offset
+     * @param CData|VkBuffer $countBuffer
+     * @param int $countBufferOffset
+     * @param int $maxDrawCount
+     * @param int $stride
+     * @return void
      * @since 1.2
-     * @param CData|VkCommandBuffer $commandBuffer <<Native("VkCommandBuffer")>>
-     * @param CData|VkBuffer $buffer <<Native("VkBuffer")>>
-     * @param int $offset <<Native("VkDeviceSize")>>
-     * @param CData|VkBuffer $countBuffer <<Native("VkBuffer")>>
-     * @param int $countBufferOffset <<Native("VkDeviceSize")>>
-     * @param int $maxDrawCount <<Native("uint32_t")>>
-     * @param int $stride <<Native("uint32_t")>>
-     * @return void <<Native("void")>>
      */
-    public function vkCmdDrawIndirectCount(
+    public static function vkCmdDrawIndirectCount(
         CData $commandBuffer,
         CData $buffer,
         int $offset,
@@ -53,23 +64,24 @@ trait Vulkan12MethodsTrait
         int $maxDrawCount,
         int $stride
     ): void {
-        assert(version_compare($this->info->version, '1.2') >= 0, 'vkCmdDrawIndirectCount required Vulkan v1.2 (current v' . $this->info->version . ')');
+        assert(Version::make(1, 2) >= self::$version, 'vkCmdDrawIndirectCount required Vulkan v1.2');
 
-        $this->info->ffi->vkCmdDrawIndirectCount($commandBuffer, $buffer, $offset, $countBuffer, $countBufferOffset, $maxDrawCount, $stride);
+        self::$ffi->vkCmdDrawIndirectCount($commandBuffer, $buffer, $offset, $countBuffer, $countBufferOffset,
+            $maxDrawCount, $stride);
     }
 
     /**
+     * @param CData|VkCommandBuffer $commandBuffer
+     * @param CData|VkBuffer $buffer
+     * @param int $offset
+     * @param CData|VkBuffer $countBuffer
+     * @param int $countBufferOffset
+     * @param int $maxDrawCount
+     * @param int $stride
+     * @return void
      * @since 1.2
-     * @param CData|VkCommandBuffer $commandBuffer <<Native("VkCommandBuffer")>>
-     * @param CData|VkBuffer $buffer <<Native("VkBuffer")>>
-     * @param int $offset <<Native("VkDeviceSize")>>
-     * @param CData|VkBuffer $countBuffer <<Native("VkBuffer")>>
-     * @param int $countBufferOffset <<Native("VkDeviceSize")>>
-     * @param int $maxDrawCount <<Native("uint32_t")>>
-     * @param int $stride <<Native("uint32_t")>>
-     * @return void <<Native("void")>>
      */
-    public function vkCmdDrawIndexedIndirectCount(
+    public static function vkCmdDrawIndexedIndirectCount(
         CData $commandBuffer,
         CData $buffer,
         int $offset,
@@ -78,159 +90,170 @@ trait Vulkan12MethodsTrait
         int $maxDrawCount,
         int $stride
     ): void {
-        assert(version_compare($this->info->version, '1.2') >= 0, 'vkCmdDrawIndexedIndirectCount required Vulkan v1.2 (current v' . $this->info->version . ')');
+        assert(Version::make(1, 2) >= self::$version, 'vkCmdDrawIndexedIndirectCount required Vulkan v1.2');
 
-        $this->info->ffi->vkCmdDrawIndexedIndirectCount($commandBuffer, $buffer, $offset, $countBuffer, $countBufferOffset, $maxDrawCount, $stride);
+        self::$ffi->vkCmdDrawIndexedIndirectCount($commandBuffer, $buffer, $offset, $countBuffer, $countBufferOffset,
+            $maxDrawCount, $stride);
     }
 
     /**
+     * @param CData|VkDevice $device
+     * @param CPointer<VkRenderPassCreateInfo2>|null $pCreateInfo
+     * @param CPointer<VkAllocationCallbacks>|null $pAllocator
+     * @param CData|null $pRenderPass
+     * @return int
      * @since 1.2
-     * @param CData|VkDevice $device <<Native("VkDevice")>>
-     * @param CData|null|VkRenderPassCreateInfo2Ptr $pCreateInfo <<Native("const VkRenderPassCreateInfo2*")>>
-     * @param CData|null|VkAllocationCallbacksPtr $pAllocator <<Native("const VkAllocationCallbacks*")>>
-     * @param CData|null $pRenderPass <<Native("VkRenderPass*")>>
-     * @return int <<Native("VkResult")>>
      */
-    public function vkCreateRenderPass2(CData $device, ?CData $pCreateInfo, ?CData $pAllocator, ?CData $pRenderPass): int
-    {
-        assert(version_compare($this->info->version, '1.2') >= 0, 'VkRenderPass required Vulkan v1.2 (current v' . $this->info->version . ')');
+    public static function vkCreateRenderPass2(
+        CData $device,
+        ?CData $pCreateInfo,
+        ?CData $pAllocator,
+        ?CData $pRenderPass
+    ): int {
+        assert(Version::make(1, 2) >= self::$version, 'VkRenderPass required Vulkan v1.2');
 
-        return $this->info->ffi->vkCreateRenderPass2($device, $pCreateInfo, $pAllocator, $pRenderPass);
+        return self::$ffi->vkCreateRenderPass2($device, $pCreateInfo, $pAllocator, $pRenderPass);
     }
 
     /**
+     * @param CData|VkCommandBuffer $commandBuffer
+     * @param CPointer<VkRenderPassBeginInfo>|null $pRenderPassBegin
+     * @param CPointer<VkSubpassBeginInfo>|null $pSubpassBeginInfo
+     * @return void
      * @since 1.2
-     * @param CData|VkCommandBuffer $commandBuffer <<Native("VkCommandBuffer")>>
-     * @param CData|null|VkRenderPassBeginInfoPtr $pRenderPassBegin <<Native("const VkRenderPassBeginInfo*")>>
-     * @param CData|null|VkSubpassBeginInfoPtr $pSubpassBeginInfo <<Native("const VkSubpassBeginInfo*")>>
-     * @return void <<Native("void")>>
      */
-    public function vkCmdBeginRenderPass2(CData $commandBuffer, ?CData $pRenderPassBegin, ?CData $pSubpassBeginInfo): void
-    {
-        assert(version_compare($this->info->version, '1.2') >= 0, 'VkSubpassBeginInfo required Vulkan v1.2 (current v' . $this->info->version . ')');
+    public static function vkCmdBeginRenderPass2(
+        CData $commandBuffer,
+        ?CData $pRenderPassBegin,
+        ?CData $pSubpassBeginInfo
+    ): void {
+        assert(Version::make(1, 2) >= self::$version, 'VkSubpassBeginInfo required Vulkan v1.2');
 
-        $this->info->ffi->vkCmdBeginRenderPass2($commandBuffer, $pRenderPassBegin, $pSubpassBeginInfo);
+        self::$ffi->vkCmdBeginRenderPass2($commandBuffer, $pRenderPassBegin, $pSubpassBeginInfo);
     }
 
     /**
+     * @param CData|VkCommandBuffer $commandBuffer
+     * @param CPointer<VkSubpassBeginInfo>|null $pSubpassBeginInfo
+     * @param CPointer<VkSubpassEndInfo>|null $pSubpassEndInfo
+     * @return void
      * @since 1.2
-     * @param CData|VkCommandBuffer $commandBuffer <<Native("VkCommandBuffer")>>
-     * @param CData|null|VkSubpassBeginInfoPtr $pSubpassBeginInfo <<Native("const VkSubpassBeginInfo*")>>
-     * @param CData|null|VkSubpassEndInfoPtr $pSubpassEndInfo <<Native("const VkSubpassEndInfo*")>>
-     * @return void <<Native("void")>>
      */
-    public function vkCmdNextSubpass2(CData $commandBuffer, ?CData $pSubpassBeginInfo, ?CData $pSubpassEndInfo): void
-    {
-        assert(version_compare($this->info->version, '1.2') >= 0, 'VkSubpassEndInfo required Vulkan v1.2 (current v' . $this->info->version . ')');
+    public static function vkCmdNextSubpass2(
+        CData $commandBuffer,
+        ?CData $pSubpassBeginInfo,
+        ?CData $pSubpassEndInfo
+    ): void {
+        assert(Version::make(1, 2) >= self::$version, 'VkSubpassEndInfo required Vulkan v1.2');
 
-        $this->info->ffi->vkCmdNextSubpass2($commandBuffer, $pSubpassBeginInfo, $pSubpassEndInfo);
+        self::$ffi->vkCmdNextSubpass2($commandBuffer, $pSubpassBeginInfo, $pSubpassEndInfo);
     }
 
     /**
+     * @param CData|VkCommandBuffer $commandBuffer
+     * @param CPointer<VkSubpassEndInfo>|null $pSubpassEndInfo
+     * @return void
      * @since 1.2
-     * @param CData|VkCommandBuffer $commandBuffer <<Native("VkCommandBuffer")>>
-     * @param CData|null|VkSubpassEndInfoPtr $pSubpassEndInfo <<Native("const VkSubpassEndInfo*")>>
-     * @return void <<Native("void")>>
      */
-    public function vkCmdEndRenderPass2(CData $commandBuffer, ?CData $pSubpassEndInfo): void
+    public static function vkCmdEndRenderPass2(CData $commandBuffer, ?CData $pSubpassEndInfo): void
     {
-        assert(version_compare($this->info->version, '1.2') >= 0, 'VkSubpassEndInfo required Vulkan v1.2 (current v' . $this->info->version . ')');
+        assert(Version::make(1, 2) >= self::$version, 'VkSubpassEndInfo required Vulkan v1.2');
 
-        $this->info->ffi->vkCmdEndRenderPass2($commandBuffer, $pSubpassEndInfo);
+        self::$ffi->vkCmdEndRenderPass2($commandBuffer, $pSubpassEndInfo);
     }
 
     /**
+     * @param CData|VkDevice $device
+     * @param CData|VkQueryPool $queryPool
+     * @param int $firstQuery
+     * @param int $queryCount
+     * @return void
      * @since 1.2
-     * @param CData|VkDevice $device <<Native("VkDevice")>>
-     * @param CData|VkQueryPool $queryPool <<Native("VkQueryPool")>>
-     * @param int $firstQuery <<Native("uint32_t")>>
-     * @param int $queryCount <<Native("uint32_t")>>
-     * @return void <<Native("void")>>
      */
-    public function vkResetQueryPool(CData $device, CData $queryPool, int $firstQuery, int $queryCount): void
+    public static function vkResetQueryPool(CData $device, CData $queryPool, int $firstQuery, int $queryCount): void
     {
-        assert(version_compare($this->info->version, '1.2') >= 0, 'vkResetQueryPool required Vulkan v1.2 (current v' . $this->info->version . ')');
+        assert(Version::make(1, 2) >= self::$version, 'vkResetQueryPool required Vulkan v1.2');
 
-        $this->info->ffi->vkResetQueryPool($device, $queryPool, $firstQuery, $queryCount);
+        self::$ffi->vkResetQueryPool($device, $queryPool, $firstQuery, $queryCount);
     }
 
     /**
+     * @param CData|VkDevice $device
+     * @param CData|VkSemaphore $semaphore
+     * @param CData|null $pValue
+     * @return int
      * @since 1.2
-     * @param CData|VkDevice $device <<Native("VkDevice")>>
-     * @param CData|VkSemaphore $semaphore <<Native("VkSemaphore")>>
-     * @param CData|null|\FFI\CIntPtr $pValue <<Native("uint64_t*")>>
-     * @return int <<Native("VkResult")>>
      */
-    public function vkGetSemaphoreCounterValue(CData $device, CData $semaphore, ?CData $pValue): int
+    public static function vkGetSemaphoreCounterValue(CData $device, CData $semaphore, ?CData $pValue): int
     {
-        assert(version_compare($this->info->version, '1.2') >= 0, 'vkGetSemaphoreCounterValue required Vulkan v1.2 (current v' . $this->info->version . ')');
+        assert(Version::make(1, 2) >= self::$version, 'vkGetSemaphoreCounterValue required Vulkan v1.2');
 
-        return $this->info->ffi->vkGetSemaphoreCounterValue($device, $semaphore, $pValue);
+        return self::$ffi->vkGetSemaphoreCounterValue($device, $semaphore, $pValue);
     }
 
     /**
+     * @param CData|VkDevice $device
+     * @param CPointer<VkSemaphoreWaitInfo>|null $pWaitInfo
+     * @param int $timeout
+     * @return int
      * @since 1.2
-     * @param CData|VkDevice $device <<Native("VkDevice")>>
-     * @param CData|null|VkSemaphoreWaitInfoPtr $pWaitInfo <<Native("const VkSemaphoreWaitInfo*")>>
-     * @param int $timeout <<Native("uint64_t")>>
-     * @return int <<Native("VkResult")>>
      */
-    public function vkWaitSemaphores(CData $device, ?CData $pWaitInfo, int $timeout): int
+    public static function vkWaitSemaphores(CData $device, ?CData $pWaitInfo, int $timeout): int
     {
-        assert(version_compare($this->info->version, '1.2') >= 0, 'VkSemaphoreWaitInfo required Vulkan v1.2 (current v' . $this->info->version . ')');
+        assert(Version::make(1, 2) >= self::$version, 'VkSemaphoreWaitInfo required Vulkan v1.2');
 
-        return $this->info->ffi->vkWaitSemaphores($device, $pWaitInfo, $timeout);
+        return self::$ffi->vkWaitSemaphores($device, $pWaitInfo, $timeout);
     }
 
     /**
+     * @param CData|VkDevice $device
+     * @param CPointer<VkSemaphoreSignalInfo>|null $pSignalInfo
+     * @return int
      * @since 1.2
-     * @param CData|VkDevice $device <<Native("VkDevice")>>
-     * @param CData|null|VkSemaphoreSignalInfoPtr $pSignalInfo <<Native("const VkSemaphoreSignalInfo*")>>
-     * @return int <<Native("VkResult")>>
      */
-    public function vkSignalSemaphore(CData $device, ?CData $pSignalInfo): int
+    public static function vkSignalSemaphore(CData $device, ?CData $pSignalInfo): int
     {
-        assert(version_compare($this->info->version, '1.2') >= 0, 'VkSemaphoreSignalInfo required Vulkan v1.2 (current v' . $this->info->version . ')');
+        assert(Version::make(1, 2) >= self::$version, 'VkSemaphoreSignalInfo required Vulkan v1.2');
 
-        return $this->info->ffi->vkSignalSemaphore($device, $pSignalInfo);
+        return self::$ffi->vkSignalSemaphore($device, $pSignalInfo);
     }
 
     /**
+     * @param CData|VkDevice $device
+     * @param CPointer<VkBufferDeviceAddressInfo>|null $pInfo
+     * @return int
      * @since 1.2
-     * @param CData|VkDevice $device <<Native("VkDevice")>>
-     * @param CData|null|VkBufferDeviceAddressInfoPtr $pInfo <<Native("const VkBufferDeviceAddressInfo*")>>
-     * @return int <<Native("VkDeviceAddress")>>
      */
-    public function vkGetBufferDeviceAddress(CData $device, ?CData $pInfo): int
+    public static function vkGetBufferDeviceAddress(CData $device, ?CData $pInfo): int
     {
-        assert(version_compare($this->info->version, '1.2') >= 0, 'VkBufferDeviceAddressInfo required Vulkan v1.2 (current v' . $this->info->version . ')');
+        assert(Version::make(1, 2) >= self::$version, 'VkBufferDeviceAddressInfo required Vulkan v1.2');
 
-        return $this->info->ffi->vkGetBufferDeviceAddress($device, $pInfo);
+        return self::$ffi->vkGetBufferDeviceAddress($device, $pInfo);
     }
 
     /**
+     * @param CData|VkDevice $device
+     * @param CPointer<VkBufferDeviceAddressInfo>|null $pInfo
+     * @return int
      * @since 1.2
-     * @param CData|VkDevice $device <<Native("VkDevice")>>
-     * @param CData|null|VkBufferDeviceAddressInfoPtr $pInfo <<Native("const VkBufferDeviceAddressInfo*")>>
-     * @return int <<Native("uint64_t")>>
      */
-    public function vkGetBufferOpaqueCaptureAddress(CData $device, ?CData $pInfo): int
+    public static function vkGetBufferOpaqueCaptureAddress(CData $device, ?CData $pInfo): int
     {
-        assert(version_compare($this->info->version, '1.2') >= 0, 'VkBufferDeviceAddressInfo required Vulkan v1.2 (current v' . $this->info->version . ')');
+        assert(Version::make(1, 2) >= self::$version, 'VkBufferDeviceAddressInfo required Vulkan v1.2');
 
-        return $this->info->ffi->vkGetBufferOpaqueCaptureAddress($device, $pInfo);
+        return self::$ffi->vkGetBufferOpaqueCaptureAddress($device, $pInfo);
     }
 
     /**
+     * @param CData|VkDevice $device
+     * @param CPointer<VkDeviceMemoryOpaqueCaptureAddressInfo>|null $pInfo
+     * @return int
      * @since 1.2
-     * @param CData|VkDevice $device <<Native("VkDevice")>>
-     * @param CData|null|VkDeviceMemoryOpaqueCaptureAddressInfoPtr $pInfo <<Native("const VkDeviceMemoryOpaqueCaptureAddressInfo*")>>
-     * @return int <<Native("uint64_t")>>
      */
-    public function vkGetDeviceMemoryOpaqueCaptureAddress(CData $device, ?CData $pInfo): int
+    public static function vkGetDeviceMemoryOpaqueCaptureAddress(CData $device, ?CData $pInfo): int
     {
-        assert(version_compare($this->info->version, '1.2') >= 0, 'VkDeviceMemoryOpaqueCaptureAddressInfo required Vulkan v1.2 (current v' . $this->info->version . ')');
+        assert(Version::make(1, 2) >= self::$version, 'VkDeviceMemoryOpaqueCaptureAddressInfo required Vulkan v1.2');
 
-        return $this->info->ffi->vkGetDeviceMemoryOpaqueCaptureAddress($device, $pInfo);
+        return self::$ffi->vkGetDeviceMemoryOpaqueCaptureAddress($device, $pInfo);
     }
 }

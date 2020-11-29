@@ -4,19 +4,22 @@
     "require": {
         "php": ">=7.4",
         "ext-ffi": "*",
-        "serafim/ffi-loader": "^1.0.5"
+        "bic-engine/preprocessor": "^0.1"
     },
     "autoload": {
         "psr-4": {
             "Bic\\Vulkan\\": "src"
-        }
+        },
+        "files": [
+            "src/bootstrap.php"
+        ]
     },
     "require-dev": {
         "fzaninotto/faker": "~1.9",
-        "serafim/ffi-ide-helper": "^1.0",
         "phpunit/phpunit": "^9.0",
         "roave/security-advisories": "dev-master",
-        "symfony/var-dumper": "^5.0"
+        "symfony/var-dumper": "^5.0",
+        "vimeo/psalm": "^4.2"
     },
     "autoload-dev": {
         "psr-4": {
@@ -27,6 +30,9 @@
         "branch-alias": {
             "dev-master": "1.0.x-dev"
         }
+    },
+    "scripts": {
+        "test": "@php ./vendor/vimeo/psalm/psalm"
     },
     "minimum-stability": "dev",
     "prefer-stable": true

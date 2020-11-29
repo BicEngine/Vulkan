@@ -11,45 +11,76 @@ declare(strict_types=1);
 
 namespace Bic\Vulkan\Core;
 
-use FFI\CData;
 use Bic\Vulkan\Enum\VkFormat;
+use Bic\Vulkan\Version;
+use Bic\Vulkan\VkAllocationCallbacks;
 use Bic\Vulkan\VkAllocationCallbacksPtr;
+use Bic\Vulkan\VkBindBufferMemoryInfo;
 use Bic\Vulkan\VkBindBufferMemoryInfoPtr;
+use Bic\Vulkan\VkBindImageMemoryInfo;
 use Bic\Vulkan\VkBindImageMemoryInfoPtr;
+use Bic\Vulkan\VkBufferMemoryRequirementsInfo2;
 use Bic\Vulkan\VkBufferMemoryRequirementsInfo2Ptr;
 use Bic\Vulkan\VkCommandBuffer;
 use Bic\Vulkan\VkCommandPool;
 use Bic\Vulkan\VkDescriptorSet;
+use Bic\Vulkan\VkDescriptorSetLayoutCreateInfo;
 use Bic\Vulkan\VkDescriptorSetLayoutCreateInfoPtr;
+use Bic\Vulkan\VkDescriptorSetLayoutSupport;
 use Bic\Vulkan\VkDescriptorSetLayoutSupportPtr;
 use Bic\Vulkan\VkDescriptorUpdateTemplate;
+use Bic\Vulkan\VkDescriptorUpdateTemplateCreateInfo;
 use Bic\Vulkan\VkDescriptorUpdateTemplateCreateInfoPtr;
 use Bic\Vulkan\VkDevice;
+use Bic\Vulkan\VkDeviceQueueInfo2;
 use Bic\Vulkan\VkDeviceQueueInfo2Ptr;
+use Bic\Vulkan\VkExternalBufferProperties;
 use Bic\Vulkan\VkExternalBufferPropertiesPtr;
+use Bic\Vulkan\VkExternalFenceProperties;
 use Bic\Vulkan\VkExternalFencePropertiesPtr;
+use Bic\Vulkan\VkExternalSemaphoreProperties;
 use Bic\Vulkan\VkExternalSemaphorePropertiesPtr;
+use Bic\Vulkan\VkFormatProperties2;
 use Bic\Vulkan\VkFormatProperties2Ptr;
+use Bic\Vulkan\VkImageFormatProperties2;
 use Bic\Vulkan\VkImageFormatProperties2Ptr;
+use Bic\Vulkan\VkImageMemoryRequirementsInfo2;
 use Bic\Vulkan\VkImageMemoryRequirementsInfo2Ptr;
+use Bic\Vulkan\VkImageSparseMemoryRequirementsInfo2;
 use Bic\Vulkan\VkImageSparseMemoryRequirementsInfo2Ptr;
 use Bic\Vulkan\VkInstance;
+use Bic\Vulkan\VkMemoryRequirements2;
 use Bic\Vulkan\VkMemoryRequirements2Ptr;
 use Bic\Vulkan\VkPhysicalDevice;
+use Bic\Vulkan\VkPhysicalDeviceExternalBufferInfo;
 use Bic\Vulkan\VkPhysicalDeviceExternalBufferInfoPtr;
+use Bic\Vulkan\VkPhysicalDeviceExternalFenceInfo;
 use Bic\Vulkan\VkPhysicalDeviceExternalFenceInfoPtr;
+use Bic\Vulkan\VkPhysicalDeviceExternalSemaphoreInfo;
 use Bic\Vulkan\VkPhysicalDeviceExternalSemaphoreInfoPtr;
+use Bic\Vulkan\VkPhysicalDeviceFeatures2;
 use Bic\Vulkan\VkPhysicalDeviceFeatures2Ptr;
+use Bic\Vulkan\VkPhysicalDeviceGroupProperties;
 use Bic\Vulkan\VkPhysicalDeviceGroupPropertiesPtr;
+use Bic\Vulkan\VkPhysicalDeviceImageFormatInfo2;
 use Bic\Vulkan\VkPhysicalDeviceImageFormatInfo2Ptr;
+use Bic\Vulkan\VkPhysicalDeviceMemoryProperties2;
 use Bic\Vulkan\VkPhysicalDeviceMemoryProperties2Ptr;
+use Bic\Vulkan\VkPhysicalDeviceProperties2;
 use Bic\Vulkan\VkPhysicalDeviceProperties2Ptr;
+use Bic\Vulkan\VkPhysicalDeviceSparseImageFormatInfo2;
 use Bic\Vulkan\VkPhysicalDeviceSparseImageFormatInfo2Ptr;
+use Bic\Vulkan\VkQueueFamilyProperties2;
 use Bic\Vulkan\VkQueueFamilyProperties2Ptr;
 use Bic\Vulkan\VkSamplerYcbcrConversion;
+use Bic\Vulkan\VkSamplerYcbcrConversionCreateInfo;
 use Bic\Vulkan\VkSamplerYcbcrConversionCreateInfoPtr;
+use Bic\Vulkan\VkSparseImageFormatProperties2;
 use Bic\Vulkan\VkSparseImageFormatProperties2Ptr;
+use Bic\Vulkan\VkSparseImageMemoryRequirements2;
 use Bic\Vulkan\VkSparseImageMemoryRequirements2Ptr;
+use FFI\CData;
+use FFI\CPointer;
 
 /**
  * @mixin Vulkan11Interface
@@ -58,86 +89,92 @@ use Bic\Vulkan\VkSparseImageMemoryRequirements2Ptr;
 trait Vulkan11MethodsTrait
 {
     /**
+     * @param CData|null $pApiVersion
+     * @return int
      * @since 1.1
-     * @param CData|null|\FFI\CIntPtr $pApiVersion <<Native("uint32_t*")>>
-     * @return int <<Native("VkResult")>>
      */
-    public function vkEnumerateInstanceVersion(?CData $pApiVersion): int
+    public static function vkEnumerateInstanceVersion(?CData $pApiVersion): int
     {
-        assert(version_compare($this->info->version, '1.1') >= 0, 'vkEnumerateInstanceVersion required Vulkan v1.1 (current v' . $this->info->version . ')');
+        assert(Version::make(1, 1) >= self::$version, 'vkEnumerateInstanceVersion required Vulkan v1.1');
 
-        return $this->info->ffi->vkEnumerateInstanceVersion($pApiVersion);
+        return self::$ffi->vkEnumerateInstanceVersion($pApiVersion);
     }
 
     /**
+     * @param CData|VkDevice $device
+     * @param int $bindInfoCount
+     * @param CPointer<VkBindBufferMemoryInfo>|null $pBindInfos
+     * @return int
      * @since 1.1
-     * @param CData|VkDevice $device <<Native("VkDevice")>>
-     * @param int $bindInfoCount <<Native("uint32_t")>>
-     * @param CData|null|VkBindBufferMemoryInfoPtr $pBindInfos <<Native("const VkBindBufferMemoryInfo*")>>
-     * @return int <<Native("VkResult")>>
      */
-    public function vkBindBufferMemory2(CData $device, int $bindInfoCount, ?CData $pBindInfos): int
+    public static function vkBindBufferMemory2(CData $device, int $bindInfoCount, ?CData $pBindInfos): int
     {
-        assert(version_compare($this->info->version, '1.1') >= 0, 'VkBindBufferMemoryInfo required Vulkan v1.1 (current v' . $this->info->version . ')');
+        assert(Version::make(1, 1) >= self::$version, 'VkBindBufferMemoryInfo required Vulkan v1.1');
 
-        return $this->info->ffi->vkBindBufferMemory2($device, $bindInfoCount, $pBindInfos);
+        return self::$ffi->vkBindBufferMemory2($device, $bindInfoCount, $pBindInfos);
     }
 
     /**
+     * @param CData|VkDevice $device
+     * @param int $bindInfoCount
+     * @param CPointer<VkBindImageMemoryInfo>|null $pBindInfos
+     * @return int
      * @since 1.1
-     * @param CData|VkDevice $device <<Native("VkDevice")>>
-     * @param int $bindInfoCount <<Native("uint32_t")>>
-     * @param CData|null|VkBindImageMemoryInfoPtr $pBindInfos <<Native("const VkBindImageMemoryInfo*")>>
-     * @return int <<Native("VkResult")>>
      */
-    public function vkBindImageMemory2(CData $device, int $bindInfoCount, ?CData $pBindInfos): int
+    public static function vkBindImageMemory2(CData $device, int $bindInfoCount, ?CData $pBindInfos): int
     {
-        assert(version_compare($this->info->version, '1.1') >= 0, 'VkBindImageMemoryInfo required Vulkan v1.1 (current v' . $this->info->version . ')');
+        assert(Version::make(1, 1) >= self::$version, 'VkBindImageMemoryInfo required Vulkan v1.1');
 
-        return $this->info->ffi->vkBindImageMemory2($device, $bindInfoCount, $pBindInfos);
+        return self::$ffi->vkBindImageMemory2($device, $bindInfoCount, $pBindInfos);
     }
 
     /**
+     * @param CData|VkDevice $device
+     * @param int $heapIndex
+     * @param int $localDeviceIndex
+     * @param int $remoteDeviceIndex
+     * @param CData|null $pPeerMemoryFeatures
+     * @return void
      * @since 1.1
-     * @param CData|VkDevice $device <<Native("VkDevice")>>
-     * @param int $heapIndex <<Native("uint32_t")>>
-     * @param int $localDeviceIndex <<Native("uint32_t")>>
-     * @param int $remoteDeviceIndex <<Native("uint32_t")>>
-     * @param CData|null $pPeerMemoryFeatures <<Native("VkPeerMemoryFeatureFlags*")>>
-     * @return void <<Native("void")>>
      */
-    public function vkGetDeviceGroupPeerMemoryFeatures(CData $device, int $heapIndex, int $localDeviceIndex, int $remoteDeviceIndex, ?CData $pPeerMemoryFeatures): void
-    {
-        assert(version_compare($this->info->version, '1.1') >= 0, 'VkPeerMemoryFeatureFlags required Vulkan v1.1 (current v' . $this->info->version . ')');
+    public static function vkGetDeviceGroupPeerMemoryFeatures(
+        CData $device,
+        int $heapIndex,
+        int $localDeviceIndex,
+        int $remoteDeviceIndex,
+        ?CData $pPeerMemoryFeatures
+    ): void {
+        assert(Version::make(1, 1) >= self::$version, 'VkPeerMemoryFeatureFlags required Vulkan v1.1');
 
-        $this->info->ffi->vkGetDeviceGroupPeerMemoryFeatures($device, $heapIndex, $localDeviceIndex, $remoteDeviceIndex, $pPeerMemoryFeatures);
+        self::$ffi->vkGetDeviceGroupPeerMemoryFeatures($device, $heapIndex, $localDeviceIndex, $remoteDeviceIndex,
+            $pPeerMemoryFeatures);
     }
 
     /**
+     * @param CData|VkCommandBuffer $commandBuffer
+     * @param int $deviceMask
+     * @return void
      * @since 1.1
-     * @param CData|VkCommandBuffer $commandBuffer <<Native("VkCommandBuffer")>>
-     * @param int $deviceMask <<Native("uint32_t")>>
-     * @return void <<Native("void")>>
      */
-    public function vkCmdSetDeviceMask(CData $commandBuffer, int $deviceMask): void
+    public static function vkCmdSetDeviceMask(CData $commandBuffer, int $deviceMask): void
     {
-        assert(version_compare($this->info->version, '1.1') >= 0, 'vkCmdSetDeviceMask required Vulkan v1.1 (current v' . $this->info->version . ')');
+        assert(Version::make(1, 1) >= self::$version, 'vkCmdSetDeviceMask required Vulkan v1.1');
 
-        $this->info->ffi->vkCmdSetDeviceMask($commandBuffer, $deviceMask);
+        self::$ffi->vkCmdSetDeviceMask($commandBuffer, $deviceMask);
     }
 
     /**
+     * @param CData|VkCommandBuffer $commandBuffer
+     * @param int $baseGroupX
+     * @param int $baseGroupY
+     * @param int $baseGroupZ
+     * @param int $groupCountX
+     * @param int $groupCountY
+     * @param int $groupCountZ
+     * @return void
      * @since 1.1
-     * @param CData|VkCommandBuffer $commandBuffer <<Native("VkCommandBuffer")>>
-     * @param int $baseGroupX <<Native("uint32_t")>>
-     * @param int $baseGroupY <<Native("uint32_t")>>
-     * @param int $baseGroupZ <<Native("uint32_t")>>
-     * @param int $groupCountX <<Native("uint32_t")>>
-     * @param int $groupCountY <<Native("uint32_t")>>
-     * @param int $groupCountZ <<Native("uint32_t")>>
-     * @return void <<Native("void")>>
      */
-    public function vkCmdDispatchBase(
+    public static function vkCmdDispatchBase(
         CData $commandBuffer,
         int $baseGroupX,
         int $baseGroupY,
@@ -146,320 +183,383 @@ trait Vulkan11MethodsTrait
         int $groupCountY,
         int $groupCountZ
     ): void {
-        assert(version_compare($this->info->version, '1.1') >= 0, 'vkCmdDispatchBase required Vulkan v1.1 (current v' . $this->info->version . ')');
+        assert(Version::make(1, 1) >= self::$version, 'vkCmdDispatchBase required Vulkan v1.1');
 
-        $this->info->ffi->vkCmdDispatchBase($commandBuffer, $baseGroupX, $baseGroupY, $baseGroupZ, $groupCountX, $groupCountY, $groupCountZ);
+        self::$ffi->vkCmdDispatchBase($commandBuffer, $baseGroupX, $baseGroupY, $baseGroupZ, $groupCountX, $groupCountY,
+            $groupCountZ);
     }
 
     /**
+     * @param CData|VkInstance $instance
+     * @param CData|null $pPhysicalDeviceGroupCount
+     * @param CPointer<VkPhysicalDeviceGroupProperties>|null $pPhysicalDeviceGroupProperties
+     * @return int
      * @since 1.1
-     * @param CData|VkInstance $instance <<Native("VkInstance")>>
-     * @param CData|null|\FFI\CIntPtr $pPhysicalDeviceGroupCount <<Native("uint32_t*")>>
-     * @param CData|null|VkPhysicalDeviceGroupPropertiesPtr $pPhysicalDeviceGroupProperties <<Native("VkPhysicalDeviceGroupProperties*")>>
-     * @return int <<Native("VkResult")>>
      */
-    public function vkEnumeratePhysicalDeviceGroups(CData $instance, ?CData $pPhysicalDeviceGroupCount, ?CData $pPhysicalDeviceGroupProperties): int
-    {
-        assert(version_compare($this->info->version, '1.1') >= 0, 'VkPhysicalDeviceGroupProperties required Vulkan v1.1 (current v' . $this->info->version . ')');
+    public static function vkEnumeratePhysicalDeviceGroups(
+        CData $instance,
+        ?CData $pPhysicalDeviceGroupCount,
+        ?CData $pPhysicalDeviceGroupProperties
+    ): int {
+        assert(Version::make(1, 1) >= self::$version, 'VkPhysicalDeviceGroupProperties required Vulkan v1.1');
 
-        return $this->info->ffi->vkEnumeratePhysicalDeviceGroups($instance, $pPhysicalDeviceGroupCount, $pPhysicalDeviceGroupProperties);
+        return self::$ffi->vkEnumeratePhysicalDeviceGroups($instance, $pPhysicalDeviceGroupCount,
+            $pPhysicalDeviceGroupProperties);
     }
 
     /**
+     * @param CData|VkDevice $device
+     * @param CPointer<VkImageMemoryRequirementsInfo2>|null $pInfo
+     * @param CPointer<VkMemoryRequirements2>|null $pMemoryRequirements
+     * @return void
      * @since 1.1
-     * @param CData|VkDevice $device <<Native("VkDevice")>>
-     * @param CData|null|VkImageMemoryRequirementsInfo2Ptr $pInfo <<Native("const VkImageMemoryRequirementsInfo2*")>>
-     * @param CData|null|VkMemoryRequirements2Ptr $pMemoryRequirements <<Native("VkMemoryRequirements2*")>>
-     * @return void <<Native("void")>>
      */
-    public function vkGetImageMemoryRequirements2(CData $device, ?CData $pInfo, ?CData $pMemoryRequirements): void
-    {
-        assert(version_compare($this->info->version, '1.1') >= 0, 'VkMemoryRequirements2 required Vulkan v1.1 (current v' . $this->info->version . ')');
+    public static function vkGetImageMemoryRequirements2(
+        CData $device,
+        ?CData $pInfo,
+        ?CData $pMemoryRequirements
+    ): void {
+        assert(Version::make(1, 1) >= self::$version, 'VkMemoryRequirements2 required Vulkan v1.1');
 
-        $this->info->ffi->vkGetImageMemoryRequirements2($device, $pInfo, $pMemoryRequirements);
+        self::$ffi->vkGetImageMemoryRequirements2($device, $pInfo, $pMemoryRequirements);
     }
 
     /**
+     * @param CData|VkDevice $device
+     * @param CPointer<VkBufferMemoryRequirementsInfo2>|null $pInfo
+     * @param CPointer<VkMemoryRequirements2>|null $pMemoryRequirements
+     * @return void
      * @since 1.1
-     * @param CData|VkDevice $device <<Native("VkDevice")>>
-     * @param CData|null|VkBufferMemoryRequirementsInfo2Ptr $pInfo <<Native("const VkBufferMemoryRequirementsInfo2*")>>
-     * @param CData|null|VkMemoryRequirements2Ptr $pMemoryRequirements <<Native("VkMemoryRequirements2*")>>
-     * @return void <<Native("void")>>
      */
-    public function vkGetBufferMemoryRequirements2(CData $device, ?CData $pInfo, ?CData $pMemoryRequirements): void
-    {
-        assert(version_compare($this->info->version, '1.1') >= 0, 'VkMemoryRequirements2 required Vulkan v1.1 (current v' . $this->info->version . ')');
+    public static function vkGetBufferMemoryRequirements2(
+        CData $device,
+        ?CData $pInfo,
+        ?CData $pMemoryRequirements
+    ): void {
+        assert(Version::make(1, 1) >= self::$version, 'VkMemoryRequirements2 required Vulkan v1.1');
 
-        $this->info->ffi->vkGetBufferMemoryRequirements2($device, $pInfo, $pMemoryRequirements);
+        self::$ffi->vkGetBufferMemoryRequirements2($device, $pInfo, $pMemoryRequirements);
     }
 
     /**
+     * @param CData|VkDevice $device
+     * @param CPointer<VkImageSparseMemoryRequirementsInfo2>|null $pInfo
+     * @param CData|null $pSparseMemoryRequirementCount
+     * @param CPointer<VkSparseImageMemoryRequirements2>|null $pSparseMemoryRequirements
+     * @return void
      * @since 1.1
-     * @param CData|VkDevice $device <<Native("VkDevice")>>
-     * @param CData|null|VkImageSparseMemoryRequirementsInfo2Ptr $pInfo <<Native("const VkImageSparseMemoryRequirementsInfo2*")>>
-     * @param CData|null|\FFI\CIntPtr $pSparseMemoryRequirementCount <<Native("uint32_t*")>>
-     * @param CData|null|VkSparseImageMemoryRequirements2Ptr $pSparseMemoryRequirements <<Native("VkSparseImageMemoryRequirements2*")>>
-     * @return void <<Native("void")>>
      */
-    public function vkGetImageSparseMemoryRequirements2(CData $device, ?CData $pInfo, ?CData $pSparseMemoryRequirementCount, ?CData $pSparseMemoryRequirements): void
-    {
-        assert(version_compare($this->info->version, '1.1') >= 0, 'VkSparseImageMemoryRequirements2 required Vulkan v1.1 (current v' . $this->info->version . ')');
+    public static function vkGetImageSparseMemoryRequirements2(
+        CData $device,
+        ?CData $pInfo,
+        ?CData $pSparseMemoryRequirementCount,
+        ?CData $pSparseMemoryRequirements
+    ): void {
+        assert(Version::make(1, 1) >= self::$version, 'VkSparseImageMemoryRequirements2 required Vulkan v1.1');
 
-        $this->info->ffi->vkGetImageSparseMemoryRequirements2($device, $pInfo, $pSparseMemoryRequirementCount, $pSparseMemoryRequirements);
+        self::$ffi->vkGetImageSparseMemoryRequirements2($device, $pInfo, $pSparseMemoryRequirementCount,
+            $pSparseMemoryRequirements);
     }
 
     /**
+     * @param CData|VkPhysicalDevice $physicalDevice
+     * @param CPointer<VkPhysicalDeviceFeatures2>|null $pFeatures
+     * @return void
      * @since 1.1
-     * @param CData|VkPhysicalDevice $physicalDevice <<Native("VkPhysicalDevice")>>
-     * @param CData|null|VkPhysicalDeviceFeatures2Ptr $pFeatures <<Native("VkPhysicalDeviceFeatures2*")>>
-     * @return void <<Native("void")>>
      */
-    public function vkGetPhysicalDeviceFeatures2(CData $physicalDevice, ?CData $pFeatures): void
+    public static function vkGetPhysicalDeviceFeatures2(CData $physicalDevice, ?CData $pFeatures): void
     {
-        assert(version_compare($this->info->version, '1.1') >= 0, 'VkPhysicalDeviceFeatures2 required Vulkan v1.1 (current v' . $this->info->version . ')');
+        assert(Version::make(1, 1) >= self::$version, 'VkPhysicalDeviceFeatures2 required Vulkan v1.1');
 
-        $this->info->ffi->vkGetPhysicalDeviceFeatures2($physicalDevice, $pFeatures);
+        self::$ffi->vkGetPhysicalDeviceFeatures2($physicalDevice, $pFeatures);
     }
 
     /**
+     * @param CData|VkPhysicalDevice $physicalDevice
+     * @param CPointer<VkPhysicalDeviceProperties2>|null $pProperties
+     * @return void
      * @since 1.1
-     * @param CData|VkPhysicalDevice $physicalDevice <<Native("VkPhysicalDevice")>>
-     * @param CData|null|VkPhysicalDeviceProperties2Ptr $pProperties <<Native("VkPhysicalDeviceProperties2*")>>
-     * @return void <<Native("void")>>
      */
-    public function vkGetPhysicalDeviceProperties2(CData $physicalDevice, ?CData $pProperties): void
+    public static function vkGetPhysicalDeviceProperties2(CData $physicalDevice, ?CData $pProperties): void
     {
-        assert(version_compare($this->info->version, '1.1') >= 0, 'VkPhysicalDeviceProperties2 required Vulkan v1.1 (current v' . $this->info->version . ')');
+        assert(Version::make(1, 1) >= self::$version, 'VkPhysicalDeviceProperties2 required Vulkan v1.1');
 
-        $this->info->ffi->vkGetPhysicalDeviceProperties2($physicalDevice, $pProperties);
+        self::$ffi->vkGetPhysicalDeviceProperties2($physicalDevice, $pProperties);
     }
 
     /**
+     * @param CData|VkPhysicalDevice $physicalDevice
+     * @param int $format
+     * @param CPointer<VkFormatProperties2>|null $pFormatProperties
+     * @return void
      * @since 1.1
      * @psalm-param VkFormat::* $format
      *
-     * @param CData|VkPhysicalDevice $physicalDevice <<Native("VkPhysicalDevice")>>
-     * @param int $format <<Native("VkFormat")>>
-     * @param CData|null|VkFormatProperties2Ptr $pFormatProperties <<Native("VkFormatProperties2*")>>
-     * @return void <<Native("void")>>
      */
-    public function vkGetPhysicalDeviceFormatProperties2(CData $physicalDevice, int $format, ?CData $pFormatProperties): void
-    {
-        assert(version_compare($this->info->version, '1.1') >= 0, 'VkFormatProperties2 required Vulkan v1.1 (current v' . $this->info->version . ')');
+    public static function vkGetPhysicalDeviceFormatProperties2(
+        CData $physicalDevice,
+        int $format,
+        ?CData $pFormatProperties
+    ): void {
+        assert(Version::make(1, 1) >= self::$version, 'VkFormatProperties2 required Vulkan v1.1');
 
-        $this->info->ffi->vkGetPhysicalDeviceFormatProperties2($physicalDevice, $format, $pFormatProperties);
+        self::$ffi->vkGetPhysicalDeviceFormatProperties2($physicalDevice, $format, $pFormatProperties);
     }
 
     /**
+     * @param CData|VkPhysicalDevice $physicalDevice
+     * @param CPointer<VkPhysicalDeviceImageFormatInfo2>|null $pImageFormatInfo
+     * @param CPointer<VkImageFormatProperties2>|null $pImageFormatProperties
+     * @return int
      * @since 1.1
-     * @param CData|VkPhysicalDevice $physicalDevice <<Native("VkPhysicalDevice")>>
-     * @param CData|null|VkPhysicalDeviceImageFormatInfo2Ptr $pImageFormatInfo <<Native("const VkPhysicalDeviceImageFormatInfo2*")>>
-     * @param CData|null|VkImageFormatProperties2Ptr $pImageFormatProperties <<Native("VkImageFormatProperties2*")>>
-     * @return int <<Native("VkResult")>>
      */
-    public function vkGetPhysicalDeviceImageFormatProperties2(CData $physicalDevice, ?CData $pImageFormatInfo, ?CData $pImageFormatProperties): int
-    {
-        assert(version_compare($this->info->version, '1.1') >= 0, 'VkImageFormatProperties2 required Vulkan v1.1 (current v' . $this->info->version . ')');
+    public static function vkGetPhysicalDeviceImageFormatProperties2(
+        CData $physicalDevice,
+        ?CData $pImageFormatInfo,
+        ?CData $pImageFormatProperties
+    ): int {
+        assert(Version::make(1, 1) >= self::$version, 'VkImageFormatProperties2 required Vulkan v1.1');
 
-        return $this->info->ffi->vkGetPhysicalDeviceImageFormatProperties2($physicalDevice, $pImageFormatInfo, $pImageFormatProperties);
+        return self::$ffi->vkGetPhysicalDeviceImageFormatProperties2($physicalDevice, $pImageFormatInfo,
+            $pImageFormatProperties);
     }
 
     /**
+     * @param CData|VkPhysicalDevice $physicalDevice
+     * @param CData|null $pQueueFamilyPropertyCount
+     * @param CPointer<VkQueueFamilyProperties2>|null $pQueueFamilyProperties
+     * @return void
      * @since 1.1
-     * @param CData|VkPhysicalDevice $physicalDevice <<Native("VkPhysicalDevice")>>
-     * @param CData|null|\FFI\CIntPtr $pQueueFamilyPropertyCount <<Native("uint32_t*")>>
-     * @param CData|null|VkQueueFamilyProperties2Ptr $pQueueFamilyProperties <<Native("VkQueueFamilyProperties2*")>>
-     * @return void <<Native("void")>>
      */
-    public function vkGetPhysicalDeviceQueueFamilyProperties2(CData $physicalDevice, ?CData $pQueueFamilyPropertyCount, ?CData $pQueueFamilyProperties): void
-    {
-        assert(version_compare($this->info->version, '1.1') >= 0, 'VkQueueFamilyProperties2 required Vulkan v1.1 (current v' . $this->info->version . ')');
+    public static function vkGetPhysicalDeviceQueueFamilyProperties2(
+        CData $physicalDevice,
+        ?CData $pQueueFamilyPropertyCount,
+        ?CData $pQueueFamilyProperties
+    ): void {
+        assert(Version::make(1, 1) >= self::$version, 'VkQueueFamilyProperties2 required Vulkan v1.1');
 
-        $this->info->ffi->vkGetPhysicalDeviceQueueFamilyProperties2($physicalDevice, $pQueueFamilyPropertyCount, $pQueueFamilyProperties);
+        self::$ffi->vkGetPhysicalDeviceQueueFamilyProperties2($physicalDevice, $pQueueFamilyPropertyCount,
+            $pQueueFamilyProperties);
     }
 
     /**
+     * @param CData|VkPhysicalDevice $physicalDevice
+     * @param CPointer<VkPhysicalDeviceMemoryProperties2>|null $pMemoryProperties
+     * @return void
      * @since 1.1
-     * @param CData|VkPhysicalDevice $physicalDevice <<Native("VkPhysicalDevice")>>
-     * @param CData|null|VkPhysicalDeviceMemoryProperties2Ptr $pMemoryProperties <<Native("VkPhysicalDeviceMemoryProperties2*")>>
-     * @return void <<Native("void")>>
      */
-    public function vkGetPhysicalDeviceMemoryProperties2(CData $physicalDevice, ?CData $pMemoryProperties): void
+    public static function vkGetPhysicalDeviceMemoryProperties2(CData $physicalDevice, ?CData $pMemoryProperties): void
     {
-        assert(version_compare($this->info->version, '1.1') >= 0, 'VkPhysicalDeviceMemoryProperties2 required Vulkan v1.1 (current v' . $this->info->version . ')');
+        assert(Version::make(1, 1) >= self::$version, 'VkPhysicalDeviceMemoryProperties2 required Vulkan v1.1');
 
-        $this->info->ffi->vkGetPhysicalDeviceMemoryProperties2($physicalDevice, $pMemoryProperties);
+        self::$ffi->vkGetPhysicalDeviceMemoryProperties2($physicalDevice, $pMemoryProperties);
     }
 
     /**
+     * @param CData|VkPhysicalDevice $physicalDevice
+     * @param CPointer<VkPhysicalDeviceSparseImageFormatInfo2>|null $pFormatInfo
+     * @param CData|null $pPropertyCount
+     * @param CPointer<VkSparseImageFormatProperties2>|null $pProperties
+     * @return void
      * @since 1.1
-     * @param CData|VkPhysicalDevice $physicalDevice <<Native("VkPhysicalDevice")>>
-     * @param CData|null|VkPhysicalDeviceSparseImageFormatInfo2Ptr $pFormatInfo <<Native("const VkPhysicalDeviceSparseImageFormatInfo2*")>>
-     * @param CData|null|\FFI\CIntPtr $pPropertyCount <<Native("uint32_t*")>>
-     * @param CData|null|VkSparseImageFormatProperties2Ptr $pProperties <<Native("VkSparseImageFormatProperties2*")>>
-     * @return void <<Native("void")>>
      */
-    public function vkGetPhysicalDeviceSparseImageFormatProperties2(CData $physicalDevice, ?CData $pFormatInfo, ?CData $pPropertyCount, ?CData $pProperties): void
-    {
-        assert(version_compare($this->info->version, '1.1') >= 0, 'VkSparseImageFormatProperties2 required Vulkan v1.1 (current v' . $this->info->version . ')');
+    public static function vkGetPhysicalDeviceSparseImageFormatProperties2(
+        CData $physicalDevice,
+        ?CData $pFormatInfo,
+        ?CData $pPropertyCount,
+        ?CData $pProperties
+    ): void {
+        assert(Version::make(1, 1) >= self::$version, 'VkSparseImageFormatProperties2 required Vulkan v1.1');
 
-        $this->info->ffi->vkGetPhysicalDeviceSparseImageFormatProperties2($physicalDevice, $pFormatInfo, $pPropertyCount, $pProperties);
+        self::$ffi->vkGetPhysicalDeviceSparseImageFormatProperties2($physicalDevice, $pFormatInfo, $pPropertyCount,
+            $pProperties);
     }
 
     /**
+     * @param CData|VkDevice $device
+     * @param CData|VkCommandPool $commandPool
+     * @param int $flags
+     * @return void
      * @since 1.1
-     * @param CData|VkDevice $device <<Native("VkDevice")>>
-     * @param CData|VkCommandPool $commandPool <<Native("VkCommandPool")>>
-     * @param int $flags <<Native("VkCommandPoolTrimFlags")>>
-     * @return void <<Native("void")>>
      */
-    public function vkTrimCommandPool(CData $device, CData $commandPool, int $flags): void
+    public static function vkTrimCommandPool(CData $device, CData $commandPool, int $flags): void
     {
-        assert(version_compare($this->info->version, '1.1') >= 0, 'vkTrimCommandPool required Vulkan v1.1 (current v' . $this->info->version . ')');
+        assert(Version::make(1, 1) >= self::$version, 'vkTrimCommandPool required Vulkan v1.1');
 
-        $this->info->ffi->vkTrimCommandPool($device, $commandPool, $flags);
+        self::$ffi->vkTrimCommandPool($device, $commandPool, $flags);
     }
 
     /**
+     * @param CData|VkDevice $device
+     * @param CPointer<VkDeviceQueueInfo2>|null $pQueueInfo
+     * @param CData|null $pQueue
+     * @return void
      * @since 1.1
-     * @param CData|VkDevice $device <<Native("VkDevice")>>
-     * @param CData|null|VkDeviceQueueInfo2Ptr $pQueueInfo <<Native("const VkDeviceQueueInfo2*")>>
-     * @param CData|null $pQueue <<Native("VkQueue*")>>
-     * @return void <<Native("void")>>
      */
-    public function vkGetDeviceQueue2(CData $device, ?CData $pQueueInfo, ?CData $pQueue): void
+    public static function vkGetDeviceQueue2(CData $device, ?CData $pQueueInfo, ?CData $pQueue): void
     {
-        assert(version_compare($this->info->version, '1.1') >= 0, 'VkQueue required Vulkan v1.1 (current v' . $this->info->version . ')');
+        assert(Version::make(1, 1) >= self::$version, 'VkQueue required Vulkan v1.1');
 
-        $this->info->ffi->vkGetDeviceQueue2($device, $pQueueInfo, $pQueue);
+        self::$ffi->vkGetDeviceQueue2($device, $pQueueInfo, $pQueue);
     }
 
     /**
+     * @param CData|VkDevice $device
+     * @param CPointer<VkSamplerYcbcrConversionCreateInfo>|null $pCreateInfo
+     * @param CPointer<VkAllocationCallbacks>|null $pAllocator
+     * @param CData|null $pYcbcrConversion
+     * @return int
      * @since 1.1
-     * @param CData|VkDevice $device <<Native("VkDevice")>>
-     * @param CData|null|VkSamplerYcbcrConversionCreateInfoPtr $pCreateInfo <<Native("const VkSamplerYcbcrConversionCreateInfo*")>>
-     * @param CData|null|VkAllocationCallbacksPtr $pAllocator <<Native("const VkAllocationCallbacks*")>>
-     * @param CData|null $pYcbcrConversion <<Native("VkSamplerYcbcrConversion*")>>
-     * @return int <<Native("VkResult")>>
      */
-    public function vkCreateSamplerYcbcrConversion(CData $device, ?CData $pCreateInfo, ?CData $pAllocator, ?CData $pYcbcrConversion): int
-    {
-        assert(version_compare($this->info->version, '1.1') >= 0, 'VkSamplerYcbcrConversion required Vulkan v1.1 (current v' . $this->info->version . ')');
+    public static function vkCreateSamplerYcbcrConversion(
+        CData $device,
+        ?CData $pCreateInfo,
+        ?CData $pAllocator,
+        ?CData $pYcbcrConversion
+    ): int {
+        assert(Version::make(1, 1) >= self::$version, 'VkSamplerYcbcrConversion required Vulkan v1.1');
 
-        return $this->info->ffi->vkCreateSamplerYcbcrConversion($device, $pCreateInfo, $pAllocator, $pYcbcrConversion);
+        return self::$ffi->vkCreateSamplerYcbcrConversion($device, $pCreateInfo, $pAllocator, $pYcbcrConversion);
     }
 
     /**
+     * @param CData|VkDevice $device
+     * @param CData|VkSamplerYcbcrConversion $ycbcrConversion
+     * @param CPointer<VkAllocationCallbacks>|null $pAllocator
+     * @return void
      * @since 1.1
-     * @param CData|VkDevice $device <<Native("VkDevice")>>
-     * @param CData|VkSamplerYcbcrConversion $ycbcrConversion <<Native("VkSamplerYcbcrConversion")>>
-     * @param CData|null|VkAllocationCallbacksPtr $pAllocator <<Native("const VkAllocationCallbacks*")>>
-     * @return void <<Native("void")>>
      */
-    public function vkDestroySamplerYcbcrConversion(CData $device, CData $ycbcrConversion, ?CData $pAllocator): void
-    {
-        assert(version_compare($this->info->version, '1.1') >= 0, 'VkAllocationCallbacks required Vulkan v1.1 (current v' . $this->info->version . ')');
+    public static function vkDestroySamplerYcbcrConversion(
+        CData $device,
+        CData $ycbcrConversion,
+        ?CData $pAllocator
+    ): void {
+        assert(Version::make(1, 1) >= self::$version, 'VkAllocationCallbacks required Vulkan v1.1');
 
-        $this->info->ffi->vkDestroySamplerYcbcrConversion($device, $ycbcrConversion, $pAllocator);
+        self::$ffi->vkDestroySamplerYcbcrConversion($device, $ycbcrConversion, $pAllocator);
     }
 
     /**
+     * @param CData|VkDevice $device
+     * @param CPointer<VkDescriptorUpdateTemplateCreateInfo>|null $pCreateInfo
+     * @param CPointer<VkAllocationCallbacks>|null $pAllocator
+     * @param CData|null $pDescriptorUpdateTemplate
+     * @return int
      * @since 1.1
-     * @param CData|VkDevice $device <<Native("VkDevice")>>
-     * @param CData|null|VkDescriptorUpdateTemplateCreateInfoPtr $pCreateInfo <<Native("const VkDescriptorUpdateTemplateCreateInfo*")>>
-     * @param CData|null|VkAllocationCallbacksPtr $pAllocator <<Native("const VkAllocationCallbacks*")>>
-     * @param CData|null $pDescriptorUpdateTemplate <<Native("VkDescriptorUpdateTemplate*")>>
-     * @return int <<Native("VkResult")>>
      */
-    public function vkCreateDescriptorUpdateTemplate(CData $device, ?CData $pCreateInfo, ?CData $pAllocator, ?CData $pDescriptorUpdateTemplate): int
-    {
-        assert(version_compare($this->info->version, '1.1') >= 0, 'VkDescriptorUpdateTemplate required Vulkan v1.1 (current v' . $this->info->version . ')');
+    public static function vkCreateDescriptorUpdateTemplate(
+        CData $device,
+        ?CData $pCreateInfo,
+        ?CData $pAllocator,
+        ?CData $pDescriptorUpdateTemplate
+    ): int {
+        assert(Version::make(1, 1) >= self::$version, 'VkDescriptorUpdateTemplate required Vulkan v1.1');
 
-        return $this->info->ffi->vkCreateDescriptorUpdateTemplate($device, $pCreateInfo, $pAllocator, $pDescriptorUpdateTemplate);
+        return self::$ffi->vkCreateDescriptorUpdateTemplate($device, $pCreateInfo, $pAllocator,
+            $pDescriptorUpdateTemplate);
     }
 
     /**
+     * @param CData|VkDevice $device
+     * @param CData|VkDescriptorUpdateTemplate $descriptorUpdateTemplate
+     * @param CPointer<VkAllocationCallbacks>|null $pAllocator
+     * @return void
      * @since 1.1
-     * @param CData|VkDevice $device <<Native("VkDevice")>>
-     * @param CData|VkDescriptorUpdateTemplate $descriptorUpdateTemplate <<Native("VkDescriptorUpdateTemplate")>>
-     * @param CData|null|VkAllocationCallbacksPtr $pAllocator <<Native("const VkAllocationCallbacks*")>>
-     * @return void <<Native("void")>>
      */
-    public function vkDestroyDescriptorUpdateTemplate(CData $device, CData $descriptorUpdateTemplate, ?CData $pAllocator): void
-    {
-        assert(version_compare($this->info->version, '1.1') >= 0, 'VkAllocationCallbacks required Vulkan v1.1 (current v' . $this->info->version . ')');
+    public static function vkDestroyDescriptorUpdateTemplate(
+        CData $device,
+        CData $descriptorUpdateTemplate,
+        ?CData $pAllocator
+    ): void {
+        assert(Version::make(1, 1) >= self::$version, 'VkAllocationCallbacks required Vulkan v1.1');
 
-        $this->info->ffi->vkDestroyDescriptorUpdateTemplate($device, $descriptorUpdateTemplate, $pAllocator);
+        self::$ffi->vkDestroyDescriptorUpdateTemplate($device, $descriptorUpdateTemplate, $pAllocator);
     }
 
     /**
+     * @param CData|VkDevice $device
+     * @param CData|VkDescriptorSet $descriptorSet
+     * @param CData|VkDescriptorUpdateTemplate $descriptorUpdateTemplate
+     * @param CData|null $pData
+     * @return void
      * @since 1.1
-     * @param CData|VkDevice $device <<Native("VkDevice")>>
-     * @param CData|VkDescriptorSet $descriptorSet <<Native("VkDescriptorSet")>>
-     * @param CData|VkDescriptorUpdateTemplate $descriptorUpdateTemplate <<Native("VkDescriptorUpdateTemplate")>>
-     * @param CData|null $pData <<Native("const void*")>>
-     * @return void <<Native("void")>>
      */
-    public function vkUpdateDescriptorSetWithTemplate(CData $device, CData $descriptorSet, CData $descriptorUpdateTemplate, ?CData $pData): void
-    {
-        assert(version_compare($this->info->version, '1.1') >= 0, 'void required Vulkan v1.1 (current v' . $this->info->version . ')');
+    public static function vkUpdateDescriptorSetWithTemplate(
+        CData $device,
+        CData $descriptorSet,
+        CData $descriptorUpdateTemplate,
+        ?CData $pData
+    ): void {
+        assert(Version::make(1, 1) >= self::$version, 'void required Vulkan v1.1');
 
-        $this->info->ffi->vkUpdateDescriptorSetWithTemplate($device, $descriptorSet, $descriptorUpdateTemplate, $pData);
+        self::$ffi->vkUpdateDescriptorSetWithTemplate($device, $descriptorSet, $descriptorUpdateTemplate, $pData);
     }
 
     /**
+     * @param CData|VkPhysicalDevice $physicalDevice
+     * @param CPointer<VkPhysicalDeviceExternalBufferInfo>|null $pExternalBufferInfo
+     * @param CPointer<VkExternalBufferProperties>|null $pExternalBufferProperties
+     * @return void
      * @since 1.1
-     * @param CData|VkPhysicalDevice $physicalDevice <<Native("VkPhysicalDevice")>>
-     * @param CData|null|VkPhysicalDeviceExternalBufferInfoPtr $pExternalBufferInfo <<Native("const VkPhysicalDeviceExternalBufferInfo*")>>
-     * @param CData|null|VkExternalBufferPropertiesPtr $pExternalBufferProperties <<Native("VkExternalBufferProperties*")>>
-     * @return void <<Native("void")>>
      */
-    public function vkGetPhysicalDeviceExternalBufferProperties(CData $physicalDevice, ?CData $pExternalBufferInfo, ?CData $pExternalBufferProperties): void
-    {
-        assert(version_compare($this->info->version, '1.1') >= 0, 'VkExternalBufferProperties required Vulkan v1.1 (current v' . $this->info->version . ')');
+    public static function vkGetPhysicalDeviceExternalBufferProperties(
+        CData $physicalDevice,
+        ?CData $pExternalBufferInfo,
+        ?CData $pExternalBufferProperties
+    ): void {
+        assert(Version::make(1, 1) >= self::$version, 'VkExternalBufferProperties required Vulkan v1.1');
 
-        $this->info->ffi->vkGetPhysicalDeviceExternalBufferProperties($physicalDevice, $pExternalBufferInfo, $pExternalBufferProperties);
+        self::$ffi->vkGetPhysicalDeviceExternalBufferProperties($physicalDevice, $pExternalBufferInfo,
+            $pExternalBufferProperties);
     }
 
     /**
+     * @param CData|VkPhysicalDevice $physicalDevice
+     * @param CPointer<VkPhysicalDeviceExternalFenceInfo>|null $pExternalFenceInfo
+     * @param CPointer<VkExternalFenceProperties>|null $pExternalFenceProperties
+     * @return void
      * @since 1.1
-     * @param CData|VkPhysicalDevice $physicalDevice <<Native("VkPhysicalDevice")>>
-     * @param CData|null|VkPhysicalDeviceExternalFenceInfoPtr $pExternalFenceInfo <<Native("const VkPhysicalDeviceExternalFenceInfo*")>>
-     * @param CData|null|VkExternalFencePropertiesPtr $pExternalFenceProperties <<Native("VkExternalFenceProperties*")>>
-     * @return void <<Native("void")>>
      */
-    public function vkGetPhysicalDeviceExternalFenceProperties(CData $physicalDevice, ?CData $pExternalFenceInfo, ?CData $pExternalFenceProperties): void
-    {
-        assert(version_compare($this->info->version, '1.1') >= 0, 'VkExternalFenceProperties required Vulkan v1.1 (current v' . $this->info->version . ')');
+    public static function vkGetPhysicalDeviceExternalFenceProperties(
+        CData $physicalDevice,
+        ?CData $pExternalFenceInfo,
+        ?CData $pExternalFenceProperties
+    ): void {
+        assert(Version::make(1, 1) >= self::$version, 'VkExternalFenceProperties required Vulkan v1.1');
 
-        $this->info->ffi->vkGetPhysicalDeviceExternalFenceProperties($physicalDevice, $pExternalFenceInfo, $pExternalFenceProperties);
+        self::$ffi->vkGetPhysicalDeviceExternalFenceProperties($physicalDevice, $pExternalFenceInfo,
+            $pExternalFenceProperties);
     }
 
     /**
+     * @param CData|VkPhysicalDevice $physicalDevice
+     * @param CPointer<VkPhysicalDeviceExternalSemaphoreInfo>|null $pExternalSemaphoreInfo
+     * @param CPointer<VkExternalSemaphoreProperties>|null $pExternalSemaphoreProperties
+     * @return void
      * @since 1.1
-     * @param CData|VkPhysicalDevice $physicalDevice <<Native("VkPhysicalDevice")>>
-     * @param CData|null|VkPhysicalDeviceExternalSemaphoreInfoPtr $pExternalSemaphoreInfo <<Native("const VkPhysicalDeviceExternalSemaphoreInfo*")>>
-     * @param CData|null|VkExternalSemaphorePropertiesPtr $pExternalSemaphoreProperties <<Native("VkExternalSemaphoreProperties*")>>
-     * @return void <<Native("void")>>
      */
-    public function vkGetPhysicalDeviceExternalSemaphoreProperties(CData $physicalDevice, ?CData $pExternalSemaphoreInfo, ?CData $pExternalSemaphoreProperties): void
-    {
-        assert(version_compare($this->info->version, '1.1') >= 0, 'VkExternalSemaphoreProperties required Vulkan v1.1 (current v' . $this->info->version . ')');
+    public static function vkGetPhysicalDeviceExternalSemaphoreProperties(
+        CData $physicalDevice,
+        ?CData $pExternalSemaphoreInfo,
+        ?CData $pExternalSemaphoreProperties
+    ): void {
+        assert(Version::make(1, 1) >= self::$version, 'VkExternalSemaphoreProperties required Vulkan v1.1');
 
-        $this->info->ffi->vkGetPhysicalDeviceExternalSemaphoreProperties($physicalDevice, $pExternalSemaphoreInfo, $pExternalSemaphoreProperties);
+        self::$ffi->vkGetPhysicalDeviceExternalSemaphoreProperties($physicalDevice, $pExternalSemaphoreInfo,
+            $pExternalSemaphoreProperties);
     }
 
     /**
+     * @param CData|VkDevice $device
+     * @param CPointer<VkDescriptorSetLayoutCreateInfo>|null $pCreateInfo
+     * @param CPointer<VkDescriptorSetLayoutSupport>|null $pSupport
+     * @return void
      * @since 1.1
-     * @param CData|VkDevice $device <<Native("VkDevice")>>
-     * @param CData|null|VkDescriptorSetLayoutCreateInfoPtr $pCreateInfo <<Native("const VkDescriptorSetLayoutCreateInfo*")>>
-     * @param CData|null|VkDescriptorSetLayoutSupportPtr $pSupport <<Native("VkDescriptorSetLayoutSupport*")>>
-     * @return void <<Native("void")>>
      */
-    public function vkGetDescriptorSetLayoutSupport(CData $device, ?CData $pCreateInfo, ?CData $pSupport): void
+    public static function vkGetDescriptorSetLayoutSupport(CData $device, ?CData $pCreateInfo, ?CData $pSupport): void
     {
-        assert(version_compare($this->info->version, '1.1') >= 0, 'VkDescriptorSetLayoutSupport required Vulkan v1.1 (current v' . $this->info->version . ')');
+        assert(Version::make(1, 1) >= self::$version, 'VkDescriptorSetLayoutSupport required Vulkan v1.1');
 
-        $this->info->ffi->vkGetDescriptorSetLayoutSupport($device, $pCreateInfo, $pSupport);
+        self::$ffi->vkGetDescriptorSetLayoutSupport($device, $pCreateInfo, $pSupport);
     }
 }

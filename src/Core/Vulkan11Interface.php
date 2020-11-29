@@ -31,5 +31,6 @@ interface Vulkan11Interface extends Vulkan11ExtensionsInterface
     public const
         VK_LUID_SIZE             = 8,
         VK_QUEUE_FAMILY_EXTERNAL = ~0 - 1,
-        VK_MAX_DEVICE_GROUP_SIZE = 32;
+        VK_MAX_DEVICE_GROUP_SIZE = 32
+    ;
 }

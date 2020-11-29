@@ -11,202 +11,120 @@ declare(strict_types=1);
 
 namespace Bic\Vulkan;
 
-use FFI\CChar;
 use FFI\CData;
-use FFI\CFloatPtr;
-use FFI\CIntPtr;
-use FFI\CStruct;
 
-/**
- * @mixin CStruct
- */
 final class VkInstance extends CData
 {
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPhysicalDevice extends CData
 {
 }
 
-/**
- * @mixin CStruct
- */
 final class VkDevice extends CData
 {
 }
 
-/**
- * @mixin CStruct
- */
 final class VkQueue extends CData
 {
 }
 
-/**
- * @mixin CStruct
- */
 final class VkSemaphore extends CData
 {
 }
 
-/**
- * @mixin CStruct
- */
 final class VkCommandBuffer extends CData
 {
 }
 
-/**
- * @mixin CStruct
- */
 final class VkFence extends CData
 {
 }
 
-/**
- * @mixin CStruct
- */
 final class VkDeviceMemory extends CData
 {
 }
 
-/**
- * @mixin CStruct
- */
 final class VkBuffer extends CData
 {
 }
 
-/**
- * @mixin CStruct
- */
 final class VkImage extends CData
 {
 }
 
-/**
- * @mixin CStruct
- */
 final class VkEvent extends CData
 {
 }
 
-/**
- * @mixin CStruct
- */
 final class VkQueryPool extends CData
 {
 }
 
-/**
- * @mixin CStruct
- */
 final class VkBufferView extends CData
 {
 }
 
-/**
- * @mixin CStruct
- */
 final class VkImageView extends CData
 {
 }
 
-/**
- * @mixin CStruct
- */
 final class VkShaderModule extends CData
 {
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPipelineCache extends CData
 {
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPipelineLayout extends CData
 {
 }
 
-/**
- * @mixin CStruct
- */
 final class VkRenderPass extends CData
 {
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPipeline extends CData
 {
 }
 
-/**
- * @mixin CStruct
- */
 final class VkDescriptorSetLayout extends CData
 {
 }
 
-/**
- * @mixin CStruct
- */
 final class VkSampler extends CData
 {
 }
 
-/**
- * @mixin CStruct
- */
 final class VkDescriptorPool extends CData
 {
 }
 
-/**
- * @mixin CStruct
- */
 final class VkDescriptorSet extends CData
 {
 }
 
-/**
- * @mixin CStruct
- */
 final class VkFramebuffer extends CData
 {
 }
 
-/**
- * @mixin CStruct
- */
 final class VkCommandPool extends CData
 {
 }
 
-/**
- * @mixin CStruct
- */
 final class VkApplicationInfo extends CData
 {
     public int $sType;
 
     public ?CData $pNext;
 
-    /** @var string|CData|CChar[]|null */
+    /** @var string|CData|null */
     public ?CData $pApplicationName;
 
     public int $applicationVersion;
 
-    /** @var string|CData|CChar[]|null */
+    /** @var string|CData|null */
     public ?CData $pEngineName;
 
     public int $engineVersion;
@@ -214,9 +132,6 @@ final class VkApplicationInfo extends CData
     public int $apiVersion;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkInstanceCreateInfo extends CData
 {
     public int $sType;
@@ -238,9 +153,6 @@ final class VkInstanceCreateInfo extends CData
     public ?CData $ppEnabledExtensionNames;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkAllocationCallbacks extends CData
 {
     public ?CData $pUserData;
@@ -256,9 +168,6 @@ final class VkAllocationCallbacks extends CData
     public ?CData $pfnInternalFree;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPhysicalDeviceFeatures extends CData
 {
     public int $robustBufferAccess;
@@ -372,9 +281,6 @@ final class VkPhysicalDeviceFeatures extends CData
     public int $inheritedQueries;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkFormatProperties extends CData
 {
     public int $linearTilingFeatures;
@@ -384,9 +290,6 @@ final class VkFormatProperties extends CData
     public int $bufferFeatures;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkExtent3D extends CData
 {
     public int $width;
@@ -396,9 +299,6 @@ final class VkExtent3D extends CData
     public int $depth;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkImageFormatProperties extends CData
 {
     public VkExtent3D $maxExtent;
@@ -412,9 +312,6 @@ final class VkImageFormatProperties extends CData
     public int $maxResourceSize;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPhysicalDeviceLimits extends CData
 {
     public int $maxImageDimension1D;
@@ -636,9 +533,6 @@ final class VkPhysicalDeviceLimits extends CData
     public int $nonCoherentAtomSize;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPhysicalDeviceSparseProperties extends CData
 {
     public int $residencyStandard2DBlockShape;
@@ -652,9 +546,6 @@ final class VkPhysicalDeviceSparseProperties extends CData
     public int $residencyNonResidentStrict;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPhysicalDeviceProperties extends CData
 {
     public int $apiVersion;
@@ -667,7 +558,7 @@ final class VkPhysicalDeviceProperties extends CData
 
     public int $deviceType;
 
-    /** @var string|CData|CChar[]|null */
+    /** @var string|CData|null */
     public ?CData $deviceName;
 
     /** @var int[] */
@@ -678,9 +569,6 @@ final class VkPhysicalDeviceProperties extends CData
     public VkPhysicalDeviceSparseProperties $sparseProperties;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkQueueFamilyProperties extends CData
 {
     public int $queueFlags;
@@ -692,9 +580,6 @@ final class VkQueueFamilyProperties extends CData
     public VkExtent3D $minImageTransferGranularity;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkMemoryType extends CData
 {
     public int $propertyFlags;
@@ -702,9 +587,6 @@ final class VkMemoryType extends CData
     public int $heapIndex;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkMemoryHeap extends CData
 {
     public int $size;
@@ -712,9 +594,6 @@ final class VkMemoryHeap extends CData
     public int $flags;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPhysicalDeviceMemoryProperties extends CData
 {
     public int $memoryTypeCount;
@@ -728,9 +607,6 @@ final class VkPhysicalDeviceMemoryProperties extends CData
     public array $memoryHeaps;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkDeviceQueueCreateInfo extends CData
 {
     public int $sType;
@@ -746,9 +622,6 @@ final class VkDeviceQueueCreateInfo extends CData
     public ?CData $pQueuePriorities;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkDeviceCreateInfo extends CData
 {
     public int $sType;
@@ -774,36 +647,27 @@ final class VkDeviceCreateInfo extends CData
     public ?CData $pEnabledFeatures;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkExtensionProperties extends CData
 {
-    /** @var string|CData|CChar[]|null */
+    /** @var string|CData|null */
     public ?CData $extensionName;
 
     public int $specVersion;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkLayerProperties extends CData
 {
-    /** @var string|CData|CChar[]|null */
+    /** @var string|CData|null */
     public ?CData $layerName;
 
     public int $specVersion;
 
     public int $implementationVersion;
 
-    /** @var string|CData|CChar[]|null */
+    /** @var string|CData|null */
     public ?CData $description;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkSubmitInfo extends CData
 {
     public int $sType;
@@ -825,9 +689,6 @@ final class VkSubmitInfo extends CData
     public ?CData $pSignalSemaphores;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkMemoryAllocateInfo extends CData
 {
     public int $sType;
@@ -839,9 +700,6 @@ final class VkMemoryAllocateInfo extends CData
     public int $memoryTypeIndex;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkMappedMemoryRange extends CData
 {
     public int $sType;
@@ -855,9 +713,6 @@ final class VkMappedMemoryRange extends CData
     public int $size;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkMemoryRequirements extends CData
 {
     public int $size;
@@ -867,9 +722,6 @@ final class VkMemoryRequirements extends CData
     public int $memoryTypeBits;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkSparseImageFormatProperties extends CData
 {
     public int $aspectMask;
@@ -879,9 +731,6 @@ final class VkSparseImageFormatProperties extends CData
     public int $flags;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkSparseImageMemoryRequirements extends CData
 {
     public VkSparseImageFormatProperties $formatProperties;
@@ -895,9 +744,6 @@ final class VkSparseImageMemoryRequirements extends CData
     public int $imageMipTailStride;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkSparseMemoryBind extends CData
 {
     public int $resourceOffset;
@@ -911,9 +757,6 @@ final class VkSparseMemoryBind extends CData
     public int $flags;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkSparseBufferMemoryBindInfo extends CData
 {
     public VkBuffer $buffer;
@@ -923,9 +766,6 @@ final class VkSparseBufferMemoryBindInfo extends CData
     public ?CData $pBinds;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkSparseImageOpaqueMemoryBindInfo extends CData
 {
     public VkImage $image;
@@ -935,9 +775,6 @@ final class VkSparseImageOpaqueMemoryBindInfo extends CData
     public ?CData $pBinds;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkImageSubresource extends CData
 {
     public int $aspectMask;
@@ -947,9 +784,6 @@ final class VkImageSubresource extends CData
     public int $arrayLayer;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkOffset3D extends CData
 {
     public int $x;
@@ -959,9 +793,6 @@ final class VkOffset3D extends CData
     public int $z;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkSparseImageMemoryBind extends CData
 {
     public VkImageSubresource $subresource;
@@ -977,9 +808,6 @@ final class VkSparseImageMemoryBind extends CData
     public int $flags;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkSparseImageMemoryBindInfo extends CData
 {
     public VkImage $image;
@@ -989,9 +817,6 @@ final class VkSparseImageMemoryBindInfo extends CData
     public ?CData $pBinds;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkBindSparseInfo extends CData
 {
     public int $sType;
@@ -1019,9 +844,6 @@ final class VkBindSparseInfo extends CData
     public ?CData $pSignalSemaphores;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkFenceCreateInfo extends CData
 {
     public int $sType;
@@ -1031,9 +853,6 @@ final class VkFenceCreateInfo extends CData
     public int $flags;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkSemaphoreCreateInfo extends CData
 {
     public int $sType;
@@ -1043,9 +862,6 @@ final class VkSemaphoreCreateInfo extends CData
     public int $flags;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkEventCreateInfo extends CData
 {
     public int $sType;
@@ -1055,9 +871,6 @@ final class VkEventCreateInfo extends CData
     public int $flags;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkQueryPoolCreateInfo extends CData
 {
     public int $sType;
@@ -1073,9 +886,6 @@ final class VkQueryPoolCreateInfo extends CData
     public int $pipelineStatistics;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkBufferCreateInfo extends CData
 {
     public int $sType;
@@ -1095,9 +905,6 @@ final class VkBufferCreateInfo extends CData
     public ?CData $pQueueFamilyIndices;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkBufferViewCreateInfo extends CData
 {
     public int $sType;
@@ -1115,9 +922,6 @@ final class VkBufferViewCreateInfo extends CData
     public int $range;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkImageCreateInfo extends CData
 {
     public int $sType;
@@ -1151,9 +955,6 @@ final class VkImageCreateInfo extends CData
     public int $initialLayout;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkSubresourceLayout extends CData
 {
     public int $offset;
@@ -1167,9 +968,6 @@ final class VkSubresourceLayout extends CData
     public int $depthPitch;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkComponentMapping extends CData
 {
     public int $r;
@@ -1181,9 +979,6 @@ final class VkComponentMapping extends CData
     public int $a;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkImageSubresourceRange extends CData
 {
     public int $aspectMask;
@@ -1197,9 +992,6 @@ final class VkImageSubresourceRange extends CData
     public int $layerCount;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkImageViewCreateInfo extends CData
 {
     public int $sType;
@@ -1219,9 +1011,6 @@ final class VkImageViewCreateInfo extends CData
     public VkImageSubresourceRange $subresourceRange;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkShaderModuleCreateInfo extends CData
 {
     public int $sType;
@@ -1235,9 +1024,6 @@ final class VkShaderModuleCreateInfo extends CData
     public ?CData $pCode;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPipelineCacheCreateInfo extends CData
 {
     public int $sType;
@@ -1251,9 +1037,6 @@ final class VkPipelineCacheCreateInfo extends CData
     public ?CData $pInitialData;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkSpecializationMapEntry extends CData
 {
     public int $constantID;
@@ -1263,9 +1046,6 @@ final class VkSpecializationMapEntry extends CData
     public int $size;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkSpecializationInfo extends CData
 {
     public int $mapEntryCount;
@@ -1277,9 +1057,6 @@ final class VkSpecializationInfo extends CData
     public ?CData $pData;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPipelineShaderStageCreateInfo extends CData
 {
     public int $sType;
@@ -1297,9 +1074,6 @@ final class VkPipelineShaderStageCreateInfo extends CData
     public ?CData $pSpecializationInfo;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkVertexInputBindingDescription extends CData
 {
     public int $binding;
@@ -1309,9 +1083,6 @@ final class VkVertexInputBindingDescription extends CData
     public int $inputRate;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkVertexInputAttributeDescription extends CData
 {
     public int $location;
@@ -1323,9 +1094,6 @@ final class VkVertexInputAttributeDescription extends CData
     public int $offset;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPipelineVertexInputStateCreateInfo extends CData
 {
     public int $sType;
@@ -1343,9 +1111,6 @@ final class VkPipelineVertexInputStateCreateInfo extends CData
     public ?CData $pVertexAttributeDescriptions;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPipelineInputAssemblyStateCreateInfo extends CData
 {
     public int $sType;
@@ -1359,9 +1124,6 @@ final class VkPipelineInputAssemblyStateCreateInfo extends CData
     public int $primitiveRestartEnable;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPipelineTessellationStateCreateInfo extends CData
 {
     public int $sType;
@@ -1373,9 +1135,6 @@ final class VkPipelineTessellationStateCreateInfo extends CData
     public int $patchControlPoints;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkViewport extends CData
 {
     public float $x;
@@ -1391,9 +1150,6 @@ final class VkViewport extends CData
     public float $maxDepth;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkOffset2D extends CData
 {
     public int $x;
@@ -1401,9 +1157,6 @@ final class VkOffset2D extends CData
     public int $y;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkExtent2D extends CData
 {
     public int $width;
@@ -1411,9 +1164,6 @@ final class VkExtent2D extends CData
     public int $height;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkRect2D extends CData
 {
     public VkOffset2D $offset;
@@ -1421,9 +1171,6 @@ final class VkRect2D extends CData
     public VkExtent2D $extent;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPipelineViewportStateCreateInfo extends CData
 {
     public int $sType;
@@ -1441,9 +1188,6 @@ final class VkPipelineViewportStateCreateInfo extends CData
     public ?CData $pScissors;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPipelineRasterizationStateCreateInfo extends CData
 {
     public int $sType;
@@ -1473,9 +1217,6 @@ final class VkPipelineRasterizationStateCreateInfo extends CData
     public float $lineWidth;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPipelineMultisampleStateCreateInfo extends CData
 {
     public int $sType;
@@ -1497,9 +1238,6 @@ final class VkPipelineMultisampleStateCreateInfo extends CData
     public int $alphaToOneEnable;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkStencilOpState extends CData
 {
     public int $failOp;
@@ -1517,9 +1255,6 @@ final class VkStencilOpState extends CData
     public int $reference;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPipelineDepthStencilStateCreateInfo extends CData
 {
     public int $sType;
@@ -1547,9 +1282,6 @@ final class VkPipelineDepthStencilStateCreateInfo extends CData
     public float $maxDepthBounds;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPipelineColorBlendAttachmentState extends CData
 {
     public int $blendEnable;
@@ -1569,9 +1301,6 @@ final class VkPipelineColorBlendAttachmentState extends CData
     public int $colorWriteMask;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPipelineColorBlendStateCreateInfo extends CData
 {
     public int $sType;
@@ -1592,9 +1321,6 @@ final class VkPipelineColorBlendStateCreateInfo extends CData
     public array $blendConstants;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPipelineDynamicStateCreateInfo extends CData
 {
     public int $sType;
@@ -1608,9 +1334,6 @@ final class VkPipelineDynamicStateCreateInfo extends CData
     public ?CData $pDynamicStates;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkGraphicsPipelineCreateInfo extends CData
 {
     public int $sType;
@@ -1652,9 +1375,6 @@ final class VkGraphicsPipelineCreateInfo extends CData
     public int $basePipelineIndex;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkComputePipelineCreateInfo extends CData
 {
     public int $sType;
@@ -1672,9 +1392,6 @@ final class VkComputePipelineCreateInfo extends CData
     public int $basePipelineIndex;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPushConstantRange extends CData
 {
     public int $stageFlags;
@@ -1684,9 +1401,6 @@ final class VkPushConstantRange extends CData
     public int $size;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPipelineLayoutCreateInfo extends CData
 {
     public int $sType;
@@ -1704,9 +1418,6 @@ final class VkPipelineLayoutCreateInfo extends CData
     public ?CData $pPushConstantRanges;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkSamplerCreateInfo extends CData
 {
     public int $sType;
@@ -1746,9 +1457,6 @@ final class VkSamplerCreateInfo extends CData
     public int $unnormalizedCoordinates;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkDescriptorSetLayoutBinding extends CData
 {
     public int $binding;
@@ -1762,9 +1470,6 @@ final class VkDescriptorSetLayoutBinding extends CData
     public ?CData $pImmutableSamplers;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkDescriptorSetLayoutCreateInfo extends CData
 {
     public int $sType;
@@ -1778,9 +1483,6 @@ final class VkDescriptorSetLayoutCreateInfo extends CData
     public ?CData $pBindings;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkDescriptorPoolSize extends CData
 {
     public int $type;
@@ -1788,9 +1490,6 @@ final class VkDescriptorPoolSize extends CData
     public int $descriptorCount;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkDescriptorPoolCreateInfo extends CData
 {
     public int $sType;
@@ -1806,9 +1505,6 @@ final class VkDescriptorPoolCreateInfo extends CData
     public ?CData $pPoolSizes;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkDescriptorSetAllocateInfo extends CData
 {
     public int $sType;
@@ -1822,9 +1518,6 @@ final class VkDescriptorSetAllocateInfo extends CData
     public ?CData $pSetLayouts;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkDescriptorImageInfo extends CData
 {
     public VkSampler $sampler;
@@ -1834,9 +1527,6 @@ final class VkDescriptorImageInfo extends CData
     public int $imageLayout;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkDescriptorBufferInfo extends CData
 {
     public VkBuffer $buffer;
@@ -1846,9 +1536,6 @@ final class VkDescriptorBufferInfo extends CData
     public int $range;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkWriteDescriptorSet extends CData
 {
     public int $sType;
@@ -1872,9 +1559,6 @@ final class VkWriteDescriptorSet extends CData
     public ?CData $pTexelBufferView;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkCopyDescriptorSet extends CData
 {
     public int $sType;
@@ -1896,9 +1580,6 @@ final class VkCopyDescriptorSet extends CData
     public int $descriptorCount;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkFramebufferCreateInfo extends CData
 {
     public int $sType;
@@ -1920,9 +1601,6 @@ final class VkFramebufferCreateInfo extends CData
     public int $layers;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkAttachmentDescription extends CData
 {
     public int $flags;
@@ -1944,9 +1622,6 @@ final class VkAttachmentDescription extends CData
     public int $finalLayout;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkAttachmentReference extends CData
 {
     public int $attachment;
@@ -1954,9 +1629,6 @@ final class VkAttachmentReference extends CData
     public int $layout;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkSubpassDescription extends CData
 {
     public int $flags;
@@ -1980,9 +1652,6 @@ final class VkSubpassDescription extends CData
     public ?CData $pPreserveAttachments;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkSubpassDependency extends CData
 {
     public int $srcSubpass;
@@ -2000,9 +1669,6 @@ final class VkSubpassDependency extends CData
     public int $dependencyFlags;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkRenderPassCreateInfo extends CData
 {
     public int $sType;
@@ -2024,9 +1690,6 @@ final class VkRenderPassCreateInfo extends CData
     public ?CData $pDependencies;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkCommandPoolCreateInfo extends CData
 {
     public int $sType;
@@ -2038,9 +1701,6 @@ final class VkCommandPoolCreateInfo extends CData
     public int $queueFamilyIndex;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkCommandBufferAllocateInfo extends CData
 {
     public int $sType;
@@ -2054,9 +1714,6 @@ final class VkCommandBufferAllocateInfo extends CData
     public int $commandBufferCount;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkCommandBufferInheritanceInfo extends CData
 {
     public int $sType;
@@ -2076,9 +1733,6 @@ final class VkCommandBufferInheritanceInfo extends CData
     public int $pipelineStatistics;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkCommandBufferBeginInfo extends CData
 {
     public int $sType;
@@ -2090,9 +1744,6 @@ final class VkCommandBufferBeginInfo extends CData
     public ?CData $pInheritanceInfo;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkBufferCopy extends CData
 {
     public int $srcOffset;
@@ -2102,9 +1753,6 @@ final class VkBufferCopy extends CData
     public int $size;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkImageSubresourceLayers extends CData
 {
     public int $aspectMask;
@@ -2116,9 +1764,6 @@ final class VkImageSubresourceLayers extends CData
     public int $layerCount;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkImageCopy extends CData
 {
     public VkImageSubresourceLayers $srcSubresource;
@@ -2132,9 +1777,6 @@ final class VkImageCopy extends CData
     public VkExtent3D $extent;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkImageBlit extends CData
 {
     public VkImageSubresourceLayers $srcSubresource;
@@ -2148,9 +1790,6 @@ final class VkImageBlit extends CData
     public array $dstOffsets;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkBufferImageCopy extends CData
 {
     public int $bufferOffset;
@@ -2166,9 +1805,6 @@ final class VkBufferImageCopy extends CData
     public VkExtent3D $imageExtent;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkClearDepthStencilValue extends CData
 {
     public float $depth;
@@ -2176,9 +1812,6 @@ final class VkClearDepthStencilValue extends CData
     public int $stencil;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkClearAttachment extends CData
 {
     public int $aspectMask;
@@ -2188,9 +1821,6 @@ final class VkClearAttachment extends CData
     public ?CData $clearValue;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkClearRect extends CData
 {
     public VkRect2D $rect;
@@ -2200,9 +1830,6 @@ final class VkClearRect extends CData
     public int $layerCount;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkImageResolve extends CData
 {
     public VkImageSubresourceLayers $srcSubresource;
@@ -2216,9 +1843,6 @@ final class VkImageResolve extends CData
     public VkExtent3D $extent;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkMemoryBarrier extends CData
 {
     public int $sType;
@@ -2230,9 +1854,6 @@ final class VkMemoryBarrier extends CData
     public int $dstAccessMask;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkBufferMemoryBarrier extends CData
 {
     public int $sType;
@@ -2254,9 +1875,6 @@ final class VkBufferMemoryBarrier extends CData
     public int $size;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkImageMemoryBarrier extends CData
 {
     public int $sType;
@@ -2280,9 +1898,6 @@ final class VkImageMemoryBarrier extends CData
     public VkImageSubresourceRange $subresourceRange;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkRenderPassBeginInfo extends CData
 {
     public int $sType;
@@ -2300,9 +1915,6 @@ final class VkRenderPassBeginInfo extends CData
     public ?CData $pClearValues;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkDispatchIndirectCommand extends CData
 {
     public int $x;
@@ -2312,9 +1924,6 @@ final class VkDispatchIndirectCommand extends CData
     public int $z;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkDrawIndexedIndirectCommand extends CData
 {
     public int $indexCount;
@@ -2328,9 +1937,6 @@ final class VkDrawIndexedIndirectCommand extends CData
     public int $firstInstance;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkDrawIndirectCommand extends CData
 {
     public int $vertexCount;
@@ -2342,9 +1948,6 @@ final class VkDrawIndirectCommand extends CData
     public int $firstInstance;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkBaseOutStructure extends CData
 {
     public int $sType;
@@ -2352,9 +1955,6 @@ final class VkBaseOutStructure extends CData
     public ?CData $pNext;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkBaseInStructure extends CData
 {
     public int $sType;
@@ -2362,23 +1962,14 @@ final class VkBaseInStructure extends CData
     public ?CData $pNext;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkSamplerYcbcrConversion extends CData
 {
 }
 
-/**
- * @mixin CStruct
- */
 final class VkDescriptorUpdateTemplate extends CData
 {
 }
 
-/**
- * @mixin CStruct
- */
 final class VkBindBufferMemoryInfo extends CData
 {
     public int $sType;
@@ -2392,9 +1983,6 @@ final class VkBindBufferMemoryInfo extends CData
     public int $memoryOffset;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkBindImageMemoryInfo extends CData
 {
     public int $sType;
@@ -2408,9 +1996,6 @@ final class VkBindImageMemoryInfo extends CData
     public int $memoryOffset;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPhysicalDevice16BitStorageFeatures extends CData
 {
     public int $sType;
@@ -2426,9 +2011,6 @@ final class VkPhysicalDevice16BitStorageFeatures extends CData
     public int $storageInputOutput16;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkMemoryDedicatedRequirements extends CData
 {
     public int $sType;
@@ -2440,9 +2022,6 @@ final class VkMemoryDedicatedRequirements extends CData
     public int $requiresDedicatedAllocation;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkMemoryDedicatedAllocateInfo extends CData
 {
     public int $sType;
@@ -2454,9 +2033,6 @@ final class VkMemoryDedicatedAllocateInfo extends CData
     public VkBuffer $buffer;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkMemoryAllocateFlagsInfo extends CData
 {
     public int $sType;
@@ -2468,9 +2044,6 @@ final class VkMemoryAllocateFlagsInfo extends CData
     public int $deviceMask;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkDeviceGroupRenderPassBeginInfo extends CData
 {
     public int $sType;
@@ -2484,9 +2057,6 @@ final class VkDeviceGroupRenderPassBeginInfo extends CData
     public ?CData $pDeviceRenderAreas;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkDeviceGroupCommandBufferBeginInfo extends CData
 {
     public int $sType;
@@ -2496,9 +2066,6 @@ final class VkDeviceGroupCommandBufferBeginInfo extends CData
     public int $deviceMask;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkDeviceGroupSubmitInfo extends CData
 {
     public int $sType;
@@ -2518,9 +2085,6 @@ final class VkDeviceGroupSubmitInfo extends CData
     public ?CData $pSignalSemaphoreDeviceIndices;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkDeviceGroupBindSparseInfo extends CData
 {
     public int $sType;
@@ -2532,9 +2096,6 @@ final class VkDeviceGroupBindSparseInfo extends CData
     public int $memoryDeviceIndex;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkBindBufferMemoryDeviceGroupInfo extends CData
 {
     public int $sType;
@@ -2546,9 +2107,6 @@ final class VkBindBufferMemoryDeviceGroupInfo extends CData
     public ?CData $pDeviceIndices;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkBindImageMemoryDeviceGroupInfo extends CData
 {
     public int $sType;
@@ -2564,9 +2122,6 @@ final class VkBindImageMemoryDeviceGroupInfo extends CData
     public ?CData $pSplitInstanceBindRegions;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPhysicalDeviceGroupProperties extends CData
 {
     public int $sType;
@@ -2581,9 +2136,6 @@ final class VkPhysicalDeviceGroupProperties extends CData
     public int $subsetAllocation;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkDeviceGroupDeviceCreateInfo extends CData
 {
     public int $sType;
@@ -2595,9 +2147,6 @@ final class VkDeviceGroupDeviceCreateInfo extends CData
     public ?CData $pPhysicalDevices;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkBufferMemoryRequirementsInfo2 extends CData
 {
     public int $sType;
@@ -2607,9 +2156,6 @@ final class VkBufferMemoryRequirementsInfo2 extends CData
     public VkBuffer $buffer;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkImageMemoryRequirementsInfo2 extends CData
 {
     public int $sType;
@@ -2619,9 +2165,6 @@ final class VkImageMemoryRequirementsInfo2 extends CData
     public VkImage $image;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkImageSparseMemoryRequirementsInfo2 extends CData
 {
     public int $sType;
@@ -2631,9 +2174,6 @@ final class VkImageSparseMemoryRequirementsInfo2 extends CData
     public VkImage $image;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkMemoryRequirements2 extends CData
 {
     public int $sType;
@@ -2643,9 +2183,6 @@ final class VkMemoryRequirements2 extends CData
     public VkMemoryRequirements $memoryRequirements;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkSparseImageMemoryRequirements2 extends CData
 {
     public int $sType;
@@ -2655,9 +2192,6 @@ final class VkSparseImageMemoryRequirements2 extends CData
     public VkSparseImageMemoryRequirements $memoryRequirements;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPhysicalDeviceFeatures2 extends CData
 {
     public int $sType;
@@ -2667,9 +2201,6 @@ final class VkPhysicalDeviceFeatures2 extends CData
     public VkPhysicalDeviceFeatures $features;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPhysicalDeviceProperties2 extends CData
 {
     public int $sType;
@@ -2679,9 +2210,6 @@ final class VkPhysicalDeviceProperties2 extends CData
     public VkPhysicalDeviceProperties $properties;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkFormatProperties2 extends CData
 {
     public int $sType;
@@ -2691,9 +2219,6 @@ final class VkFormatProperties2 extends CData
     public VkFormatProperties $formatProperties;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkImageFormatProperties2 extends CData
 {
     public int $sType;
@@ -2703,9 +2228,6 @@ final class VkImageFormatProperties2 extends CData
     public VkImageFormatProperties $imageFormatProperties;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPhysicalDeviceImageFormatInfo2 extends CData
 {
     public int $sType;
@@ -2723,9 +2245,6 @@ final class VkPhysicalDeviceImageFormatInfo2 extends CData
     public int $flags;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkQueueFamilyProperties2 extends CData
 {
     public int $sType;
@@ -2735,9 +2254,6 @@ final class VkQueueFamilyProperties2 extends CData
     public VkQueueFamilyProperties $queueFamilyProperties;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPhysicalDeviceMemoryProperties2 extends CData
 {
     public int $sType;
@@ -2747,9 +2263,6 @@ final class VkPhysicalDeviceMemoryProperties2 extends CData
     public VkPhysicalDeviceMemoryProperties $memoryProperties;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkSparseImageFormatProperties2 extends CData
 {
     public int $sType;
@@ -2759,9 +2272,6 @@ final class VkSparseImageFormatProperties2 extends CData
     public VkSparseImageFormatProperties $properties;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPhysicalDeviceSparseImageFormatInfo2 extends CData
 {
     public int $sType;
@@ -2779,9 +2289,6 @@ final class VkPhysicalDeviceSparseImageFormatInfo2 extends CData
     public int $tiling;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPhysicalDevicePointClippingProperties extends CData
 {
     public int $sType;
@@ -2791,9 +2298,6 @@ final class VkPhysicalDevicePointClippingProperties extends CData
     public int $pointClippingBehavior;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkInputAttachmentAspectReference extends CData
 {
     public int $subpass;
@@ -2803,9 +2307,6 @@ final class VkInputAttachmentAspectReference extends CData
     public int $aspectMask;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkRenderPassInputAttachmentAspectCreateInfo extends CData
 {
     public int $sType;
@@ -2817,9 +2318,6 @@ final class VkRenderPassInputAttachmentAspectCreateInfo extends CData
     public ?CData $pAspectReferences;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkImageViewUsageCreateInfo extends CData
 {
     public int $sType;
@@ -2829,9 +2327,6 @@ final class VkImageViewUsageCreateInfo extends CData
     public int $usage;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPipelineTessellationDomainOriginStateCreateInfo extends CData
 {
     public int $sType;
@@ -2841,9 +2336,6 @@ final class VkPipelineTessellationDomainOriginStateCreateInfo extends CData
     public int $domainOrigin;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkRenderPassMultiviewCreateInfo extends CData
 {
     public int $sType;
@@ -2863,9 +2355,6 @@ final class VkRenderPassMultiviewCreateInfo extends CData
     public ?CData $pCorrelationMasks;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPhysicalDeviceMultiviewFeatures extends CData
 {
     public int $sType;
@@ -2879,9 +2368,6 @@ final class VkPhysicalDeviceMultiviewFeatures extends CData
     public int $multiviewTessellationShader;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPhysicalDeviceMultiviewProperties extends CData
 {
     public int $sType;
@@ -2893,9 +2379,6 @@ final class VkPhysicalDeviceMultiviewProperties extends CData
     public int $maxMultiviewInstanceIndex;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPhysicalDeviceVariablePointersFeatures extends CData
 {
     public int $sType;
@@ -2907,9 +2390,6 @@ final class VkPhysicalDeviceVariablePointersFeatures extends CData
     public int $variablePointers;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPhysicalDeviceProtectedMemoryFeatures extends CData
 {
     public int $sType;
@@ -2919,9 +2399,6 @@ final class VkPhysicalDeviceProtectedMemoryFeatures extends CData
     public int $protectedMemory;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPhysicalDeviceProtectedMemoryProperties extends CData
 {
     public int $sType;
@@ -2931,9 +2408,6 @@ final class VkPhysicalDeviceProtectedMemoryProperties extends CData
     public int $protectedNoFault;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkDeviceQueueInfo2 extends CData
 {
     public int $sType;
@@ -2947,9 +2421,6 @@ final class VkDeviceQueueInfo2 extends CData
     public int $queueIndex;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkProtectedSubmitInfo extends CData
 {
     public int $sType;
@@ -2959,9 +2430,6 @@ final class VkProtectedSubmitInfo extends CData
     public int $protectedSubmit;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkSamplerYcbcrConversionCreateInfo extends CData
 {
     public int $sType;
@@ -2985,9 +2453,6 @@ final class VkSamplerYcbcrConversionCreateInfo extends CData
     public int $forceExplicitReconstruction;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkSamplerYcbcrConversionInfo extends CData
 {
     public int $sType;
@@ -2997,9 +2462,6 @@ final class VkSamplerYcbcrConversionInfo extends CData
     public VkSamplerYcbcrConversion $conversion;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkBindImagePlaneMemoryInfo extends CData
 {
     public int $sType;
@@ -3009,9 +2471,6 @@ final class VkBindImagePlaneMemoryInfo extends CData
     public int $planeAspect;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkImagePlaneMemoryRequirementsInfo extends CData
 {
     public int $sType;
@@ -3021,9 +2480,6 @@ final class VkImagePlaneMemoryRequirementsInfo extends CData
     public int $planeAspect;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPhysicalDeviceSamplerYcbcrConversionFeatures extends CData
 {
     public int $sType;
@@ -3033,9 +2489,6 @@ final class VkPhysicalDeviceSamplerYcbcrConversionFeatures extends CData
     public int $samplerYcbcrConversion;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkSamplerYcbcrConversionImageFormatProperties extends CData
 {
     public int $sType;
@@ -3045,9 +2498,6 @@ final class VkSamplerYcbcrConversionImageFormatProperties extends CData
     public int $combinedImageSamplerDescriptorCount;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkDescriptorUpdateTemplateEntry extends CData
 {
     public int $dstBinding;
@@ -3063,9 +2513,6 @@ final class VkDescriptorUpdateTemplateEntry extends CData
     public int $stride;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkDescriptorUpdateTemplateCreateInfo extends CData
 {
     public int $sType;
@@ -3089,9 +2536,6 @@ final class VkDescriptorUpdateTemplateCreateInfo extends CData
     public int $set;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkExternalMemoryProperties extends CData
 {
     public int $externalMemoryFeatures;
@@ -3101,9 +2545,6 @@ final class VkExternalMemoryProperties extends CData
     public int $compatibleHandleTypes;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPhysicalDeviceExternalImageFormatInfo extends CData
 {
     public int $sType;
@@ -3113,9 +2554,6 @@ final class VkPhysicalDeviceExternalImageFormatInfo extends CData
     public int $handleType;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkExternalImageFormatProperties extends CData
 {
     public int $sType;
@@ -3125,9 +2563,6 @@ final class VkExternalImageFormatProperties extends CData
     public VkExternalMemoryProperties $externalMemoryProperties;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPhysicalDeviceExternalBufferInfo extends CData
 {
     public int $sType;
@@ -3141,9 +2576,6 @@ final class VkPhysicalDeviceExternalBufferInfo extends CData
     public int $handleType;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkExternalBufferProperties extends CData
 {
     public int $sType;
@@ -3153,9 +2585,6 @@ final class VkExternalBufferProperties extends CData
     public VkExternalMemoryProperties $externalMemoryProperties;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPhysicalDeviceIDProperties extends CData
 {
     public int $sType;
@@ -3176,9 +2605,6 @@ final class VkPhysicalDeviceIDProperties extends CData
     public int $deviceLUIDValid;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkExternalMemoryImageCreateInfo extends CData
 {
     public int $sType;
@@ -3188,9 +2614,6 @@ final class VkExternalMemoryImageCreateInfo extends CData
     public int $handleTypes;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkExternalMemoryBufferCreateInfo extends CData
 {
     public int $sType;
@@ -3200,9 +2623,6 @@ final class VkExternalMemoryBufferCreateInfo extends CData
     public int $handleTypes;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkExportMemoryAllocateInfo extends CData
 {
     public int $sType;
@@ -3212,9 +2632,6 @@ final class VkExportMemoryAllocateInfo extends CData
     public int $handleTypes;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPhysicalDeviceExternalFenceInfo extends CData
 {
     public int $sType;
@@ -3224,9 +2641,6 @@ final class VkPhysicalDeviceExternalFenceInfo extends CData
     public int $handleType;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkExternalFenceProperties extends CData
 {
     public int $sType;
@@ -3240,9 +2654,6 @@ final class VkExternalFenceProperties extends CData
     public int $externalFenceFeatures;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkExportFenceCreateInfo extends CData
 {
     public int $sType;
@@ -3252,9 +2663,6 @@ final class VkExportFenceCreateInfo extends CData
     public int $handleTypes;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkExportSemaphoreCreateInfo extends CData
 {
     public int $sType;
@@ -3264,9 +2672,6 @@ final class VkExportSemaphoreCreateInfo extends CData
     public int $handleTypes;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPhysicalDeviceExternalSemaphoreInfo extends CData
 {
     public int $sType;
@@ -3276,9 +2681,6 @@ final class VkPhysicalDeviceExternalSemaphoreInfo extends CData
     public int $handleType;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkExternalSemaphoreProperties extends CData
 {
     public int $sType;
@@ -3292,9 +2694,6 @@ final class VkExternalSemaphoreProperties extends CData
     public int $externalSemaphoreFeatures;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPhysicalDeviceMaintenance3Properties extends CData
 {
     public int $sType;
@@ -3306,9 +2705,6 @@ final class VkPhysicalDeviceMaintenance3Properties extends CData
     public int $maxMemoryAllocationSize;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkDescriptorSetLayoutSupport extends CData
 {
     public int $sType;
@@ -3318,9 +2714,6 @@ final class VkDescriptorSetLayoutSupport extends CData
     public int $supported;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPhysicalDeviceShaderDrawParametersFeatures extends CData
 {
     public int $sType;
@@ -3330,9 +2723,6 @@ final class VkPhysicalDeviceShaderDrawParametersFeatures extends CData
     public int $shaderDrawParameters;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPhysicalDeviceVulkan11Properties extends CData
 {
     public int $sType;
@@ -3373,9 +2763,6 @@ final class VkPhysicalDeviceVulkan11Properties extends CData
     public int $maxMemoryAllocationSize;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPhysicalDeviceVulkan12Features extends CData
 {
     public int $sType;
@@ -3477,9 +2864,6 @@ final class VkPhysicalDeviceVulkan12Features extends CData
     public int $subgroupBroadcastDynamicId;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkConformanceVersion extends CData
 {
     public int $major;
@@ -3491,9 +2875,6 @@ final class VkConformanceVersion extends CData
     public int $patch;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPhysicalDeviceVulkan12Properties extends CData
 {
     public int $sType;
@@ -3502,10 +2883,10 @@ final class VkPhysicalDeviceVulkan12Properties extends CData
 
     public int $driverID;
 
-    /** @var string|CData|CChar[]|null */
+    /** @var string|CData|null */
     public ?CData $driverName;
 
-    /** @var string|CData|CChar[]|null */
+    /** @var string|CData|null */
     public ?CData $driverInfo;
 
     public VkConformanceVersion $conformanceVersion;
@@ -3607,9 +2988,6 @@ final class VkPhysicalDeviceVulkan12Properties extends CData
     public int $framebufferIntegerColorSampleCounts;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkImageFormatListCreateInfo extends CData
 {
     public int $sType;
@@ -3621,9 +2999,6 @@ final class VkImageFormatListCreateInfo extends CData
     public ?CData $pViewFormats;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkAttachmentDescription2 extends CData
 {
     public int $sType;
@@ -3649,9 +3024,6 @@ final class VkAttachmentDescription2 extends CData
     public int $finalLayout;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkAttachmentReference2 extends CData
 {
     public int $sType;
@@ -3665,9 +3037,6 @@ final class VkAttachmentReference2 extends CData
     public int $aspectMask;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkSubpassDescription2 extends CData
 {
     public int $sType;
@@ -3697,9 +3066,6 @@ final class VkSubpassDescription2 extends CData
     public ?CData $pPreserveAttachments;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkSubpassDependency2 extends CData
 {
     public int $sType;
@@ -3723,9 +3089,6 @@ final class VkSubpassDependency2 extends CData
     public int $viewOffset;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkRenderPassCreateInfo2 extends CData
 {
     public int $sType;
@@ -3751,9 +3114,6 @@ final class VkRenderPassCreateInfo2 extends CData
     public ?CData $pCorrelatedViewMasks;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkSubpassBeginInfo extends CData
 {
     public int $sType;
@@ -3763,9 +3123,6 @@ final class VkSubpassBeginInfo extends CData
     public int $contents;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkSubpassEndInfo extends CData
 {
     public int $sType;
@@ -3773,9 +3130,6 @@ final class VkSubpassEndInfo extends CData
     public ?CData $pNext;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPhysicalDevice8BitStorageFeatures extends CData
 {
     public int $sType;
@@ -3789,9 +3143,6 @@ final class VkPhysicalDevice8BitStorageFeatures extends CData
     public int $storagePushConstant8;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPhysicalDeviceDriverProperties extends CData
 {
     public int $sType;
@@ -3800,18 +3151,15 @@ final class VkPhysicalDeviceDriverProperties extends CData
 
     public int $driverID;
 
-    /** @var string|CData|CChar[]|null */
+    /** @var string|CData|null */
     public ?CData $driverName;
 
-    /** @var string|CData|CChar[]|null */
+    /** @var string|CData|null */
     public ?CData $driverInfo;
 
     public VkConformanceVersion $conformanceVersion;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPhysicalDeviceShaderAtomicInt64Features extends CData
 {
     public int $sType;
@@ -3823,9 +3171,6 @@ final class VkPhysicalDeviceShaderAtomicInt64Features extends CData
     public int $shaderSharedInt64Atomics;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPhysicalDeviceShaderFloat16Int8Features extends CData
 {
     public int $sType;
@@ -3837,9 +3182,6 @@ final class VkPhysicalDeviceShaderFloat16Int8Features extends CData
     public int $shaderInt8;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPhysicalDeviceFloatControlsProperties extends CData
 {
     public int $sType;
@@ -3881,9 +3223,6 @@ final class VkPhysicalDeviceFloatControlsProperties extends CData
     public int $shaderRoundingModeRTZFloat64;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkDescriptorSetLayoutBindingFlagsCreateInfo extends CData
 {
     public int $sType;
@@ -3895,9 +3234,6 @@ final class VkDescriptorSetLayoutBindingFlagsCreateInfo extends CData
     public ?CData $pBindingFlags;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPhysicalDeviceDescriptorIndexingFeatures extends CData
 {
     public int $sType;
@@ -3945,9 +3281,6 @@ final class VkPhysicalDeviceDescriptorIndexingFeatures extends CData
     public int $runtimeDescriptorArray;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPhysicalDeviceDescriptorIndexingProperties extends CData
 {
     public int $sType;
@@ -4001,9 +3334,6 @@ final class VkPhysicalDeviceDescriptorIndexingProperties extends CData
     public int $maxDescriptorSetUpdateAfterBindInputAttachments;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkDescriptorSetVariableDescriptorCountAllocateInfo extends CData
 {
     public int $sType;
@@ -4015,9 +3345,6 @@ final class VkDescriptorSetVariableDescriptorCountAllocateInfo extends CData
     public ?CData $pDescriptorCounts;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkDescriptorSetVariableDescriptorCountLayoutSupport extends CData
 {
     public int $sType;
@@ -4027,9 +3354,6 @@ final class VkDescriptorSetVariableDescriptorCountLayoutSupport extends CData
     public int $maxVariableDescriptorCount;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkSubpassDescriptionDepthStencilResolve extends CData
 {
     public int $sType;
@@ -4043,9 +3367,6 @@ final class VkSubpassDescriptionDepthStencilResolve extends CData
     public ?CData $pDepthStencilResolveAttachment;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPhysicalDeviceDepthStencilResolveProperties extends CData
 {
     public int $sType;
@@ -4061,9 +3382,6 @@ final class VkPhysicalDeviceDepthStencilResolveProperties extends CData
     public int $independentResolve;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPhysicalDeviceScalarBlockLayoutFeatures extends CData
 {
     public int $sType;
@@ -4073,9 +3391,6 @@ final class VkPhysicalDeviceScalarBlockLayoutFeatures extends CData
     public int $scalarBlockLayout;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkImageStencilUsageCreateInfo extends CData
 {
     public int $sType;
@@ -4085,9 +3400,6 @@ final class VkImageStencilUsageCreateInfo extends CData
     public int $stencilUsage;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkSamplerReductionModeCreateInfo extends CData
 {
     public int $sType;
@@ -4097,9 +3409,6 @@ final class VkSamplerReductionModeCreateInfo extends CData
     public int $reductionMode;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPhysicalDeviceSamplerFilterMinmaxProperties extends CData
 {
     public int $sType;
@@ -4111,9 +3420,6 @@ final class VkPhysicalDeviceSamplerFilterMinmaxProperties extends CData
     public int $filterMinmaxImageComponentMapping;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPhysicalDeviceVulkanMemoryModelFeatures extends CData
 {
     public int $sType;
@@ -4127,9 +3433,6 @@ final class VkPhysicalDeviceVulkanMemoryModelFeatures extends CData
     public int $vulkanMemoryModelAvailabilityVisibilityChains;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPhysicalDeviceImagelessFramebufferFeatures extends CData
 {
     public int $sType;
@@ -4139,9 +3442,6 @@ final class VkPhysicalDeviceImagelessFramebufferFeatures extends CData
     public int $imagelessFramebuffer;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkFramebufferAttachmentImageInfo extends CData
 {
     public int $sType;
@@ -4163,9 +3463,6 @@ final class VkFramebufferAttachmentImageInfo extends CData
     public ?CData $pViewFormats;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkFramebufferAttachmentsCreateInfo extends CData
 {
     public int $sType;
@@ -4177,9 +3474,6 @@ final class VkFramebufferAttachmentsCreateInfo extends CData
     public ?CData $pAttachmentImageInfos;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkRenderPassAttachmentBeginInfo extends CData
 {
     public int $sType;
@@ -4191,9 +3485,6 @@ final class VkRenderPassAttachmentBeginInfo extends CData
     public ?CData $pAttachments;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPhysicalDeviceUniformBufferStandardLayoutFeatures extends CData
 {
     public int $sType;
@@ -4203,9 +3494,6 @@ final class VkPhysicalDeviceUniformBufferStandardLayoutFeatures extends CData
     public int $uniformBufferStandardLayout;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures extends CData
 {
     public int $sType;
@@ -4215,9 +3503,6 @@ final class VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures extends CData
     public int $shaderSubgroupExtendedTypes;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures extends CData
 {
     public int $sType;
@@ -4227,9 +3512,6 @@ final class VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures extends CData
     public int $separateDepthStencilLayouts;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkAttachmentReferenceStencilLayout extends CData
 {
     public int $sType;
@@ -4239,9 +3521,6 @@ final class VkAttachmentReferenceStencilLayout extends CData
     public int $stencilLayout;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkAttachmentDescriptionStencilLayout extends CData
 {
     public int $sType;
@@ -4253,9 +3532,6 @@ final class VkAttachmentDescriptionStencilLayout extends CData
     public int $stencilFinalLayout;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPhysicalDeviceHostQueryResetFeatures extends CData
 {
     public int $sType;
@@ -4265,9 +3541,6 @@ final class VkPhysicalDeviceHostQueryResetFeatures extends CData
     public int $hostQueryReset;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPhysicalDeviceTimelineSemaphoreFeatures extends CData
 {
     public int $sType;
@@ -4277,9 +3550,6 @@ final class VkPhysicalDeviceTimelineSemaphoreFeatures extends CData
     public int $timelineSemaphore;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPhysicalDeviceTimelineSemaphoreProperties extends CData
 {
     public int $sType;
@@ -4289,9 +3559,6 @@ final class VkPhysicalDeviceTimelineSemaphoreProperties extends CData
     public int $maxTimelineSemaphoreValueDifference;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkSemaphoreTypeCreateInfo extends CData
 {
     public int $sType;
@@ -4303,9 +3570,6 @@ final class VkSemaphoreTypeCreateInfo extends CData
     public int $initialValue;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkTimelineSemaphoreSubmitInfo extends CData
 {
     public int $sType;
@@ -4321,9 +3585,6 @@ final class VkTimelineSemaphoreSubmitInfo extends CData
     public ?CData $pSignalSemaphoreValues;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkSemaphoreWaitInfo extends CData
 {
     public int $sType;
@@ -4339,9 +3600,6 @@ final class VkSemaphoreWaitInfo extends CData
     public ?CData $pValues;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkSemaphoreSignalInfo extends CData
 {
     public int $sType;
@@ -4353,9 +3611,6 @@ final class VkSemaphoreSignalInfo extends CData
     public int $value;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPhysicalDeviceBufferDeviceAddressFeatures extends CData
 {
     public int $sType;
@@ -4369,9 +3624,6 @@ final class VkPhysicalDeviceBufferDeviceAddressFeatures extends CData
     public int $bufferDeviceAddressMultiDevice;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkBufferDeviceAddressInfo extends CData
 {
     public int $sType;
@@ -4381,9 +3633,6 @@ final class VkBufferDeviceAddressInfo extends CData
     public VkBuffer $buffer;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkBufferOpaqueCaptureAddressCreateInfo extends CData
 {
     public int $sType;
@@ -4393,9 +3642,6 @@ final class VkBufferOpaqueCaptureAddressCreateInfo extends CData
     public int $opaqueCaptureAddress;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkMemoryOpaqueCaptureAddressAllocateInfo extends CData
 {
     public int $sType;
@@ -4405,9 +3651,6 @@ final class VkMemoryOpaqueCaptureAddressAllocateInfo extends CData
     public int $opaqueCaptureAddress;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkDeviceMemoryOpaqueCaptureAddressInfo extends CData
 {
     public int $sType;
@@ -4417,16 +3660,10 @@ final class VkDeviceMemoryOpaqueCaptureAddressInfo extends CData
     public VkDeviceMemory $memory;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkSwapchainKHR extends CData
 {
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPresentInfoKHR extends CData
 {
     public int $sType;
@@ -4446,9 +3683,6 @@ final class VkPresentInfoKHR extends CData
     public ?CData $pResults;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkImageSwapchainCreateInfoKHR extends CData
 {
     public int $sType;
@@ -4458,9 +3692,6 @@ final class VkImageSwapchainCreateInfoKHR extends CData
     public VkSwapchainKHR $swapchain;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkBindImageMemorySwapchainInfoKHR extends CData
 {
     public int $sType;
@@ -4472,9 +3703,6 @@ final class VkBindImageMemorySwapchainInfoKHR extends CData
     public int $imageIndex;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkAcquireNextImageInfoKHR extends CData
 {
     public int $sType;
@@ -4492,9 +3720,6 @@ final class VkAcquireNextImageInfoKHR extends CData
     public int $deviceMask;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkDeviceGroupPresentCapabilitiesKHR extends CData
 {
     public int $sType;
@@ -4507,9 +3732,6 @@ final class VkDeviceGroupPresentCapabilitiesKHR extends CData
     public int $modes;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkDeviceGroupPresentInfoKHR extends CData
 {
     public int $sType;
@@ -4523,9 +3745,6 @@ final class VkDeviceGroupPresentInfoKHR extends CData
     public int $mode;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkDeviceGroupSwapchainCreateInfoKHR extends CData
 {
     public int $sType;
@@ -4535,23 +3754,14 @@ final class VkDeviceGroupSwapchainCreateInfoKHR extends CData
     public int $modes;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkDisplayKHR extends CData
 {
 }
 
-/**
- * @mixin CStruct
- */
 final class VkDisplayModeKHR extends CData
 {
 }
 
-/**
- * @mixin CStruct
- */
 final class VkDisplayModeParametersKHR extends CData
 {
     public VkExtent2D $visibleRegion;
@@ -4559,9 +3769,6 @@ final class VkDisplayModeParametersKHR extends CData
     public int $refreshRate;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkDisplayModePropertiesKHR extends CData
 {
     public VkDisplayModeKHR $displayMode;
@@ -4569,9 +3776,6 @@ final class VkDisplayModePropertiesKHR extends CData
     public VkDisplayModeParametersKHR $parameters;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkDisplayModeCreateInfoKHR extends CData
 {
     public int $sType;
@@ -4583,9 +3787,6 @@ final class VkDisplayModeCreateInfoKHR extends CData
     public VkDisplayModeParametersKHR $parameters;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkDisplayPlaneCapabilitiesKHR extends CData
 {
     public int $supportedAlpha;
@@ -4607,9 +3808,6 @@ final class VkDisplayPlaneCapabilitiesKHR extends CData
     public VkExtent2D $maxDstExtent;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkDisplayPlanePropertiesKHR extends CData
 {
     public VkDisplayKHR $currentDisplay;
@@ -4617,9 +3815,6 @@ final class VkDisplayPlanePropertiesKHR extends CData
     public int $currentStackIndex;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkDisplaySurfaceCreateInfoKHR extends CData
 {
     public int $sType;
@@ -4644,9 +3839,6 @@ final class VkDisplaySurfaceCreateInfoKHR extends CData
 }
 
 
-/**
- * @mixin CStruct
- */
 final class VkDisplayPresentInfoKHR extends CData
 {
     public int $sType;
@@ -4660,9 +3852,6 @@ final class VkDisplayPresentInfoKHR extends CData
     public int $persistent;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkImportMemoryFdInfoKHR extends CData
 {
     public int $sType;
@@ -4674,9 +3863,6 @@ final class VkImportMemoryFdInfoKHR extends CData
     public int $fd;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkMemoryFdPropertiesKHR extends CData
 {
     public int $sType;
@@ -4686,9 +3872,6 @@ final class VkMemoryFdPropertiesKHR extends CData
     public int $memoryTypeBits;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkMemoryGetFdInfoKHR extends CData
 {
     public int $sType;
@@ -4700,9 +3883,6 @@ final class VkMemoryGetFdInfoKHR extends CData
     public int $handleType;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkImportSemaphoreFdInfoKHR extends CData
 {
     public int $sType;
@@ -4718,9 +3898,6 @@ final class VkImportSemaphoreFdInfoKHR extends CData
     public int $fd;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkSemaphoreGetFdInfoKHR extends CData
 {
     public int $sType;
@@ -4733,9 +3910,6 @@ final class VkSemaphoreGetFdInfoKHR extends CData
 }
 
 
-/**
- * @mixin CStruct
- */
 final class VkPhysicalDevicePushDescriptorPropertiesKHR extends CData
 {
     public int $sType;
@@ -4746,9 +3920,6 @@ final class VkPhysicalDevicePushDescriptorPropertiesKHR extends CData
 }
 
 
-/**
- * @mixin CStruct
- */
 final class VkRectLayerKHR extends CData
 {
     public VkOffset2D $offset;
@@ -4758,9 +3929,6 @@ final class VkRectLayerKHR extends CData
     public int $layer;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPresentRegionKHR extends CData
 {
     public int $rectangleCount;
@@ -4768,9 +3936,6 @@ final class VkPresentRegionKHR extends CData
     public ?CData $pRectangles;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPresentRegionsKHR extends CData
 {
     public int $sType;
@@ -4782,9 +3947,6 @@ final class VkPresentRegionsKHR extends CData
     public ?CData $pRegions;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkSharedPresentSurfaceCapabilitiesKHR extends CData
 {
     public int $sType;
@@ -4794,9 +3956,6 @@ final class VkSharedPresentSurfaceCapabilitiesKHR extends CData
     public int $sharedPresentSupportedUsageFlags;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkImportFenceFdInfoKHR extends CData
 {
     public int $sType;
@@ -4812,9 +3971,6 @@ final class VkImportFenceFdInfoKHR extends CData
     public int $fd;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkFenceGetFdInfoKHR extends CData
 {
     public int $sType;
@@ -4826,9 +3982,6 @@ final class VkFenceGetFdInfoKHR extends CData
     public int $handleType;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPhysicalDevicePerformanceQueryPropertiesKHR extends CData
 {
     public int $sType;
@@ -4838,9 +3991,6 @@ final class VkPhysicalDevicePerformanceQueryPropertiesKHR extends CData
     public int $allowCommandBufferQueryCopies;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPerformanceCounterKHR extends CData
 {
     public int $sType;
@@ -4857,9 +4007,6 @@ final class VkPerformanceCounterKHR extends CData
     public array $uuid;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPerformanceCounterDescriptionKHR extends CData
 {
     public int $sType;
@@ -4868,19 +4015,16 @@ final class VkPerformanceCounterDescriptionKHR extends CData
 
     public int $flags;
 
-    /** @var string|CData|CChar[]|null */
+    /** @var string|CData|null */
     public ?CData $name;
 
-    /** @var string|CData|CChar[]|null */
+    /** @var string|CData|null */
     public ?CData $category;
 
-    /** @var string|CData|CChar[]|null */
+    /** @var string|CData|null */
     public ?CData $description;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkQueryPoolPerformanceCreateInfoKHR extends CData
 {
     public int $sType;
@@ -4894,9 +4038,6 @@ final class VkQueryPoolPerformanceCreateInfoKHR extends CData
     public ?CData $pCounterIndices;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkAcquireProfilingLockInfoKHR extends CData
 {
     public int $sType;
@@ -4908,9 +4049,6 @@ final class VkAcquireProfilingLockInfoKHR extends CData
     public int $timeout;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPerformanceQuerySubmitInfoKHR extends CData
 {
     public int $sType;
@@ -4920,9 +4058,6 @@ final class VkPerformanceQuerySubmitInfoKHR extends CData
     public int $counterPassIndex;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPhysicalDeviceSurfaceInfo2KHR extends CData
 {
     public int $sType;
@@ -4932,16 +4067,10 @@ final class VkPhysicalDeviceSurfaceInfo2KHR extends CData
     public VkSurfaceKHR $surface;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkSurfaceKHR extends CData
 {
 }
 
-/**
- * @mixin CStruct
- */
 final class VkSurfaceCapabilities2KHR extends CData
 {
     public int $sType;
@@ -4951,9 +4080,6 @@ final class VkSurfaceCapabilities2KHR extends CData
     public VkSurfaceCapabilitiesKHR $surfaceCapabilities;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkSurfaceCapabilitiesKHR extends CData
 {
     public int $minImageCount;
@@ -4977,9 +4103,6 @@ final class VkSurfaceCapabilitiesKHR extends CData
     public int $supportedUsageFlags;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkSurfaceFormat2KHR extends CData
 {
     public int $sType;
@@ -4989,9 +4112,6 @@ final class VkSurfaceFormat2KHR extends CData
     public VkSurfaceFormatKHR $surfaceFormat;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkSurfaceFormatKHR extends CData
 {
     public int $format;
@@ -5000,9 +4120,6 @@ final class VkSurfaceFormatKHR extends CData
 }
 
 
-/**
- * @mixin CStruct
- */
 final class VkDisplayProperties2KHR extends CData
 {
     public int $sType;
@@ -5012,14 +4129,11 @@ final class VkDisplayProperties2KHR extends CData
     public VkDisplayPropertiesKHR $displayProperties;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkDisplayPropertiesKHR extends CData
 {
     public ?CData $display;
 
-    /** @var string|CData|CChar[]|null */
+    /** @var string|CData|null */
     public ?CData $displayName;
 
     public ?CData $physicalDimensions;
@@ -5034,9 +4148,6 @@ final class VkDisplayPropertiesKHR extends CData
 }
 
 
-/**
- * @mixin CStruct
- */
 final class VkDisplayPlaneProperties2KHR extends CData
 {
     public int $sType;
@@ -5046,9 +4157,6 @@ final class VkDisplayPlaneProperties2KHR extends CData
     public VkDisplayPlanePropertiesKHR $displayPlaneProperties;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkDisplayModeProperties2KHR extends CData
 {
     public int $sType;
@@ -5058,9 +4166,6 @@ final class VkDisplayModeProperties2KHR extends CData
     public VkDisplayModePropertiesKHR $displayModeProperties;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkDisplayPlaneInfo2KHR extends CData
 {
     public int $sType;
@@ -5072,9 +4177,6 @@ final class VkDisplayPlaneInfo2KHR extends CData
     public int $planeIndex;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkDisplayPlaneCapabilities2KHR extends CData
 {
     public int $sType;
@@ -5084,9 +4186,6 @@ final class VkDisplayPlaneCapabilities2KHR extends CData
     public VkDisplayPlaneCapabilitiesKHR $capabilities;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPhysicalDeviceShaderClockFeaturesKHR extends CData
 {
     public int $sType;
@@ -5099,9 +4198,6 @@ final class VkPhysicalDeviceShaderClockFeaturesKHR extends CData
 }
 
 
-/**
- * @mixin CStruct
- */
 final class VkSurfaceProtectedCapabilitiesKHR extends CData
 {
     public int $sType;
@@ -5111,9 +4207,6 @@ final class VkSurfaceProtectedCapabilitiesKHR extends CData
     public int $supportsProtected;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPipelineInfoKHR extends CData
 {
     public int $sType;
@@ -5123,9 +4216,6 @@ final class VkPipelineInfoKHR extends CData
     public VkPipeline $pipeline;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPipelineExecutablePropertiesKHR extends CData
 {
     public int $sType;
@@ -5134,18 +4224,15 @@ final class VkPipelineExecutablePropertiesKHR extends CData
 
     public int $stages;
 
-    /** @var string|CData|CChar[]|null */
+    /** @var string|CData|null */
     public ?CData $name;
 
-    /** @var string|CData|CChar[]|null */
+    /** @var string|CData|null */
     public ?CData $description;
 
     public int $subgroupSize;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPipelineExecutableInfoKHR extends CData
 {
     public int $sType;
@@ -5157,19 +4244,16 @@ final class VkPipelineExecutableInfoKHR extends CData
     public int $executableIndex;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPipelineExecutableStatisticKHR extends CData
 {
     public int $sType;
 
     public ?CData $pNext;
 
-    /** @var string|CData|CChar[]|null */
+    /** @var string|CData|null */
     public ?CData$name;
 
-    /** @var string|CData|CChar[]|null */
+    /** @var string|CData|null */
     public ?CData $description;
 
     public int $format;
@@ -5177,19 +4261,16 @@ final class VkPipelineExecutableStatisticKHR extends CData
     public ?CData $value;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPipelineExecutableInternalRepresentationKHR extends CData
 {
     public int $sType;
 
     public ?CData $pNext;
 
-    /** @var string|CData|CChar[]|null */
+    /** @var string|CData|null */
     public ?CData$name;
 
-    /** @var string|CData|CChar[]|null */
+    /** @var string|CData|null */
     public ?CData $description;
 
     public int $isText;
@@ -5199,16 +4280,10 @@ final class VkPipelineExecutableInternalRepresentationKHR extends CData
     public ?CData $pData;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkDebugReportCallbackEXT extends CData
 {
 }
 
-/**
- * @mixin CStruct
- */
 final class VkDebugReportCallbackCreateInfoEXT extends CData
 {
     public int $sType;
@@ -5224,9 +4299,6 @@ final class VkDebugReportCallbackCreateInfoEXT extends CData
 }
 
 
-/**
- * @mixin CStruct
- */
 final class VkDebugMarkerObjectNameInfoEXT extends CData
 {
     public int $sType;
@@ -5240,9 +4312,6 @@ final class VkDebugMarkerObjectNameInfoEXT extends CData
     public ?CData $pObjectName;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkDebugMarkerObjectTagInfoEXT extends CData
 {
     public int $sType;
@@ -5260,9 +4329,6 @@ final class VkDebugMarkerObjectTagInfoEXT extends CData
     public ?CData $pTag;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkDebugMarkerMarkerInfoEXT extends CData
 {
     public int $sType;
@@ -5275,9 +4341,6 @@ final class VkDebugMarkerMarkerInfoEXT extends CData
     public array $color;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkDedicatedAllocationImageCreateInfoNV extends CData
 {
     public int $sType;
@@ -5287,9 +4350,6 @@ final class VkDedicatedAllocationImageCreateInfoNV extends CData
     public int $dedicatedAllocation;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkDedicatedAllocationBufferCreateInfoNV extends CData
 {
     public int $sType;
@@ -5299,9 +4359,6 @@ final class VkDedicatedAllocationBufferCreateInfoNV extends CData
     public int $dedicatedAllocation;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkDedicatedAllocationMemoryAllocateInfoNV extends CData
 {
     public int $sType;
@@ -5313,9 +4370,6 @@ final class VkDedicatedAllocationMemoryAllocateInfoNV extends CData
     public VkBuffer $buffer;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPhysicalDeviceTransformFeedbackFeaturesEXT extends CData
 {
     public int $sType;
@@ -5327,9 +4381,6 @@ final class VkPhysicalDeviceTransformFeedbackFeaturesEXT extends CData
     public int $geometryStreams;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPhysicalDeviceTransformFeedbackPropertiesEXT extends CData
 {
     public int $sType;
@@ -5357,9 +4408,6 @@ final class VkPhysicalDeviceTransformFeedbackPropertiesEXT extends CData
     public int $transformFeedbackDraw;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPipelineRasterizationStateStreamCreateInfoEXT extends CData
 {
     public int $sType;
@@ -5371,9 +4419,6 @@ final class VkPipelineRasterizationStateStreamCreateInfoEXT extends CData
     public int $rasterizationStream;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkImageViewHandleInfoNVX extends CData
 {
     public int $sType;
@@ -5387,9 +4432,6 @@ final class VkImageViewHandleInfoNVX extends CData
     public VkSampler $sampler;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkTextureLODGatherFormatPropertiesAMD extends CData
 {
     public int $sType;
@@ -5399,9 +4441,6 @@ final class VkTextureLODGatherFormatPropertiesAMD extends CData
     public int $supportsTextureGatherLODBiasAMD;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkShaderResourceUsageAMD extends CData
 {
     public int $numUsedVgprs;
@@ -5415,9 +4454,6 @@ final class VkShaderResourceUsageAMD extends CData
     public int $scratchMemUsageInBytes;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkShaderStatisticsInfoAMD extends CData
 {
     public int $shaderStageMask;
@@ -5436,9 +4472,6 @@ final class VkShaderStatisticsInfoAMD extends CData
     public array $computeWorkGroupSize;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPhysicalDeviceCornerSampledImageFeaturesNV extends CData
 {
     public int $sType;
@@ -5448,9 +4481,6 @@ final class VkPhysicalDeviceCornerSampledImageFeaturesNV extends CData
     public int $cornerSampledImage;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkExternalMemoryImageCreateInfoNV extends CData
 {
     public int $sType;
@@ -5460,9 +4490,6 @@ final class VkExternalMemoryImageCreateInfoNV extends CData
     public int $handleTypes;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkExportMemoryAllocateInfoNV extends CData
 {
     public int $sType;
@@ -5472,9 +4499,6 @@ final class VkExportMemoryAllocateInfoNV extends CData
     public int $handleTypes;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT extends CData
 {
     public int $sType;
@@ -5484,9 +4508,6 @@ final class VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT extends CData
     public int $textureCompressionASTC_HDR;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkImageViewASTCDecodeModeEXT extends CData
 {
     public int $sType;
@@ -5496,9 +4517,6 @@ final class VkImageViewASTCDecodeModeEXT extends CData
     public int $decodeMode;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPhysicalDeviceASTCDecodeFeaturesEXT extends CData
 {
     public int $sType;
@@ -5508,9 +4526,6 @@ final class VkPhysicalDeviceASTCDecodeFeaturesEXT extends CData
     public int $decodeModeSharedExponent;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPhysicalDeviceConditionalRenderingFeaturesEXT extends CData
 {
     public int $sType;
@@ -5522,9 +4537,6 @@ final class VkPhysicalDeviceConditionalRenderingFeaturesEXT extends CData
     public int $inheritedConditionalRendering;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkCommandBufferInheritanceConditionalRenderingInfoEXT extends CData
 {
     public int $sType;
@@ -5534,9 +4546,6 @@ final class VkCommandBufferInheritanceConditionalRenderingInfoEXT extends CData
     public int $conditionalRenderingEnable;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkViewportWScalingNV extends CData
 {
     public float $xcoeff;
@@ -5544,9 +4553,6 @@ final class VkViewportWScalingNV extends CData
     public float $ycoeff;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPipelineViewportWScalingStateCreateInfoNV extends CData
 {
     public int $sType;
@@ -5560,9 +4566,6 @@ final class VkPipelineViewportWScalingStateCreateInfoNV extends CData
     public ?CData $pViewportWScalings;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkDeviceEventInfoEXT extends CData
 {
     public int $sType;
@@ -5572,9 +4575,6 @@ final class VkDeviceEventInfoEXT extends CData
     public int $deviceEvent;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkDisplayEventInfoEXT extends CData
 {
     public int $sType;
@@ -5584,9 +4584,6 @@ final class VkDisplayEventInfoEXT extends CData
     public int $displayEvent;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkSwapchainCounterCreateInfoEXT extends CData
 {
     public int $sType;
@@ -5596,17 +4593,11 @@ final class VkSwapchainCounterCreateInfoEXT extends CData
     public int $surfaceCounters;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkRefreshCycleDurationGOOGLE extends CData
 {
     public int $refreshDuration;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPastPresentationTimingGOOGLE extends CData
 {
     public int $presentID;
@@ -5620,9 +4611,6 @@ final class VkPastPresentationTimingGOOGLE extends CData
     public int $presentMargin;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPresentTimeGOOGLE extends CData
 {
     public int $presentID;
@@ -5630,9 +4618,6 @@ final class VkPresentTimeGOOGLE extends CData
     public int $desiredPresentTime;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPresentTimesInfoGOOGLE extends CData
 {
     public int $sType;
@@ -5644,9 +4629,6 @@ final class VkPresentTimesInfoGOOGLE extends CData
     public ?CData $pTimes;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX extends CData
 {
     public int $sType;
@@ -5656,9 +4638,6 @@ final class VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX extends CDat
     public int $perViewPositionAllComponents;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPipelineViewportSwizzleStateCreateInfoNV extends CData
 {
     public int $sType;
@@ -5672,9 +4651,6 @@ final class VkPipelineViewportSwizzleStateCreateInfoNV extends CData
     public ?CData $pViewportSwizzles;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPipelineDiscardRectangleStateCreateInfoEXT extends CData
 {
     public int $sType;
@@ -5690,9 +4666,6 @@ final class VkPipelineDiscardRectangleStateCreateInfoEXT extends CData
     public ?CData $pDiscardRectangles;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPipelineRasterizationConservativeStateCreateInfoEXT extends CData
 {
     public int $sType;
@@ -5706,9 +4679,6 @@ final class VkPipelineRasterizationConservativeStateCreateInfoEXT extends CData
     public float $extraPrimitiveOverestimationSize;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPhysicalDeviceDepthClipEnableFeaturesEXT extends CData
 {
     public int $sType;
@@ -5718,9 +4688,6 @@ final class VkPhysicalDeviceDepthClipEnableFeaturesEXT extends CData
     public int $depthClipEnable;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPipelineRasterizationDepthClipStateCreateInfoEXT extends CData
 {
     public int $sType;
@@ -5732,9 +4699,6 @@ final class VkPipelineRasterizationDepthClipStateCreateInfoEXT extends CData
     public int $depthClipEnable;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkXYColorEXT extends CData
 {
     public float $x;
@@ -5742,9 +4706,6 @@ final class VkXYColorEXT extends CData
     public float $y;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkHdrMetadataEXT extends CData
 {
     public int $sType;
@@ -5768,16 +4729,10 @@ final class VkHdrMetadataEXT extends CData
     public float $maxFrameAverageLightLevel;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkDebugUtilsMessengerEXT extends CData
 {
 }
 
-/**
- * @mixin CStruct
- */
 final class VkDebugUtilsObjectTagInfoEXT extends CData
 {
     public int $sType;
@@ -5795,9 +4750,6 @@ final class VkDebugUtilsObjectTagInfoEXT extends CData
     public ?CData $pTag;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkDebugUtilsLabelEXT extends CData
 {
     public int $sType;
@@ -5810,9 +4762,6 @@ final class VkDebugUtilsLabelEXT extends CData
     public array $color;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkDebugUtilsMessengerCallbackDataEXT extends CData
 {
     public int $sType;
@@ -5840,9 +4789,6 @@ final class VkDebugUtilsMessengerCallbackDataEXT extends CData
     public ?CData $pObjects;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkDebugUtilsMessengerCreateInfoEXT extends CData
 {
     public int $sType;
@@ -5861,9 +4807,6 @@ final class VkDebugUtilsMessengerCreateInfoEXT extends CData
     public ?CData $pUserData;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPhysicalDeviceInlineUniformBlockFeaturesEXT extends CData
 {
     public int $sType;
@@ -5875,9 +4818,6 @@ final class VkPhysicalDeviceInlineUniformBlockFeaturesEXT extends CData
     public int $descriptorBindingInlineUniformBlockUpdateAfterBind;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPhysicalDeviceInlineUniformBlockPropertiesEXT extends CData
 {
     public int $sType;
@@ -5895,9 +4835,6 @@ final class VkPhysicalDeviceInlineUniformBlockPropertiesEXT extends CData
     public int $maxDescriptorSetUpdateAfterBindInlineUniformBlocks;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkWriteDescriptorSetInlineUniformBlockEXT extends CData
 {
     public int $sType;
@@ -5909,9 +4846,6 @@ final class VkWriteDescriptorSetInlineUniformBlockEXT extends CData
     public ?CData $pData;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkDescriptorPoolInlineUniformBlockCreateInfoEXT extends CData
 {
     public int $sType;
@@ -5921,9 +4855,6 @@ final class VkDescriptorPoolInlineUniformBlockCreateInfoEXT extends CData
     public int $maxInlineUniformBlockBindings;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkSampleLocationEXT extends CData
 {
     public float $x;
@@ -5931,9 +4862,6 @@ final class VkSampleLocationEXT extends CData
     public float $y;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkSampleLocationsInfoEXT extends CData
 {
     public int $sType;
@@ -5949,9 +4877,6 @@ final class VkSampleLocationsInfoEXT extends CData
     public ?CData $pSampleLocations;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkAttachmentSampleLocationsEXT extends CData
 {
     public int $attachmentIndex;
@@ -5959,9 +4884,6 @@ final class VkAttachmentSampleLocationsEXT extends CData
     public VkSampleLocationsInfoEXT $sampleLocationsInfo;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkSubpassSampleLocationsEXT extends CData
 {
     public int $subpassIndex;
@@ -5969,9 +4891,6 @@ final class VkSubpassSampleLocationsEXT extends CData
     public VkSampleLocationsInfoEXT $sampleLocationsInfo;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkRenderPassSampleLocationsBeginInfoEXT extends CData
 {
     public int $sType;
@@ -5987,9 +4906,6 @@ final class VkRenderPassSampleLocationsBeginInfoEXT extends CData
     public ?CData $pPostSubpassSampleLocations;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPipelineSampleLocationsStateCreateInfoEXT extends CData
 {
     public int $sType;
@@ -6001,9 +4917,6 @@ final class VkPipelineSampleLocationsStateCreateInfoEXT extends CData
     public VkSampleLocationsInfoEXT $sampleLocationsInfo;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPhysicalDeviceSampleLocationsPropertiesEXT extends CData
 {
     public int $sType;
@@ -6022,9 +4935,6 @@ final class VkPhysicalDeviceSampleLocationsPropertiesEXT extends CData
     public int $variableSampleLocations;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkMultisamplePropertiesEXT extends CData
 {
     public int $sType;
@@ -6034,9 +4944,6 @@ final class VkMultisamplePropertiesEXT extends CData
     public VkExtent2D $maxSampleLocationGridSize;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT extends CData
 {
     public int $sType;
@@ -6056,9 +4963,6 @@ final class VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT extends CData
     public int $advancedBlendAllOperations;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPipelineColorBlendAdvancedStateCreateInfoEXT extends CData
 {
     public int $sType;
@@ -6072,9 +4976,6 @@ final class VkPipelineColorBlendAdvancedStateCreateInfoEXT extends CData
     public int $blendOverlap;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPipelineCoverageToColorStateCreateInfoNV extends CData
 {
     public int $sType;
@@ -6088,9 +4989,6 @@ final class VkPipelineCoverageToColorStateCreateInfoNV extends CData
     public int $coverageToColorLocation;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPhysicalDeviceShaderSMBuiltinsPropertiesNV extends CData
 {
     public int $sType;
@@ -6102,9 +5000,6 @@ final class VkPhysicalDeviceShaderSMBuiltinsPropertiesNV extends CData
     public int $shaderWarpsPerSM;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPhysicalDeviceShaderSMBuiltinsFeaturesNV extends CData
 {
     public int $sType;
@@ -6114,9 +5009,6 @@ final class VkPhysicalDeviceShaderSMBuiltinsFeaturesNV extends CData
     public int $shaderSMBuiltins;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkDrmFormatModifierPropertiesEXT extends CData
 {
     public int $drmFormatModifier;
@@ -6126,9 +5018,6 @@ final class VkDrmFormatModifierPropertiesEXT extends CData
     public int $drmFormatModifierTilingFeatures;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkDrmFormatModifierPropertiesListEXT extends CData
 {
     public int $sType;
@@ -6140,9 +5029,6 @@ final class VkDrmFormatModifierPropertiesListEXT extends CData
     public ?CData $pDrmFormatModifierProperties;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPhysicalDeviceImageDrmFormatModifierInfoEXT extends CData
 {
     public int $sType;
@@ -6158,9 +5044,6 @@ final class VkPhysicalDeviceImageDrmFormatModifierInfoEXT extends CData
     public ?CData $pQueueFamilyIndices;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkImageDrmFormatModifierListCreateInfoEXT extends CData
 {
     public int $sType;
@@ -6172,9 +5055,6 @@ final class VkImageDrmFormatModifierListCreateInfoEXT extends CData
     public ?CData $pDrmFormatModifiers;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkImageDrmFormatModifierExplicitCreateInfoEXT extends CData
 {
     public int $sType;
@@ -6188,9 +5068,6 @@ final class VkImageDrmFormatModifierExplicitCreateInfoEXT extends CData
     public ?CData $pPlaneLayouts;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkImageDrmFormatModifierPropertiesEXT extends CData
 {
     public int $sType;
@@ -6200,16 +5077,10 @@ final class VkImageDrmFormatModifierPropertiesEXT extends CData
     public int $drmFormatModifier;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkValidationCacheEXT extends CData
 {
 }
 
-/**
- * @mixin CStruct
- */
 final class VkShaderModuleValidationCacheCreateInfoEXT extends CData
 {
     public int $sType;
@@ -6219,9 +5090,6 @@ final class VkShaderModuleValidationCacheCreateInfoEXT extends CData
     public VkValidationCacheEXT $validationCache;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPipelineViewportShadingRateImageStateCreateInfoNV extends CData
 {
     public int $sType;
@@ -6235,9 +5103,6 @@ final class VkPipelineViewportShadingRateImageStateCreateInfoNV extends CData
     public ?CData $pShadingRatePalettes;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPhysicalDeviceShadingRateImageFeaturesNV extends CData
 {
     public int $sType;
@@ -6249,9 +5114,6 @@ final class VkPhysicalDeviceShadingRateImageFeaturesNV extends CData
     public int $shadingRateCoarseSampleOrder;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPhysicalDeviceShadingRateImagePropertiesNV extends CData
 {
     public int $sType;
@@ -6265,9 +5127,6 @@ final class VkPhysicalDeviceShadingRateImagePropertiesNV extends CData
     public int $shadingRateMaxCoarseSamples;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkCoarseSampleLocationNV extends CData
 {
     public int $pixelX;
@@ -6277,9 +5136,6 @@ final class VkCoarseSampleLocationNV extends CData
     public int $sample;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkCoarseSampleOrderCustomNV extends CData
 {
     public int $shadingRate;
@@ -6291,9 +5147,6 @@ final class VkCoarseSampleOrderCustomNV extends CData
     public ?CData $pSampleLocations;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPipelineViewportCoarseSampleOrderStateCreateInfoNV extends CData
 {
     public int $sType;
@@ -6307,16 +5160,10 @@ final class VkPipelineViewportCoarseSampleOrderStateCreateInfoNV extends CData
     public ?CData $pCustomSampleOrders;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkAccelerationStructureKHR extends CData
 {
 }
 
-/**
- * @mixin CStruct
- */
 final class VkRayTracingShaderGroupCreateInfoNV extends CData
 {
     public int $sType;
@@ -6334,9 +5181,6 @@ final class VkRayTracingShaderGroupCreateInfoNV extends CData
     public int $intersectionShader;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkRayTracingPipelineCreateInfoNV extends CData
 {
     public int $sType;
@@ -6362,9 +5206,6 @@ final class VkRayTracingPipelineCreateInfoNV extends CData
     public int $basePipelineIndex;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkGeometryTrianglesNV extends CData
 {
     public int $sType;
@@ -6394,9 +5235,6 @@ final class VkGeometryTrianglesNV extends CData
     public int $transformOffset;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkGeometryAABBNV extends CData
 {
     public int $sType;
@@ -6412,9 +5250,6 @@ final class VkGeometryAABBNV extends CData
     public int $offset;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkGeometryDataNV extends CData
 {
     public VkGeometryTrianglesNV $triangles;
@@ -6422,9 +5257,6 @@ final class VkGeometryDataNV extends CData
     public VkGeometryAABBNV $aabbs;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkGeometryNV extends CData
 {
     public int $sType;
@@ -6438,9 +5270,6 @@ final class VkGeometryNV extends CData
     public int $flags;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkAccelerationStructureInfoNV extends CData
 {
     public int $sType;
@@ -6458,9 +5287,6 @@ final class VkAccelerationStructureInfoNV extends CData
     public ?CData $pGeometries;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkAccelerationStructureCreateInfoNV extends CData
 {
     public int $sType;
@@ -6472,9 +5298,6 @@ final class VkAccelerationStructureCreateInfoNV extends CData
     public VkAccelerationStructureInfoNV $info;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkBindAccelerationStructureMemoryInfoKHR extends CData
 {
     public int $sType;
@@ -6492,9 +5315,6 @@ final class VkBindAccelerationStructureMemoryInfoKHR extends CData
     public ?CData $pDeviceIndices;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkWriteDescriptorSetAccelerationStructureKHR extends CData
 {
     public int $sType;
@@ -6506,9 +5326,6 @@ final class VkWriteDescriptorSetAccelerationStructureKHR extends CData
     public ?CData $pAccelerationStructures;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkAccelerationStructureMemoryRequirementsInfoNV extends CData
 {
     public int $sType;
@@ -6520,9 +5337,6 @@ final class VkAccelerationStructureMemoryRequirementsInfoNV extends CData
     public ?CData $accelerationStructure;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPhysicalDeviceRayTracingPropertiesNV extends CData
 {
     public int $sType;
@@ -6546,18 +5360,12 @@ final class VkPhysicalDeviceRayTracingPropertiesNV extends CData
     public int $maxDescriptorSetAccelerationStructures;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkTransformMatrixKHR extends CData
 {
     /** @var float[] */
     public array $matrix;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkAabbPositionsKHR extends CData
 {
     public float $minX;
@@ -6573,9 +5381,6 @@ final class VkAabbPositionsKHR extends CData
     public float $maxZ;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkAccelerationStructureInstanceKHR extends CData
 {
     public VkTransformMatrixKHR $transform;
@@ -6591,9 +5396,6 @@ final class VkAccelerationStructureInstanceKHR extends CData
     public int $accelerationStructureReference;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV extends CData
 {
     public int $sType;
@@ -6603,9 +5405,6 @@ final class VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV extends CData
     public int $representativeFragmentTest;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPipelineRepresentativeFragmentTestStateCreateInfoNV extends CData
 {
     public int $sType;
@@ -6615,9 +5414,6 @@ final class VkPipelineRepresentativeFragmentTestStateCreateInfoNV extends CData
     public int $representativeFragmentTestEnable;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPhysicalDeviceImageViewImageFormatInfoEXT extends CData
 {
     public int $sType;
@@ -6627,9 +5423,6 @@ final class VkPhysicalDeviceImageViewImageFormatInfoEXT extends CData
     public int $imageViewType;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkFilterCubicImageViewImageFormatPropertiesEXT extends CData
 {
     public int $sType;
@@ -6641,9 +5434,6 @@ final class VkFilterCubicImageViewImageFormatPropertiesEXT extends CData
     public int $filterCubicMinmax;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkImportMemoryHostPointerInfoEXT extends CData
 {
     public int $sType;
@@ -6655,9 +5445,6 @@ final class VkImportMemoryHostPointerInfoEXT extends CData
     public ?CData $pHostPointer;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkMemoryHostPointerPropertiesEXT extends CData
 {
     public int $sType;
@@ -6667,9 +5454,6 @@ final class VkMemoryHostPointerPropertiesEXT extends CData
     public int $memoryTypeBits;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPhysicalDeviceExternalMemoryHostPropertiesEXT extends CData
 {
     public int $sType;
@@ -6679,9 +5463,6 @@ final class VkPhysicalDeviceExternalMemoryHostPropertiesEXT extends CData
     public int $minImportedHostPointerAlignment;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPhysicalDeviceShaderCorePropertiesAMD extends CData
 {
     public int $sType;
@@ -6717,9 +5498,6 @@ final class VkPhysicalDeviceShaderCorePropertiesAMD extends CData
     public int $vgprAllocationGranularity;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT extends CData
 {
     public int $sType;
@@ -6729,9 +5507,6 @@ final class VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT extends CData
     public int $maxVertexAttribDivisor;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkVertexInputBindingDivisorDescriptionEXT extends CData
 {
     public int $binding;
@@ -6739,9 +5514,6 @@ final class VkVertexInputBindingDivisorDescriptionEXT extends CData
     public int $divisor;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPipelineVertexInputDivisorStateCreateInfoEXT extends CData
 {
     public int $sType;
@@ -6753,9 +5525,6 @@ final class VkPipelineVertexInputDivisorStateCreateInfoEXT extends CData
     public ?CData $pVertexBindingDivisors;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT extends CData
 {
     public int $sType;
@@ -6767,9 +5536,6 @@ final class VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT extends CData
     public int $vertexAttributeInstanceRateZeroDivisor;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPipelineCreationFeedbackCreateInfoEXT extends CData
 {
     public int $sType;
@@ -6783,9 +5549,6 @@ final class VkPipelineCreationFeedbackCreateInfoEXT extends CData
     public ?CData $pPipelineStageCreationFeedbacks;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPhysicalDeviceComputeShaderDerivativesFeaturesNV extends CData
 {
     public int $sType;
@@ -6797,9 +5560,6 @@ final class VkPhysicalDeviceComputeShaderDerivativesFeaturesNV extends CData
     public int $computeDerivativeGroupLinear;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPhysicalDeviceMeshShaderFeaturesNV extends CData
 {
     public int $sType;
@@ -6811,9 +5571,6 @@ final class VkPhysicalDeviceMeshShaderFeaturesNV extends CData
     public int $meshShader;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPhysicalDeviceMeshShaderPropertiesNV extends CData
 {
     public int $sType;
@@ -6849,9 +5606,6 @@ final class VkPhysicalDeviceMeshShaderPropertiesNV extends CData
     public int $meshOutputPerPrimitiveGranularity;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkDrawMeshTasksIndirectCommandNV extends CData
 {
     public int $taskCount;
@@ -6859,9 +5613,6 @@ final class VkDrawMeshTasksIndirectCommandNV extends CData
     public int $firstTask;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV extends CData
 {
     public int $sType;
@@ -6871,9 +5622,6 @@ final class VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV extends CData
     public int $fragmentShaderBarycentric;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPhysicalDeviceShaderImageFootprintFeaturesNV extends CData
 {
     public int $sType;
@@ -6883,9 +5631,6 @@ final class VkPhysicalDeviceShaderImageFootprintFeaturesNV extends CData
     public int $imageFootprint;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPipelineViewportExclusiveScissorStateCreateInfoNV extends CData
 {
     public int $sType;
@@ -6897,9 +5642,6 @@ final class VkPipelineViewportExclusiveScissorStateCreateInfoNV extends CData
     public ?CData $pExclusiveScissors;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPhysicalDeviceExclusiveScissorFeaturesNV extends CData
 {
     public int $sType;
@@ -6910,9 +5652,6 @@ final class VkPhysicalDeviceExclusiveScissorFeaturesNV extends CData
 }
 
 
-/**
- * @mixin CStruct
- */
 final class VkQueueFamilyCheckpointPropertiesNV extends CData
 {
     public int $sType;
@@ -6922,9 +5661,6 @@ final class VkQueueFamilyCheckpointPropertiesNV extends CData
     public int $checkpointExecutionStageMask;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkCheckpointDataNV extends CData
 {
     public int $sType;
@@ -6937,9 +5673,6 @@ final class VkCheckpointDataNV extends CData
 }
 
 
-/**
- * @mixin CStruct
- */
 final class VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL extends CData
 {
     public int $sType;
@@ -6949,16 +5682,10 @@ final class VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL extends CData
     public int $shaderIntegerFunctions2;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPerformanceConfigurationINTEL extends CData
 {
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPerformanceValueINTEL extends CData
 {
     public int $type;
@@ -6966,9 +5693,6 @@ final class VkPerformanceValueINTEL extends CData
     public ?CData $data;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkInitializePerformanceApiInfoINTEL extends CData
 {
     public int $sType;
@@ -6978,9 +5702,6 @@ final class VkInitializePerformanceApiInfoINTEL extends CData
     public ?CData $pUserData;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkQueryPoolPerformanceQueryCreateInfoINTEL extends CData
 {
     public int $sType;
@@ -6990,9 +5711,6 @@ final class VkQueryPoolPerformanceQueryCreateInfoINTEL extends CData
     public int $performanceCountersSampling;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPerformanceMarkerInfoINTEL extends CData
 {
     public int $sType;
@@ -7002,9 +5720,6 @@ final class VkPerformanceMarkerInfoINTEL extends CData
     public int $marker;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPerformanceStreamMarkerInfoINTEL extends CData
 {
     public int $sType;
@@ -7014,9 +5729,6 @@ final class VkPerformanceStreamMarkerInfoINTEL extends CData
     public int $marker;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPerformanceOverrideInfoINTEL extends CData
 {
     public int $sType;
@@ -7030,9 +5742,6 @@ final class VkPerformanceOverrideInfoINTEL extends CData
     public int $parameter;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPerformanceConfigurationAcquireInfoINTEL extends CData
 {
     public int $sType;
@@ -7043,9 +5752,6 @@ final class VkPerformanceConfigurationAcquireInfoINTEL extends CData
 }
 
 
-/**
- * @mixin CStruct
- */
 final class VkPhysicalDevicePCIBusInfoPropertiesEXT extends CData
 {
     public int $sType;
@@ -7061,9 +5767,6 @@ final class VkPhysicalDevicePCIBusInfoPropertiesEXT extends CData
     public int $pciFunction;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkDisplayNativeHdrSurfaceCapabilitiesAMD extends CData
 {
     public int $sType;
@@ -7073,9 +5776,6 @@ final class VkDisplayNativeHdrSurfaceCapabilitiesAMD extends CData
     public int $localDimmingSupport;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkSwapchainDisplayNativeHdrCreateInfoAMD extends CData
 {
     public int $sType;
@@ -7085,9 +5785,6 @@ final class VkSwapchainDisplayNativeHdrCreateInfoAMD extends CData
     public int $localDimmingEnable;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPhysicalDeviceFragmentDensityMapFeaturesEXT extends CData
 {
     public int $sType;
@@ -7101,9 +5798,6 @@ final class VkPhysicalDeviceFragmentDensityMapFeaturesEXT extends CData
     public int $fragmentDensityMapNonSubsampledImages;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPhysicalDeviceFragmentDensityMapPropertiesEXT extends CData
 {
     public int $sType;
@@ -7117,9 +5811,6 @@ final class VkPhysicalDeviceFragmentDensityMapPropertiesEXT extends CData
     public int $fragmentDensityInvocations;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkRenderPassFragmentDensityMapCreateInfoEXT extends CData
 {
     public int $sType;
@@ -7129,9 +5820,6 @@ final class VkRenderPassFragmentDensityMapCreateInfoEXT extends CData
     public VkAttachmentReference $fragmentDensityMapAttachment;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPhysicalDeviceSubgroupSizeControlFeaturesEXT extends CData
 {
     public int $sType;
@@ -7143,9 +5831,6 @@ final class VkPhysicalDeviceSubgroupSizeControlFeaturesEXT extends CData
     public int $computeFullSubgroups;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPhysicalDeviceSubgroupSizeControlPropertiesEXT extends CData
 {
     public int $sType;
@@ -7161,9 +5846,6 @@ final class VkPhysicalDeviceSubgroupSizeControlPropertiesEXT extends CData
     public int $requiredSubgroupSizeStages;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT extends CData
 {
     public int $sType;
@@ -7173,9 +5855,6 @@ final class VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT extends CData
     public int $requiredSubgroupSize;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPhysicalDeviceCoherentMemoryFeaturesAMD extends CData
 {
     public int $sType;
@@ -7185,9 +5864,6 @@ final class VkPhysicalDeviceCoherentMemoryFeaturesAMD extends CData
     public int $deviceCoherentMemory;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPhysicalDeviceMemoryBudgetPropertiesEXT extends CData
 {
     public int $sType;
@@ -7201,9 +5877,6 @@ final class VkPhysicalDeviceMemoryBudgetPropertiesEXT extends CData
     public array $heapUsage;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPhysicalDeviceMemoryPriorityFeaturesEXT extends CData
 {
     public int $sType;
@@ -7213,9 +5886,6 @@ final class VkPhysicalDeviceMemoryPriorityFeaturesEXT extends CData
     public int $memoryPriority;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkMemoryPriorityAllocateInfoEXT extends CData
 {
     public int $sType;
@@ -7225,9 +5895,6 @@ final class VkMemoryPriorityAllocateInfoEXT extends CData
     public float $priority;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV extends CData
 {
     public int $sType;
@@ -7237,9 +5904,6 @@ final class VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV extends C
     public int $dedicatedAllocationImageAliasing;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPhysicalDeviceBufferDeviceAddressFeaturesEXT extends CData
 {
     public int $sType;
@@ -7253,9 +5917,6 @@ final class VkPhysicalDeviceBufferDeviceAddressFeaturesEXT extends CData
     public int $bufferDeviceAddressMultiDevice;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkBufferDeviceAddressCreateInfoEXT extends CData
 {
     public int $sType;
@@ -7265,9 +5926,6 @@ final class VkBufferDeviceAddressCreateInfoEXT extends CData
     public int $deviceAddress;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPhysicalDeviceCooperativeMatrixFeaturesNV extends CData
 {
     public int $sType;
@@ -7279,9 +5937,6 @@ final class VkPhysicalDeviceCooperativeMatrixFeaturesNV extends CData
     public int $cooperativeMatrixRobustBufferAccess;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPhysicalDeviceCooperativeMatrixPropertiesNV extends CData
 {
     public int $sType;
@@ -7292,9 +5947,6 @@ final class VkPhysicalDeviceCooperativeMatrixPropertiesNV extends CData
 }
 
 
-/**
- * @mixin CStruct
- */
 final class VkPipelineCoverageReductionStateCreateInfoNV extends CData
 {
     public int $sType;
@@ -7306,9 +5958,6 @@ final class VkPipelineCoverageReductionStateCreateInfoNV extends CData
     public int $coverageReductionMode;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkFramebufferMixedSamplesCombinationNV extends CData
 {
     public int $sType;
@@ -7324,9 +5973,6 @@ final class VkFramebufferMixedSamplesCombinationNV extends CData
     public int $colorSamples;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT extends CData
 {
     public int $sType;
@@ -7340,9 +5986,6 @@ final class VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT extends CData
     public int $fragmentShaderShadingRateInterlock;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPhysicalDeviceYcbcrImageArraysFeaturesEXT extends CData
 {
     public int $sType;
@@ -7352,9 +5995,6 @@ final class VkPhysicalDeviceYcbcrImageArraysFeaturesEXT extends CData
     public int $ycbcrImageArrays;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkHeadlessSurfaceCreateInfoEXT extends CData
 {
     public int $sType;
@@ -7365,9 +6005,6 @@ final class VkHeadlessSurfaceCreateInfoEXT extends CData
 }
 
 
-/**
- * @mixin CStruct
- */
 final class VkPhysicalDeviceLineRasterizationPropertiesEXT extends CData
 {
     public int $sType;
@@ -7377,9 +6014,6 @@ final class VkPhysicalDeviceLineRasterizationPropertiesEXT extends CData
     public int $lineSubPixelPrecisionBits;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPipelineRasterizationLineStateCreateInfoEXT extends CData
 {
     public int $sType;
@@ -7395,9 +6029,6 @@ final class VkPipelineRasterizationLineStateCreateInfoEXT extends CData
     public int $lineStipplePattern;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPhysicalDeviceIndexTypeUint8FeaturesEXT extends CData
 {
     public int $sType;
@@ -7407,9 +6038,6 @@ final class VkPhysicalDeviceIndexTypeUint8FeaturesEXT extends CData
     public int $indexTypeUint8;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT extends CData
 {
     public int $sType;
@@ -7419,16 +6047,10 @@ final class VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT extends CD
     public int $shaderDemoteToHelperInvocation;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkIndirectCommandsLayoutNV extends CData
 {
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV extends CData
 {
     public int $sType;
@@ -7438,9 +6060,6 @@ final class VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV extends CData
     public int $deviceGeneratedCommands;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkGraphicsShaderGroupCreateInfoNV extends CData
 {
     public int $sType;
@@ -7456,9 +6075,6 @@ final class VkGraphicsShaderGroupCreateInfoNV extends CData
     public ?CData $pTessellationState;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkGraphicsPipelineShaderGroupsCreateInfoNV extends CData
 {
     public int $sType;
@@ -7474,17 +6090,11 @@ final class VkGraphicsPipelineShaderGroupsCreateInfoNV extends CData
     public ?CData $pPipelines;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkBindShaderGroupIndirectCommandNV extends CData
 {
     public int $groupIndex;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkBindIndexBufferIndirectCommandNV extends CData
 {
     public int $bufferAddress;
@@ -7494,9 +6104,6 @@ final class VkBindIndexBufferIndirectCommandNV extends CData
     public int $indexType;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkBindVertexBufferIndirectCommandNV extends CData
 {
     public int $bufferAddress;
@@ -7506,17 +6113,11 @@ final class VkBindVertexBufferIndirectCommandNV extends CData
     public int $stride;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkSetStateFlagsIndirectCommandNV extends CData
 {
     public int $data;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkIndirectCommandsStreamNV extends CData
 {
     public VkBuffer $buffer;
@@ -7524,9 +6125,6 @@ final class VkIndirectCommandsStreamNV extends CData
     public int $offset;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkIndirectCommandsLayoutTokenNV extends CData
 {
     public int $sType;
@@ -7560,9 +6158,6 @@ final class VkIndirectCommandsLayoutTokenNV extends CData
     public ?CData $pIndexTypeValues;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkIndirectCommandsLayoutCreateInfoNV extends CData
 {
     public int $sType;
@@ -7582,9 +6177,6 @@ final class VkIndirectCommandsLayoutCreateInfoNV extends CData
     public ?CData $pStreamStrides;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkGeneratedCommandsInfoNV extends CData
 {
     public int $sType;
@@ -7618,9 +6210,6 @@ final class VkGeneratedCommandsInfoNV extends CData
     public int $sequencesIndexOffset;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkGeneratedCommandsMemoryRequirementsInfoNV extends CData
 {
     public int $sType;
@@ -7636,9 +6225,6 @@ final class VkGeneratedCommandsMemoryRequirementsInfoNV extends CData
     public int $maxSequencesCount;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT extends CData
 {
     public int $sType;
@@ -7648,9 +6234,6 @@ final class VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT extends CData
     public int $texelBufferAlignment;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPhysicalDeviceTexelBufferAlignmentPropertiesEXT extends CData
 {
     public int $sType;
@@ -7666,9 +6249,6 @@ final class VkPhysicalDeviceTexelBufferAlignmentPropertiesEXT extends CData
     public int $uniformTexelBufferOffsetSingleTexelAlignment;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkRenderPassTransformBeginInfoQCOM extends CData
 {
     public int $sType;
@@ -7678,9 +6258,6 @@ final class VkRenderPassTransformBeginInfoQCOM extends CData
     public int $transform;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkCommandBufferInheritanceRenderPassTransformInfoQCOM extends CData
 {
     public int $sType;
@@ -7692,9 +6269,6 @@ final class VkCommandBufferInheritanceRenderPassTransformInfoQCOM extends CData
     public VkRect2D $renderArea;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT extends CData
 {
     public int $sType;
@@ -7704,9 +6278,6 @@ final class VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT extends CDat
     public int $pipelineCreationCacheControl;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkDeviceDiagnosticsConfigCreateInfoNV extends CData
 {
     public int $sType;
@@ -7716,9 +6287,6 @@ final class VkDeviceDiagnosticsConfigCreateInfoNV extends CData
     public int $flags;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPhysicalDeviceSubgroupProperties extends CData
 {
     public int $sType;
@@ -7734,9 +6302,6 @@ final class VkPhysicalDeviceSubgroupProperties extends CData
     public int $quadOperationsInAllStages;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPhysicalDeviceVulkan11Features extends CData
 {
     public int $sType;
@@ -7768,9 +6333,6 @@ final class VkPhysicalDeviceVulkan11Features extends CData
     public int $shaderDrawParameters;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkSwapchainCreateInfoKHR extends CData
 {
     public int $sType;
@@ -7798,7 +6360,7 @@ final class VkSwapchainCreateInfoKHR extends CData
 
     public int $queueFamilyIndexCount;
 
-    /** @var CData|null|CIntPtr */
+    /** @var CData|null */
     public ?CData $pQueueFamilyIndices;
 
     public int $preTransform;
@@ -7813,9 +6375,6 @@ final class VkSwapchainCreateInfoKHR extends CData
     public ?CData $oldSwapchain;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPhysicalDevicePerformanceQueryFeaturesKHR extends CData
 {
     public int $sType;
@@ -7827,9 +6386,6 @@ final class VkPhysicalDevicePerformanceQueryFeaturesKHR extends CData
     public int $performanceCounterMultipleQueryPools;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR extends CData
 {
     public int $sType;
@@ -7839,9 +6395,6 @@ final class VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR extends CDat
     public int $pipelineExecutableInfo;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPipelineRasterizationStateRasterizationOrderAMD extends CData
 {
     public int $sType;
@@ -7851,9 +6404,6 @@ final class VkPipelineRasterizationStateRasterizationOrderAMD extends CData
     public int $rasterizationOrder;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkExternalImageFormatPropertiesNV extends CData
 {
     /** @var CData|null|VkImageFormatProperties */
@@ -7866,9 +6416,6 @@ final class VkExternalImageFormatPropertiesNV extends CData
     public int $compatibleHandleTypes;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkValidationFlagsEXT extends CData
 {
     public int $sType;
@@ -7880,9 +6427,6 @@ final class VkValidationFlagsEXT extends CData
     public ?CData $pDisabledValidationChecks;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkConditionalRenderingBeginInfoEXT extends CData
 {
     public int $sType;
@@ -7897,9 +6441,6 @@ final class VkConditionalRenderingBeginInfoEXT extends CData
     public int $flags;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkSurfaceCapabilities2EXT extends CData
 {
     public int $sType;
@@ -7932,9 +6473,6 @@ final class VkSurfaceCapabilities2EXT extends CData
     public int $supportedSurfaceCounters;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkDisplayPowerInfoEXT extends CData
 {
     public int $sType;
@@ -7944,9 +6482,6 @@ final class VkDisplayPowerInfoEXT extends CData
     public int $powerState;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkViewportSwizzleNV extends CData
 {
     public int $x;
@@ -7958,9 +6493,6 @@ final class VkViewportSwizzleNV extends CData
     public int $w;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPhysicalDeviceDiscardRectanglePropertiesEXT extends CData
 {
     public int $sType;
@@ -7970,9 +6502,6 @@ final class VkPhysicalDeviceDiscardRectanglePropertiesEXT extends CData
     public int $maxDiscardRectangles;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPhysicalDeviceConservativeRasterizationPropertiesEXT extends CData
 {
     public int $sType;
@@ -7998,9 +6527,6 @@ final class VkPhysicalDeviceConservativeRasterizationPropertiesEXT extends CData
     public int $conservativeRasterizationPostDepthCoverage;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkDebugUtilsObjectNameInfoEXT extends CData
 {
     public int $sType;
@@ -8011,13 +6537,10 @@ final class VkDebugUtilsObjectNameInfoEXT extends CData
 
     public int $objectHandle;
 
-    /** @var string|CData|CChar[]|null */
+    /** @var string|CData|null */
     public ?CData $pObjectName;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT extends CData
 {
     public int $sType;
@@ -8027,9 +6550,6 @@ final class VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT extends CData
     public int $advancedBlendCoherentOperations;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPipelineCoverageModulationStateCreateInfoNV extends CData
 {
     public int $sType;
@@ -8044,13 +6564,10 @@ final class VkPipelineCoverageModulationStateCreateInfoNV extends CData
 
     public int $coverageModulationTableCount;
 
-    /** @var CData|null|CFloatPtr */
+    /** @var CData|null */
     public ?CData $pCoverageModulationTable;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkValidationCacheCreateInfoEXT extends CData
 {
     public int $sType;
@@ -8065,13 +6582,10 @@ final class VkValidationCacheCreateInfoEXT extends CData
 
     public int $coverageModulationTableCount;
 
-    /** @var CData|null|CFloatPtr */
+    /** @var CData|null */
     public ?CData $pCoverageModulationTable;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkShadingRatePaletteNV extends CData
 {
     public int $shadingRatePaletteEntryCount;
@@ -8079,9 +6593,6 @@ final class VkShadingRatePaletteNV extends CData
     public ?CData $pShadingRatePaletteEntries;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkDeviceQueueGlobalPriorityCreateInfoEXT extends CData
 {
     public int $sType;
@@ -8091,9 +6602,6 @@ final class VkDeviceQueueGlobalPriorityCreateInfoEXT extends CData
     public int $globalPriority;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPipelineCompilerControlCreateInfoAMD extends CData
 {
     public int $sType;
@@ -8103,9 +6611,6 @@ final class VkPipelineCompilerControlCreateInfoAMD extends CData
     public int $compilerControlFlags;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkCalibratedTimestampInfoEXT extends CData
 {
     public int $sType;
@@ -8115,9 +6620,6 @@ final class VkCalibratedTimestampInfoEXT extends CData
     public int $timeDomain;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkDeviceMemoryOverallocationCreateInfoAMD extends CData
 {
     public int $sType;
@@ -8127,9 +6629,6 @@ final class VkDeviceMemoryOverallocationCreateInfoAMD extends CData
     public int $overallocationBehavior;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPipelineCreationFeedbackEXT extends CData
 {
     public int $flags;
@@ -8137,9 +6636,6 @@ final class VkPipelineCreationFeedbackEXT extends CData
     public int $duration;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPhysicalDeviceShaderCoreProperties2AMD extends CData
 {
     public int $sType;
@@ -8151,33 +6647,27 @@ final class VkPhysicalDeviceShaderCoreProperties2AMD extends CData
     public int $activeComputeUnitCount;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPhysicalDeviceToolPropertiesEXT extends CData
 {
     public int $sType;
 
     public ?CData $pNext;
 
-    /** @var string|CData|CChar[]|null */
+    /** @var string|CData|null */
     public ?CData $name;
 
-    /** @var string|CData|CChar[]|null */
+    /** @var string|CData|null */
     public ?CData $version;
 
     public int $purposes;
 
-    /** @var string|CData|CChar[]|null */
+    /** @var string|CData|null */
     public ?CData $description;
 
-    /** @var string|CData|CChar[]|null */
+    /** @var string|CData|null */
     public ?CData $layer;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkValidationFeaturesEXT extends CData
 {
     public int $sType;
@@ -8193,9 +6683,6 @@ final class VkValidationFeaturesEXT extends CData
     public ?CData $pDisabledValidationFeatures;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkCooperativeMatrixPropertiesNV extends CData
 {
     public int $sType;
@@ -8219,9 +6706,6 @@ final class VkCooperativeMatrixPropertiesNV extends CData
     public int $scope;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPhysicalDeviceCoverageReductionModeFeaturesNV extends CData
 {
     public int $sType;
@@ -8231,9 +6715,6 @@ final class VkPhysicalDeviceCoverageReductionModeFeaturesNV extends CData
     public int $coverageReductionMode;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPhysicalDeviceLineRasterizationFeaturesEXT extends CData
 {
     public int $sType;
@@ -8253,9 +6734,6 @@ final class VkPhysicalDeviceLineRasterizationFeaturesEXT extends CData
     public int $stippledSmoothLines;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPhysicalDeviceDeviceGeneratedCommandsPropertiesNV extends CData
 {
     public int $sType;
@@ -8281,9 +6759,6 @@ final class VkPhysicalDeviceDeviceGeneratedCommandsPropertiesNV extends CData
     public int $minIndirectCommandsBufferOffsetAlignment;
 }
 
-/**
- * @mixin CStruct
- */
 final class VkPhysicalDeviceDiagnosticsConfigFeaturesNV extends CData
 {
     public int $sType;
