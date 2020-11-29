@@ -1,5 +1,7 @@
 {
     "name": "bic-engine/vulkan",
+    "license": "MIT",
+    "type": "library",
     "description": "PHP Vulkan bindings",
     "require": {
         "php": ">=7.4",
