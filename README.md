@@ -1,6 +1,6 @@
-# PHP Vulkan Bindings
+![Vulkan logo](resources/vulkan2.svg)
 
-![](https://habrastorage.org/webt/fw/ol/e-/fwole-c3tbdcrcpyrimienh9gha.png)
+# PHP Vulkan Bindings
 
 ## Requirements
 
