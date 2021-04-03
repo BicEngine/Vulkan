@@ -6,15 +6,12 @@
     "require": {
         "php": ">=7.4",
         "ext-ffi": "*",
-        "bic-engine/preprocessor": "^0.1"
+        "bic-engine/preprocessor": "^1.0"
     },
     "autoload": {
         "psr-4": {
             "Bic\\Vulkan\\": "src"
-        },
-        "files": [
-            "src/bootstrap.php"
-        ]
+        }
     },
     "require-dev": {
         "fzaninotto/faker": "~1.9",

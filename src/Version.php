@@ -13,11 +13,6 @@ namespace Bic\Vulkan;
 
 final class Version
 {
-    private function __construct()
-    {
-        // Can not create instance of static class
-    }
-
     /**
      * @param int $version
      * @return int
@@ -51,7 +46,7 @@ final class Version
      * @param int $patch
      * @return int
      */
-    public static function make(int $major, int $minor = 0, int $patch = 0): int
+    public static function make(int $major = 1, int $minor = 0, int $patch = 0): int
     {
         return $major << 22 | $minor << 12 | $patch;
     }

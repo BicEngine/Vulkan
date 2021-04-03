@@ -107,7 +107,6 @@ use Bic\Vulkan\VkSubresourceLayout;
 use Bic\Vulkan\VkViewport;
 use Bic\Vulkan\VkWriteDescriptorSet;
 use FFI\CData;
-use FFI\CPointer;
 
 /**
  * @mixin Vulkan10Interface
@@ -116,30 +115,30 @@ use FFI\CPointer;
 trait Vulkan10MethodsTrait
 {
     /**
-     * @param CPointer<VkInstanceCreateInfo>|null $pCreateInfo
-     * @param CPointer<VkAllocationCallbacks>|null $pAllocator
+     * @param CData<VkInstanceCreateInfo>|null $pCreateInfo
+     * @param CData<VkAllocationCallbacks>|null $pAllocator
      * @param CData|null $pInstance
      * @return int
      * @since 1.0
      */
-    public static function vkCreateInstance(?CData $pCreateInfo, ?CData $pAllocator, ?CData $pInstance): int
+    public function createInstance(?CData $pCreateInfo, ?CData $pAllocator, ?CData $pInstance): int
     {
-        assert(Version::make(1, 0) >= self::$version, 'VkInstance required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'VkInstance required Vulkan v1.0');
 
-        return self::$ffi->vkCreateInstance($pCreateInfo, $pAllocator, $pInstance);
+        return $this->ffi->vkCreateInstance($pCreateInfo, $pAllocator, $pInstance);
     }
 
     /**
      * @param CData|VkInstance $instance
-     * @param CPointer<VkAllocationCallbacks>|null $pAllocator
+     * @param CData<VkAllocationCallbacks>|null $pAllocator
      * @return void
      * @since 1.0
      */
-    public static function vkDestroyInstance(CData $instance, ?CData $pAllocator): void
+    public function destroyInstance(CData $instance, ?CData $pAllocator): void
     {
-        assert(Version::make(1, 0) >= self::$version, 'VkAllocationCallbacks required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'VkAllocationCallbacks required Vulkan v1.0');
 
-        self::$ffi->vkDestroyInstance($instance, $pAllocator);
+        $this->ffi->vkDestroyInstance($instance, $pAllocator);
     }
 
     /**
@@ -149,46 +148,46 @@ trait Vulkan10MethodsTrait
      * @return int
      * @since 1.0
      */
-    public static function vkEnumeratePhysicalDevices(
+    public function enumeratePhysicalDevices(
         CData $instance,
         ?CData $pPhysicalDeviceCount,
         ?CData $pPhysicalDevices
     ): int {
-        assert(Version::make(1, 0) >= self::$version, 'VkPhysicalDevice required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'VkPhysicalDevice required Vulkan v1.0');
 
-        return self::$ffi->vkEnumeratePhysicalDevices($instance, $pPhysicalDeviceCount, $pPhysicalDevices);
+        return $this->ffi->vkEnumeratePhysicalDevices($instance, $pPhysicalDeviceCount, $pPhysicalDevices);
     }
 
     /**
      * @param CData|VkPhysicalDevice $physicalDevice
-     * @param CPointer<VkPhysicalDeviceFeatures>|null $pFeatures
+     * @param CData<VkPhysicalDeviceFeatures>|null $pFeatures
      * @return void
      * @since 1.0
      */
-    public static function vkGetPhysicalDeviceFeatures(CData $physicalDevice, ?CData $pFeatures): void
+    public function getPhysicalDeviceFeatures(CData $physicalDevice, ?CData $pFeatures): void
     {
-        assert(Version::make(1, 0) >= self::$version, 'VkPhysicalDeviceFeatures required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'VkPhysicalDeviceFeatures required Vulkan v1.0');
 
-        self::$ffi->vkGetPhysicalDeviceFeatures($physicalDevice, $pFeatures);
+        $this->ffi->vkGetPhysicalDeviceFeatures($physicalDevice, $pFeatures);
     }
 
     /**
      * @param CData|VkPhysicalDevice $physicalDevice
      * @param int $format
-     * @param CPointer<VkFormatProperties>|null $pFormatProperties
+     * @param CData<VkFormatProperties>|null $pFormatProperties
      * @return void
      * @since 1.0
      * @psalm-param VkFormat::* $format
      *
      */
-    public static function vkGetPhysicalDeviceFormatProperties(
+    public function getPhysicalDeviceFormatProperties(
         CData $physicalDevice,
         int $format,
         ?CData $pFormatProperties
     ): void {
-        assert(Version::make(1, 0) >= self::$version, 'VkFormatProperties required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'VkFormatProperties required Vulkan v1.0');
 
-        self::$ffi->vkGetPhysicalDeviceFormatProperties($physicalDevice, $format, $pFormatProperties);
+        $this->ffi->vkGetPhysicalDeviceFormatProperties($physicalDevice, $format, $pFormatProperties);
     }
 
     /**
@@ -198,7 +197,7 @@ trait Vulkan10MethodsTrait
      * @param int $tiling
      * @param int $usage
      * @param int $flags
-     * @param CPointer<VkImageFormatProperties>|null $pImageFormatProperties
+     * @param CData<VkImageFormatProperties>|null $pImageFormatProperties
      * @return int
      * @since 1.0
      * @psalm-param VkFormat::* $format
@@ -206,7 +205,7 @@ trait Vulkan10MethodsTrait
      * @psalm-param VkImageTiling::* $tiling
      *
      */
-    public static function vkGetPhysicalDeviceImageFormatProperties(
+    public function getPhysicalDeviceImageFormatProperties(
         CData $physicalDevice,
         int $format,
         int $type,
@@ -215,54 +214,54 @@ trait Vulkan10MethodsTrait
         int $flags,
         ?CData $pImageFormatProperties
     ): int {
-        assert(Version::make(1, 0) >= self::$version, 'VkImageFormatProperties required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'VkImageFormatProperties required Vulkan v1.0');
 
-        return self::$ffi->vkGetPhysicalDeviceImageFormatProperties($physicalDevice, $format, $type, $tiling, $usage,
+        return $this->ffi->vkGetPhysicalDeviceImageFormatProperties($physicalDevice, $format, $type, $tiling, $usage,
             $flags, $pImageFormatProperties);
     }
 
     /**
      * @param CData|VkPhysicalDevice $physicalDevice
-     * @param CPointer<VkPhysicalDeviceProperties>|null $pProperties
+     * @param CData<VkPhysicalDeviceProperties>|null $pProperties
      * @return void
      * @since 1.0
      */
-    public static function vkGetPhysicalDeviceProperties(CData $physicalDevice, ?CData $pProperties): void
+    public function getPhysicalDeviceProperties(CData $physicalDevice, ?CData $pProperties): void
     {
-        assert(Version::make(1, 0) >= self::$version, 'VkPhysicalDeviceProperties required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'VkPhysicalDeviceProperties required Vulkan v1.0');
 
-        self::$ffi->vkGetPhysicalDeviceProperties($physicalDevice, $pProperties);
+        $this->ffi->vkGetPhysicalDeviceProperties($physicalDevice, $pProperties);
     }
 
     /**
      * @param CData|VkPhysicalDevice $physicalDevice
      * @param CData|null $pQueueFamilyPropertyCount
-     * @param CPointer<VkQueueFamilyProperties>|null $pQueueFamilyProperties
+     * @param CData<VkQueueFamilyProperties>|null $pQueueFamilyProperties
      * @return void
      * @since 1.0
      */
-    public static function vkGetPhysicalDeviceQueueFamilyProperties(
+    public function getPhysicalDeviceQueueFamilyProperties(
         CData $physicalDevice,
         ?CData $pQueueFamilyPropertyCount,
         ?CData $pQueueFamilyProperties
     ): void {
-        assert(Version::make(1, 0) >= self::$version, 'VkQueueFamilyProperties required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'VkQueueFamilyProperties required Vulkan v1.0');
 
-        self::$ffi->vkGetPhysicalDeviceQueueFamilyProperties($physicalDevice, $pQueueFamilyPropertyCount,
+        $this->ffi->vkGetPhysicalDeviceQueueFamilyProperties($physicalDevice, $pQueueFamilyPropertyCount,
             $pQueueFamilyProperties);
     }
 
     /**
      * @param CData|VkPhysicalDevice $physicalDevice
-     * @param CPointer<VkPhysicalDeviceMemoryProperties>|null $pMemoryProperties
+     * @param CData<VkPhysicalDeviceMemoryProperties>|null $pMemoryProperties
      * @return void
      * @since 1.0
      */
-    public static function vkGetPhysicalDeviceMemoryProperties(CData $physicalDevice, ?CData $pMemoryProperties): void
+    public function getPhysicalDeviceMemoryProperties(CData $physicalDevice, ?CData $pMemoryProperties): void
     {
-        assert(Version::make(1, 0) >= self::$version, 'VkPhysicalDeviceMemoryProperties required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'VkPhysicalDeviceMemoryProperties required Vulkan v1.0');
 
-        self::$ffi->vkGetPhysicalDeviceMemoryProperties($physicalDevice, $pMemoryProperties);
+        $this->ffi->vkGetPhysicalDeviceMemoryProperties($physicalDevice, $pMemoryProperties);
     }
 
     /**
@@ -271,11 +270,11 @@ trait Vulkan10MethodsTrait
      * @return CData|callable|null
      * @since 1.0
      */
-    public static function vkGetInstanceProcAddr(CData $instance, ?string $pName): ?CData
+    public function getInstanceProcAddr(CData $instance, ?string $pName): ?CData
     {
-        assert(Version::make(1, 0) >= self::$version, 'vkGetInstanceProcAddr required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'vkGetInstanceProcAddr required Vulkan v1.0');
 
-        return self::$ffi->vkGetInstanceProcAddr($instance, $pName);
+        return $this->ffi->vkGetInstanceProcAddr($instance, $pName);
     }
 
     /**
@@ -284,110 +283,110 @@ trait Vulkan10MethodsTrait
      * @return CData|callable|null
      * @since 1.0
      */
-    public static function vkGetDeviceProcAddr(CData $device, ?string $pName): ?CData
+    public function getDeviceProcAddr(CData $device, ?string $pName): ?CData
     {
-        assert(Version::make(1, 0) >= self::$version, 'vkGetDeviceProcAddr required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'vkGetDeviceProcAddr required Vulkan v1.0');
 
-        return self::$ffi->vkGetDeviceProcAddr($device, $pName);
+        return $this->ffi->vkGetDeviceProcAddr($device, $pName);
     }
 
     /**
      * @param CData|VkPhysicalDevice $physicalDevice
-     * @param CPointer<VkDeviceCreateInfo>|null $pCreateInfo
-     * @param CPointer<VkAllocationCallbacks>|null $pAllocator
+     * @param CData<VkDeviceCreateInfo>|null $pCreateInfo
+     * @param CData<VkAllocationCallbacks>|null $pAllocator
      * @param CData|null $pDevice
      * @return int
      * @since 1.0
      */
-    public static function vkCreateDevice(
+    public function createDevice(
         CData $physicalDevice,
         ?CData $pCreateInfo,
         ?CData $pAllocator,
         ?CData $pDevice
     ): int {
-        assert(Version::make(1, 0) >= self::$version, 'VkDevice required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'VkDevice required Vulkan v1.0');
 
-        return self::$ffi->vkCreateDevice($physicalDevice, $pCreateInfo, $pAllocator, $pDevice);
+        return $this->ffi->vkCreateDevice($physicalDevice, $pCreateInfo, $pAllocator, $pDevice);
     }
 
     /**
      * @param CData|VkDevice $device
-     * @param CPointer<VkAllocationCallbacks>|null $pAllocator
+     * @param CData<VkAllocationCallbacks>|null $pAllocator
      * @return void
      * @since 1.0
      */
-    public static function vkDestroyDevice(CData $device, ?CData $pAllocator): void
+    public function destroyDevice(CData $device, ?CData $pAllocator): void
     {
-        assert(Version::make(1, 0) >= self::$version, 'VkAllocationCallbacks required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'VkAllocationCallbacks required Vulkan v1.0');
 
-        self::$ffi->vkDestroyDevice($device, $pAllocator);
+        $this->ffi->vkDestroyDevice($device, $pAllocator);
     }
 
     /**
      * @param string|null $pLayerName
      * @param CData|null $pPropertyCount
-     * @param CPointer<VkExtensionProperties>|null $pProperties
+     * @param CData<VkExtensionProperties>|null $pProperties
      * @return int
      * @since 1.0
      */
-    public static function vkEnumerateInstanceExtensionProperties(
+    public function enumerateInstanceExtensionProperties(
         ?string $pLayerName,
         ?CData $pPropertyCount,
         ?CData $pProperties
     ): int {
-        assert(Version::make(1, 0) >= self::$version, 'VkExtensionProperties required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'VkExtensionProperties required Vulkan v1.0');
 
-        return self::$ffi->vkEnumerateInstanceExtensionProperties($pLayerName, $pPropertyCount, $pProperties);
+        return $this->ffi->vkEnumerateInstanceExtensionProperties($pLayerName, $pPropertyCount, $pProperties);
     }
 
     /**
      * @param CData|VkPhysicalDevice $physicalDevice
      * @param string|null $pLayerName
      * @param CData|null $pPropertyCount
-     * @param CPointer<VkExtensionProperties>|null $pProperties
+     * @param CData<VkExtensionProperties>|null $pProperties
      * @return int
      * @since 1.0
      */
-    public static function vkEnumerateDeviceExtensionProperties(
+    public function enumerateDeviceExtensionProperties(
         CData $physicalDevice,
         ?string $pLayerName,
         ?CData $pPropertyCount,
         ?CData $pProperties
     ): int {
-        assert(Version::make(1, 0) >= self::$version, 'VkExtensionProperties required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'VkExtensionProperties required Vulkan v1.0');
 
-        return self::$ffi->vkEnumerateDeviceExtensionProperties($physicalDevice, $pLayerName, $pPropertyCount,
+        return $this->ffi->vkEnumerateDeviceExtensionProperties($physicalDevice, $pLayerName, $pPropertyCount,
             $pProperties);
     }
 
     /**
      * @param CData|null $pPropertyCount
-     * @param CPointer<VkLayerProperties>|null $pProperties
+     * @param CData<VkLayerProperties>|null $pProperties
      * @return int
      * @since 1.0
      */
-    public static function vkEnumerateInstanceLayerProperties(?CData $pPropertyCount, ?CData $pProperties): int
+    public function enumerateInstanceLayerProperties(?CData $pPropertyCount, ?CData $pProperties): int
     {
-        assert(Version::make(1, 0) >= self::$version, 'VkLayerProperties required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'VkLayerProperties required Vulkan v1.0');
 
-        return self::$ffi->vkEnumerateInstanceLayerProperties($pPropertyCount, $pProperties);
+        return $this->ffi->vkEnumerateInstanceLayerProperties($pPropertyCount, $pProperties);
     }
 
     /**
      * @param CData|VkPhysicalDevice $physicalDevice
      * @param CData|null $pPropertyCount
-     * @param CPointer<VkLayerProperties>|null $pProperties
+     * @param CData<VkLayerProperties>|null $pProperties
      * @return int
      * @since 1.0
      */
-    public static function vkEnumerateDeviceLayerProperties(
+    public function enumerateDeviceLayerProperties(
         CData $physicalDevice,
         ?CData $pPropertyCount,
         ?CData $pProperties
     ): int {
-        assert(Version::make(1, 0) >= self::$version, 'VkLayerProperties required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'VkLayerProperties required Vulkan v1.0');
 
-        return self::$ffi->vkEnumerateDeviceLayerProperties($physicalDevice, $pPropertyCount, $pProperties);
+        return $this->ffi->vkEnumerateDeviceLayerProperties($physicalDevice, $pPropertyCount, $pProperties);
     }
 
     /**
@@ -398,26 +397,26 @@ trait Vulkan10MethodsTrait
      * @return void
      * @since 1.0
      */
-    public static function vkGetDeviceQueue(CData $device, int $queueFamilyIndex, int $queueIndex, ?CData $pQueue): void
+    public function getDeviceQueue(CData $device, int $queueFamilyIndex, int $queueIndex, ?CData $pQueue): void
     {
-        assert(Version::make(1, 0) >= self::$version, 'VkQueue required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'VkQueue required Vulkan v1.0');
 
-        self::$ffi->vkGetDeviceQueue($device, $queueFamilyIndex, $queueIndex, $pQueue);
+        $this->ffi->vkGetDeviceQueue($device, $queueFamilyIndex, $queueIndex, $pQueue);
     }
 
     /**
      * @param CData|VkQueue $queue
      * @param int $submitCount
-     * @param CPointer<VkSubmitInfo>|null $pSubmits
+     * @param CData<VkSubmitInfo>|null $pSubmits
      * @param CData|VkFence $fence
      * @return int
      * @since 1.0
      */
-    public static function vkQueueSubmit(CData $queue, int $submitCount, ?CData $pSubmits, CData $fence): int
+    public function queueSubmit(CData $queue, int $submitCount, ?CData $pSubmits, CData $fence): int
     {
-        assert(Version::make(1, 0) >= self::$version, 'VkSubmitInfo required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'VkSubmitInfo required Vulkan v1.0');
 
-        return self::$ffi->vkQueueSubmit($queue, $submitCount, $pSubmits, $fence);
+        return $this->ffi->vkQueueSubmit($queue, $submitCount, $pSubmits, $fence);
     }
 
     /**
@@ -425,11 +424,11 @@ trait Vulkan10MethodsTrait
      * @return int
      * @since 1.0
      */
-    public static function vkQueueWaitIdle(CData $queue): int
+    public function queueWaitIdle(CData $queue): int
     {
-        assert(Version::make(1, 0) >= self::$version, 'vkQueueWaitIdle required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'vkQueueWaitIdle required Vulkan v1.0');
 
-        return self::$ffi->vkQueueWaitIdle($queue);
+        return $this->ffi->vkQueueWaitIdle($queue);
     }
 
     /**
@@ -437,44 +436,44 @@ trait Vulkan10MethodsTrait
      * @return int
      * @since 1.0
      */
-    public static function vkDeviceWaitIdle(CData $device): int
+    public function deviceWaitIdle(CData $device): int
     {
-        assert(Version::make(1, 0) >= self::$version, 'vkDeviceWaitIdle required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'vkDeviceWaitIdle required Vulkan v1.0');
 
-        return self::$ffi->vkDeviceWaitIdle($device);
+        return $this->ffi->vkDeviceWaitIdle($device);
     }
 
     /**
      * @param CData|VkDevice $device
-     * @param CPointer<VkMemoryAllocateInfo>|null $pAllocateInfo
-     * @param CPointer<VkAllocationCallbacks>|null $pAllocator
+     * @param CData<VkMemoryAllocateInfo>|null $pAllocateInfo
+     * @param CData<VkAllocationCallbacks>|null $pAllocator
      * @param CData|null $pMemory
      * @return int
      * @since 1.0
      */
-    public static function vkAllocateMemory(
+    public function allocateMemory(
         CData $device,
         ?CData $pAllocateInfo,
         ?CData $pAllocator,
         ?CData $pMemory
     ): int {
-        assert(Version::make(1, 0) >= self::$version, 'VkDeviceMemory required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'VkDeviceMemory required Vulkan v1.0');
 
-        return self::$ffi->vkAllocateMemory($device, $pAllocateInfo, $pAllocator, $pMemory);
+        return $this->ffi->vkAllocateMemory($device, $pAllocateInfo, $pAllocator, $pMemory);
     }
 
     /**
      * @param CData|VkDevice $device
      * @param CData|VkDeviceMemory $memory
-     * @param CPointer<VkAllocationCallbacks>|null $pAllocator
+     * @param CData<VkAllocationCallbacks>|null $pAllocator
      * @return void
      * @since 1.0
      */
-    public static function vkFreeMemory(CData $device, CData $memory, ?CData $pAllocator): void
+    public function freeMemory(CData $device, CData $memory, ?CData $pAllocator): void
     {
-        assert(Version::make(1, 0) >= self::$version, 'VkAllocationCallbacks required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'VkAllocationCallbacks required Vulkan v1.0');
 
-        self::$ffi->vkFreeMemory($device, $memory, $pAllocator);
+        $this->ffi->vkFreeMemory($device, $memory, $pAllocator);
     }
 
     /**
@@ -487,7 +486,7 @@ trait Vulkan10MethodsTrait
      * @return int
      * @since 1.0
      */
-    public static function vkMapMemory(
+    public function mapMemory(
         CData $device,
         CData $memory,
         int $offset,
@@ -495,9 +494,9 @@ trait Vulkan10MethodsTrait
         int $flags,
         ?CData $ppData
     ): int {
-        assert(Version::make(1, 0) >= self::$version, 'void required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'void required Vulkan v1.0');
 
-        return self::$ffi->vkMapMemory($device, $memory, $offset, $size, $flags, $ppData);
+        return $this->ffi->vkMapMemory($device, $memory, $offset, $size, $flags, $ppData);
     }
 
     /**
@@ -506,42 +505,42 @@ trait Vulkan10MethodsTrait
      * @return void
      * @since 1.0
      */
-    public static function vkUnmapMemory(CData $device, CData $memory): void
+    public function unmapMemory(CData $device, CData $memory): void
     {
-        assert(Version::make(1, 0) >= self::$version, 'vkUnmapMemory required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'vkUnmapMemory required Vulkan v1.0');
 
-        self::$ffi->vkUnmapMemory($device, $memory);
+        $this->ffi->vkUnmapMemory($device, $memory);
     }
 
     /**
      * @param CData|VkDevice $device
      * @param int $memoryRangeCount
-     * @param CPointer<VkMappedMemoryRange>|null $pMemoryRanges
+     * @param CData<VkMappedMemoryRange>|null $pMemoryRanges
      * @return int
      * @since 1.0
      */
-    public static function vkFlushMappedMemoryRanges(CData $device, int $memoryRangeCount, ?CData $pMemoryRanges): int
+    public function flushMappedMemoryRanges(CData $device, int $memoryRangeCount, ?CData $pMemoryRanges): int
     {
-        assert(Version::make(1, 0) >= self::$version, 'VkMappedMemoryRange required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'VkMappedMemoryRange required Vulkan v1.0');
 
-        return self::$ffi->vkFlushMappedMemoryRanges($device, $memoryRangeCount, $pMemoryRanges);
+        return $this->ffi->vkFlushMappedMemoryRanges($device, $memoryRangeCount, $pMemoryRanges);
     }
 
     /**
      * @param CData|VkDevice $device
      * @param int $memoryRangeCount
-     * @param CPointer<VkMappedMemoryRange>|null $pMemoryRanges
+     * @param CData<VkMappedMemoryRange>|null $pMemoryRanges
      * @return int
      * @since 1.0
      */
-    public static function vkInvalidateMappedMemoryRanges(
+    public function invalidateMappedMemoryRanges(
         CData $device,
         int $memoryRangeCount,
         ?CData $pMemoryRanges
     ): int {
-        assert(Version::make(1, 0) >= self::$version, 'VkMappedMemoryRange required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'VkMappedMemoryRange required Vulkan v1.0');
 
-        return self::$ffi->vkInvalidateMappedMemoryRanges($device, $memoryRangeCount, $pMemoryRanges);
+        return $this->ffi->vkInvalidateMappedMemoryRanges($device, $memoryRangeCount, $pMemoryRanges);
     }
 
     /**
@@ -551,14 +550,14 @@ trait Vulkan10MethodsTrait
      * @return void
      * @since 1.0
      */
-    public static function vkGetDeviceMemoryCommitment(
+    public function getDeviceMemoryCommitment(
         CData $device,
         CData $memory,
         ?CData $pCommittedMemoryInBytes
     ): void {
-        assert(Version::make(1, 0) >= self::$version, 'VkDeviceSize required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'VkDeviceSize required Vulkan v1.0');
 
-        self::$ffi->vkGetDeviceMemoryCommitment($device, $memory, $pCommittedMemoryInBytes);
+        $this->ffi->vkGetDeviceMemoryCommitment($device, $memory, $pCommittedMemoryInBytes);
     }
 
     /**
@@ -569,11 +568,11 @@ trait Vulkan10MethodsTrait
      * @return int
      * @since 1.0
      */
-    public static function vkBindBufferMemory(CData $device, CData $buffer, CData $memory, int $memoryOffset): int
+    public function bindBufferMemory(CData $device, CData $buffer, CData $memory, int $memoryOffset): int
     {
-        assert(Version::make(1, 0) >= self::$version, 'vkBindBufferMemory required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'vkBindBufferMemory required Vulkan v1.0');
 
-        return self::$ffi->vkBindBufferMemory($device, $buffer, $memory, $memoryOffset);
+        return $this->ffi->vkBindBufferMemory($device, $buffer, $memory, $memoryOffset);
     }
 
     /**
@@ -584,61 +583,61 @@ trait Vulkan10MethodsTrait
      * @return int
      * @since 1.0
      */
-    public static function vkBindImageMemory(CData $device, CData $image, CData $memory, int $memoryOffset): int
+    public function bindImageMemory(CData $device, CData $image, CData $memory, int $memoryOffset): int
     {
-        assert(Version::make(1, 0) >= self::$version, 'vkBindImageMemory required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'vkBindImageMemory required Vulkan v1.0');
 
-        return self::$ffi->vkBindImageMemory($device, $image, $memory, $memoryOffset);
+        return $this->ffi->vkBindImageMemory($device, $image, $memory, $memoryOffset);
     }
 
     /**
      * @param CData|VkDevice $device
      * @param CData|VkBuffer $buffer
-     * @param CPointer<VkMemoryRequirements>|null $pMemoryRequirements
+     * @param CData<VkMemoryRequirements>|null $pMemoryRequirements
      * @return void
      * @since 1.0
      */
-    public static function vkGetBufferMemoryRequirements(
+    public function getBufferMemoryRequirements(
         CData $device,
         CData $buffer,
         ?CData $pMemoryRequirements
     ): void {
-        assert(Version::make(1, 0) >= self::$version, 'VkMemoryRequirements required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'VkMemoryRequirements required Vulkan v1.0');
 
-        self::$ffi->vkGetBufferMemoryRequirements($device, $buffer, $pMemoryRequirements);
+        $this->ffi->vkGetBufferMemoryRequirements($device, $buffer, $pMemoryRequirements);
     }
 
     /**
      * @param CData|VkDevice $device
      * @param CData|VkImage $image
-     * @param CPointer<VkMemoryRequirements>|null $pMemoryRequirements
+     * @param CData<VkMemoryRequirements>|null $pMemoryRequirements
      * @return void
      * @since 1.0
      */
-    public static function vkGetImageMemoryRequirements(CData $device, CData $image, ?CData $pMemoryRequirements): void
+    public function getImageMemoryRequirements(CData $device, CData $image, ?CData $pMemoryRequirements): void
     {
-        assert(Version::make(1, 0) >= self::$version, 'VkMemoryRequirements required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'VkMemoryRequirements required Vulkan v1.0');
 
-        self::$ffi->vkGetImageMemoryRequirements($device, $image, $pMemoryRequirements);
+        $this->ffi->vkGetImageMemoryRequirements($device, $image, $pMemoryRequirements);
     }
 
     /**
      * @param CData|VkDevice $device
      * @param CData|VkImage $image
      * @param CData|null $pSparseMemoryRequirementCount
-     * @param CPointer<VkSparseImageMemoryRequirements>|null $pSparseMemoryRequirements
+     * @param CData<VkSparseImageMemoryRequirements>|null $pSparseMemoryRequirements
      * @return void
      * @since 1.0
      */
-    public static function vkGetImageSparseMemoryRequirements(
+    public function getImageSparseMemoryRequirements(
         CData $device,
         CData $image,
         ?CData $pSparseMemoryRequirementCount,
         ?CData $pSparseMemoryRequirements
     ): void {
-        assert(Version::make(1, 0) >= self::$version, 'VkSparseImageMemoryRequirements required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'VkSparseImageMemoryRequirements required Vulkan v1.0');
 
-        self::$ffi->vkGetImageSparseMemoryRequirements($device, $image, $pSparseMemoryRequirementCount,
+        $this->ffi->vkGetImageSparseMemoryRequirements($device, $image, $pSparseMemoryRequirementCount,
             $pSparseMemoryRequirements);
     }
 
@@ -650,7 +649,7 @@ trait Vulkan10MethodsTrait
      * @param int $usage
      * @param int $tiling
      * @param CData|null $pPropertyCount
-     * @param CPointer<VkSparseImageFormatProperties>|null $pProperties
+     * @param CData<VkSparseImageFormatProperties>|null $pProperties
      * @return void
      * @since 1.0
      * @psalm-param VkFormat::* $format
@@ -659,7 +658,7 @@ trait Vulkan10MethodsTrait
      * @psalm-param VkImageTiling::* $tiling
      *
      */
-    public static function vkGetPhysicalDeviceSparseImageFormatProperties(
+    public function getPhysicalDeviceSparseImageFormatProperties(
         CData $physicalDevice,
         int $format,
         int $type,
@@ -669,54 +668,54 @@ trait Vulkan10MethodsTrait
         ?CData $pPropertyCount,
         ?CData $pProperties
     ): void {
-        assert(Version::make(1, 0) >= self::$version, 'VkSparseImageFormatProperties required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'VkSparseImageFormatProperties required Vulkan v1.0');
 
-        self::$ffi->vkGetPhysicalDeviceSparseImageFormatProperties($physicalDevice, $format, $type, $samples, $usage,
+        $this->ffi->vkGetPhysicalDeviceSparseImageFormatProperties($physicalDevice, $format, $type, $samples, $usage,
             $tiling, $pPropertyCount, $pProperties);
     }
 
     /**
      * @param CData|VkQueue $queue
      * @param int $bindInfoCount
-     * @param CPointer<VkBindSparseInfo>|null $pBindInfo
+     * @param CData<VkBindSparseInfo>|null $pBindInfo
      * @param CData|VkFence $fence
      * @return int
      * @since 1.0
      */
-    public static function vkQueueBindSparse(CData $queue, int $bindInfoCount, ?CData $pBindInfo, CData $fence): int
+    public function queueBindSparse(CData $queue, int $bindInfoCount, ?CData $pBindInfo, CData $fence): int
     {
-        assert(Version::make(1, 0) >= self::$version, 'VkBindSparseInfo required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'VkBindSparseInfo required Vulkan v1.0');
 
-        return self::$ffi->vkQueueBindSparse($queue, $bindInfoCount, $pBindInfo, $fence);
+        return $this->ffi->vkQueueBindSparse($queue, $bindInfoCount, $pBindInfo, $fence);
     }
 
     /**
      * @param CData|VkDevice $device
-     * @param CPointer<VkFenceCreateInfo>|null $pCreateInfo
-     * @param CPointer<VkAllocationCallbacks>|null $pAllocator
+     * @param CData<VkFenceCreateInfo>|null $pCreateInfo
+     * @param CData<VkAllocationCallbacks>|null $pAllocator
      * @param CData|null $pFence
      * @return int
      * @since 1.0
      */
-    public static function vkCreateFence(CData $device, ?CData $pCreateInfo, ?CData $pAllocator, ?CData $pFence): int
+    public function createFence(CData $device, ?CData $pCreateInfo, ?CData $pAllocator, ?CData $pFence): int
     {
-        assert(Version::make(1, 0) >= self::$version, 'VkFence required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'VkFence required Vulkan v1.0');
 
-        return self::$ffi->vkCreateFence($device, $pCreateInfo, $pAllocator, $pFence);
+        return $this->ffi->vkCreateFence($device, $pCreateInfo, $pAllocator, $pFence);
     }
 
     /**
      * @param CData|VkDevice $device
      * @param CData|VkFence $fence
-     * @param CPointer<VkAllocationCallbacks>|null $pAllocator
+     * @param CData<VkAllocationCallbacks>|null $pAllocator
      * @return void
      * @since 1.0
      */
-    public static function vkDestroyFence(CData $device, CData $fence, ?CData $pAllocator): void
+    public function destroyFence(CData $device, CData $fence, ?CData $pAllocator): void
     {
-        assert(Version::make(1, 0) >= self::$version, 'VkAllocationCallbacks required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'VkAllocationCallbacks required Vulkan v1.0');
 
-        self::$ffi->vkDestroyFence($device, $fence, $pAllocator);
+        $this->ffi->vkDestroyFence($device, $fence, $pAllocator);
     }
 
     /**
@@ -726,11 +725,11 @@ trait Vulkan10MethodsTrait
      * @return int
      * @since 1.0
      */
-    public static function vkResetFences(CData $device, int $fenceCount, ?CData $pFences): int
+    public function resetFences(CData $device, int $fenceCount, ?CData $pFences): int
     {
-        assert(Version::make(1, 0) >= self::$version, 'VkFence required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'VkFence required Vulkan v1.0');
 
-        return self::$ffi->vkResetFences($device, $fenceCount, $pFences);
+        return $this->ffi->vkResetFences($device, $fenceCount, $pFences);
     }
 
     /**
@@ -739,11 +738,11 @@ trait Vulkan10MethodsTrait
      * @return int
      * @since 1.0
      */
-    public static function vkGetFenceStatus(CData $device, CData $fence): int
+    public function getFenceStatus(CData $device, CData $fence): int
     {
-        assert(Version::make(1, 0) >= self::$version, 'vkGetFenceStatus required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'vkGetFenceStatus required Vulkan v1.0');
 
-        return self::$ffi->vkGetFenceStatus($device, $fence);
+        return $this->ffi->vkGetFenceStatus($device, $fence);
     }
 
     /**
@@ -755,78 +754,78 @@ trait Vulkan10MethodsTrait
      * @return int
      * @since 1.0
      */
-    public static function vkWaitForFences(
+    public function waitForFences(
         CData $device,
         int $fenceCount,
         ?CData $pFences,
         int $waitAll,
         int $timeout
     ): int {
-        assert(Version::make(1, 0) >= self::$version, 'VkFence required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'VkFence required Vulkan v1.0');
 
-        return self::$ffi->vkWaitForFences($device, $fenceCount, $pFences, $waitAll, $timeout);
+        return $this->ffi->vkWaitForFences($device, $fenceCount, $pFences, $waitAll, $timeout);
     }
 
     /**
      * @param CData|VkDevice $device
-     * @param CPointer<VkSemaphoreCreateInfo>|null $pCreateInfo
-     * @param CPointer<VkAllocationCallbacks>|null $pAllocator
+     * @param CData<VkSemaphoreCreateInfo>|null $pCreateInfo
+     * @param CData<VkAllocationCallbacks>|null $pAllocator
      * @param CData|null $pSemaphore
      * @return int
      * @since 1.0
      */
-    public static function vkCreateSemaphore(
+    public function createSemaphore(
         CData $device,
         ?CData $pCreateInfo,
         ?CData $pAllocator,
         ?CData $pSemaphore
     ): int {
-        assert(Version::make(1, 0) >= self::$version, 'VkSemaphore required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'VkSemaphore required Vulkan v1.0');
 
-        return self::$ffi->vkCreateSemaphore($device, $pCreateInfo, $pAllocator, $pSemaphore);
+        return $this->ffi->vkCreateSemaphore($device, $pCreateInfo, $pAllocator, $pSemaphore);
     }
 
     /**
      * @param CData|VkDevice $device
      * @param CData|VkSemaphore $semaphore
-     * @param CPointer<VkAllocationCallbacks>|null $pAllocator
+     * @param CData<VkAllocationCallbacks>|null $pAllocator
      * @return void
      * @since 1.0
      */
-    public static function vkDestroySemaphore(CData $device, CData $semaphore, ?CData $pAllocator): void
+    public function destroySemaphore(CData $device, CData $semaphore, ?CData $pAllocator): void
     {
-        assert(Version::make(1, 0) >= self::$version, 'VkAllocationCallbacks required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'VkAllocationCallbacks required Vulkan v1.0');
 
-        self::$ffi->vkDestroySemaphore($device, $semaphore, $pAllocator);
+        $this->ffi->vkDestroySemaphore($device, $semaphore, $pAllocator);
     }
 
     /**
      * @param CData|VkDevice $device
-     * @param CPointer<VkEventCreateInfo>|null $pCreateInfo
-     * @param CPointer<VkAllocationCallbacks>|null $pAllocator
+     * @param CData<VkEventCreateInfo>|null $pCreateInfo
+     * @param CData<VkAllocationCallbacks>|null $pAllocator
      * @param CData|null $pEvent
      * @return int
      * @since 1.0
      */
-    public static function vkCreateEvent(CData $device, ?CData $pCreateInfo, ?CData $pAllocator, ?CData $pEvent): int
+    public function createEvent(CData $device, ?CData $pCreateInfo, ?CData $pAllocator, ?CData $pEvent): int
     {
-        assert(Version::make(1, 0) >= self::$version, 'VkEvent required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'VkEvent required Vulkan v1.0');
 
-        return self::$ffi->vkCreateEvent($device, $pCreateInfo, $pAllocator, $pEvent);
+        return $this->ffi->vkCreateEvent($device, $pCreateInfo, $pAllocator, $pEvent);
     }
 
     /**
      * @param CData|VkDevice $device
      * @param CData|VkEvent $event
-     * @param CPointer<VkAllocationCallbacks>|null $pAllocator
+     * @param CData<VkAllocationCallbacks>|null $pAllocator
      * @return void
      * @since 1.0
      */
-    public static function vkDestroyEvent(CData $device, CData $event, ?CData $pAllocator): void
+    public function destroyEvent(CData $device, CData $event, ?CData $pAllocator): void
     {
-        assert(Version::make(1, 0) >= self::$version, 'VkAllocationCallbacks required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'VkAllocationCallbacks required Vulkan v1.0');
 
-        self::$ffi->vkDestroyEvent($device, $event, $pAllocator);
+        $this->ffi->vkDestroyEvent($device, $event, $pAllocator);
     }
 
     /**
@@ -835,11 +834,11 @@ trait Vulkan10MethodsTrait
      * @return int
      * @since 1.0
      */
-    public static function vkGetEventStatus(CData $device, CData $event): int
+    public function getEventStatus(CData $device, CData $event): int
     {
-        assert(Version::make(1, 0) >= self::$version, 'vkGetEventStatus required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'vkGetEventStatus required Vulkan v1.0');
 
-        return self::$ffi->vkGetEventStatus($device, $event);
+        return $this->ffi->vkGetEventStatus($device, $event);
     }
 
     /**
@@ -848,11 +847,11 @@ trait Vulkan10MethodsTrait
      * @return int
      * @since 1.0
      */
-    public static function vkSetEvent(CData $device, CData $event): int
+    public function setEvent(CData $device, CData $event): int
     {
-        assert(Version::make(1, 0) >= self::$version, 'vkSetEvent required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'vkSetEvent required Vulkan v1.0');
 
-        return self::$ffi->vkSetEvent($device, $event);
+        return $this->ffi->vkSetEvent($device, $event);
     }
 
     /**
@@ -861,44 +860,44 @@ trait Vulkan10MethodsTrait
      * @return int
      * @since 1.0
      */
-    public static function vkResetEvent(CData $device, CData $event): int
+    public function resetEvent(CData $device, CData $event): int
     {
-        assert(Version::make(1, 0) >= self::$version, 'vkResetEvent required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'vkResetEvent required Vulkan v1.0');
 
-        return self::$ffi->vkResetEvent($device, $event);
+        return $this->ffi->vkResetEvent($device, $event);
     }
 
     /**
      * @param CData|VkDevice $device
-     * @param CPointer<VkQueryPoolCreateInfo>|null $pCreateInfo
-     * @param CPointer<VkAllocationCallbacks>|null $pAllocator
+     * @param CData<VkQueryPoolCreateInfo>|null $pCreateInfo
+     * @param CData<VkAllocationCallbacks>|null $pAllocator
      * @param CData|null $pQueryPool
      * @return int
      * @since 1.0
      */
-    public static function vkCreateQueryPool(
+    public function createQueryPool(
         CData $device,
         ?CData $pCreateInfo,
         ?CData $pAllocator,
         ?CData $pQueryPool
     ): int {
-        assert(Version::make(1, 0) >= self::$version, 'VkQueryPool required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'VkQueryPool required Vulkan v1.0');
 
-        return self::$ffi->vkCreateQueryPool($device, $pCreateInfo, $pAllocator, $pQueryPool);
+        return $this->ffi->vkCreateQueryPool($device, $pCreateInfo, $pAllocator, $pQueryPool);
     }
 
     /**
      * @param CData|VkDevice $device
      * @param CData|VkQueryPool $queryPool
-     * @param CPointer<VkAllocationCallbacks>|null $pAllocator
+     * @param CData<VkAllocationCallbacks>|null $pAllocator
      * @return void
      * @since 1.0
      */
-    public static function vkDestroyQueryPool(CData $device, CData $queryPool, ?CData $pAllocator): void
+    public function destroyQueryPool(CData $device, CData $queryPool, ?CData $pAllocator): void
     {
-        assert(Version::make(1, 0) >= self::$version, 'VkAllocationCallbacks required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'VkAllocationCallbacks required Vulkan v1.0');
 
-        self::$ffi->vkDestroyQueryPool($device, $queryPool, $pAllocator);
+        $this->ffi->vkDestroyQueryPool($device, $queryPool, $pAllocator);
     }
 
     /**
@@ -913,7 +912,7 @@ trait Vulkan10MethodsTrait
      * @return int
      * @since 1.0
      */
-    public static function vkGetQueryPoolResults(
+    public function getQueryPoolResults(
         CData $device,
         CData $queryPool,
         int $firstQuery,
@@ -923,215 +922,215 @@ trait Vulkan10MethodsTrait
         int $stride,
         int $flags
     ): int {
-        assert(Version::make(1, 0) >= self::$version, 'void required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'void required Vulkan v1.0');
 
-        return self::$ffi->vkGetQueryPoolResults($device, $queryPool, $firstQuery, $queryCount, $dataSize, $pData,
+        return $this->ffi->vkGetQueryPoolResults($device, $queryPool, $firstQuery, $queryCount, $dataSize, $pData,
             $stride, $flags);
     }
 
     /**
      * @param CData|VkDevice $device
-     * @param CPointer<VkBufferCreateInfo>|null $pCreateInfo
-     * @param CPointer<VkAllocationCallbacks>|null $pAllocator
+     * @param CData<VkBufferCreateInfo>|null $pCreateInfo
+     * @param CData<VkAllocationCallbacks>|null $pAllocator
      * @param CData|null $pBuffer
      * @return int
      * @since 1.0
      */
-    public static function vkCreateBuffer(CData $device, ?CData $pCreateInfo, ?CData $pAllocator, ?CData $pBuffer): int
+    public function createBuffer(CData $device, ?CData $pCreateInfo, ?CData $pAllocator, ?CData $pBuffer): int
     {
-        assert(Version::make(1, 0) >= self::$version, 'VkBuffer required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'VkBuffer required Vulkan v1.0');
 
-        return self::$ffi->vkCreateBuffer($device, $pCreateInfo, $pAllocator, $pBuffer);
+        return $this->ffi->vkCreateBuffer($device, $pCreateInfo, $pAllocator, $pBuffer);
     }
 
     /**
      * @param CData|VkDevice $device
      * @param CData|VkBuffer $buffer
-     * @param CPointer<VkAllocationCallbacks>|null $pAllocator
+     * @param CData<VkAllocationCallbacks>|null $pAllocator
      * @return void
      * @since 1.0
      */
-    public static function vkDestroyBuffer(CData $device, CData $buffer, ?CData $pAllocator): void
+    public function destroyBuffer(CData $device, CData $buffer, ?CData $pAllocator): void
     {
-        assert(Version::make(1, 0) >= self::$version, 'VkAllocationCallbacks required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'VkAllocationCallbacks required Vulkan v1.0');
 
-        self::$ffi->vkDestroyBuffer($device, $buffer, $pAllocator);
+        $this->ffi->vkDestroyBuffer($device, $buffer, $pAllocator);
     }
 
     /**
      * @param CData|VkDevice $device
-     * @param CPointer<VkBufferViewCreateInfo>|null $pCreateInfo
-     * @param CPointer<VkAllocationCallbacks>|null $pAllocator
+     * @param CData<VkBufferViewCreateInfo>|null $pCreateInfo
+     * @param CData<VkAllocationCallbacks>|null $pAllocator
      * @param CData|null $pView
      * @return int
      * @since 1.0
      */
-    public static function vkCreateBufferView(
+    public function createBufferView(
         CData $device,
         ?CData $pCreateInfo,
         ?CData $pAllocator,
         ?CData $pView
     ): int {
-        assert(Version::make(1, 0) >= self::$version, 'VkBufferView required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'VkBufferView required Vulkan v1.0');
 
-        return self::$ffi->vkCreateBufferView($device, $pCreateInfo, $pAllocator, $pView);
+        return $this->ffi->vkCreateBufferView($device, $pCreateInfo, $pAllocator, $pView);
     }
 
     /**
      * @param CData|VkDevice $device
      * @param CData|VkBufferView $bufferView
-     * @param CPointer<VkAllocationCallbacks>|null $pAllocator
+     * @param CData<VkAllocationCallbacks>|null $pAllocator
      * @return void
      * @since 1.0
      */
-    public static function vkDestroyBufferView(CData $device, CData $bufferView, ?CData $pAllocator): void
+    public function destroyBufferView(CData $device, CData $bufferView, ?CData $pAllocator): void
     {
-        assert(Version::make(1, 0) >= self::$version, 'VkAllocationCallbacks required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'VkAllocationCallbacks required Vulkan v1.0');
 
-        self::$ffi->vkDestroyBufferView($device, $bufferView, $pAllocator);
+        $this->ffi->vkDestroyBufferView($device, $bufferView, $pAllocator);
     }
 
     /**
      * @param CData|VkDevice $device
-     * @param CPointer<VkImageCreateInfo>|null $pCreateInfo
-     * @param CPointer<VkAllocationCallbacks>|null $pAllocator
+     * @param CData<VkImageCreateInfo>|null $pCreateInfo
+     * @param CData<VkAllocationCallbacks>|null $pAllocator
      * @param CData|null $pImage
      * @return int
      * @since 1.0
      */
-    public static function vkCreateImage(CData $device, ?CData $pCreateInfo, ?CData $pAllocator, ?CData $pImage): int
+    public function createImage(CData $device, ?CData $pCreateInfo, ?CData $pAllocator, ?CData $pImage): int
     {
-        assert(Version::make(1, 0) >= self::$version, 'VkImage required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'VkImage required Vulkan v1.0');
 
-        return self::$ffi->vkCreateImage($device, $pCreateInfo, $pAllocator, $pImage);
+        return $this->ffi->vkCreateImage($device, $pCreateInfo, $pAllocator, $pImage);
     }
 
     /**
      * @param CData|VkDevice $device
      * @param CData|VkImage $image
-     * @param CPointer<VkAllocationCallbacks>|null $pAllocator
+     * @param CData<VkAllocationCallbacks>|null $pAllocator
      * @return void
      * @since 1.0
      */
-    public static function vkDestroyImage(CData $device, CData $image, ?CData $pAllocator): void
+    public function destroyImage(CData $device, CData $image, ?CData $pAllocator): void
     {
-        assert(Version::make(1, 0) >= self::$version, 'VkAllocationCallbacks required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'VkAllocationCallbacks required Vulkan v1.0');
 
-        self::$ffi->vkDestroyImage($device, $image, $pAllocator);
+        $this->ffi->vkDestroyImage($device, $image, $pAllocator);
     }
 
     /**
      * @param CData|VkDevice $device
      * @param CData|VkImage $image
-     * @param CPointer<VkImageSubresource>|null $pSubresource
-     * @param CPointer<VkSubresourceLayout>|null $pLayout
+     * @param CData<VkImageSubresource>|null $pSubresource
+     * @param CData<VkSubresourceLayout>|null $pLayout
      * @return void
      * @since 1.0
      */
-    public static function vkGetImageSubresourceLayout(
+    public function getImageSubresourceLayout(
         CData $device,
         CData $image,
         ?CData $pSubresource,
         ?CData $pLayout
     ): void {
-        assert(Version::make(1, 0) >= self::$version, 'VkSubresourceLayout required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'VkSubresourceLayout required Vulkan v1.0');
 
-        self::$ffi->vkGetImageSubresourceLayout($device, $image, $pSubresource, $pLayout);
+        $this->ffi->vkGetImageSubresourceLayout($device, $image, $pSubresource, $pLayout);
     }
 
     /**
      * @param CData|VkDevice $device
-     * @param CPointer<VkImageViewCreateInfo>|null $pCreateInfo
-     * @param CPointer<VkAllocationCallbacks>|null $pAllocator
+     * @param CData<VkImageViewCreateInfo>|null $pCreateInfo
+     * @param CData<VkAllocationCallbacks>|null $pAllocator
      * @param CData|null $pView
      * @return int
      * @since 1.0
      */
-    public static function vkCreateImageView(CData $device, ?CData $pCreateInfo, ?CData $pAllocator, ?CData $pView): int
+    public function createImageView(CData $device, ?CData $pCreateInfo, ?CData $pAllocator, ?CData $pView): int
     {
-        assert(Version::make(1, 0) >= self::$version, 'VkImageView required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'VkImageView required Vulkan v1.0');
 
-        return self::$ffi->vkCreateImageView($device, $pCreateInfo, $pAllocator, $pView);
+        return $this->ffi->vkCreateImageView($device, $pCreateInfo, $pAllocator, $pView);
     }
 
     /**
      * @param CData|VkDevice $device
      * @param CData|VkImageView $imageView
-     * @param CPointer<VkAllocationCallbacks>|null $pAllocator
+     * @param CData<VkAllocationCallbacks>|null $pAllocator
      * @return void
      * @since 1.0
      */
-    public static function vkDestroyImageView(CData $device, CData $imageView, ?CData $pAllocator): void
+    public function destroyImageView(CData $device, CData $imageView, ?CData $pAllocator): void
     {
-        assert(Version::make(1, 0) >= self::$version, 'VkAllocationCallbacks required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'VkAllocationCallbacks required Vulkan v1.0');
 
-        self::$ffi->vkDestroyImageView($device, $imageView, $pAllocator);
+        $this->ffi->vkDestroyImageView($device, $imageView, $pAllocator);
     }
 
     /**
      * @param CData|VkDevice $device
-     * @param CPointer<VkShaderModuleCreateInfo>|null $pCreateInfo
-     * @param CPointer<VkAllocationCallbacks>|null $pAllocator
+     * @param CData<VkShaderModuleCreateInfo>|null $pCreateInfo
+     * @param CData<VkAllocationCallbacks>|null $pAllocator
      * @param CData|null $pShaderModule
      * @return int
      * @since 1.0
      */
-    public static function vkCreateShaderModule(
+    public function createShaderModule(
         CData $device,
         ?CData $pCreateInfo,
         ?CData $pAllocator,
         ?CData $pShaderModule
     ): int {
-        assert(Version::make(1, 0) >= self::$version, 'VkShaderModule required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'VkShaderModule required Vulkan v1.0');
 
-        return self::$ffi->vkCreateShaderModule($device, $pCreateInfo, $pAllocator, $pShaderModule);
+        return $this->ffi->vkCreateShaderModule($device, $pCreateInfo, $pAllocator, $pShaderModule);
     }
 
     /**
      * @param CData|VkDevice $device
      * @param CData|VkShaderModule $shaderModule
-     * @param CPointer<VkAllocationCallbacks>|null $pAllocator
+     * @param CData<VkAllocationCallbacks>|null $pAllocator
      * @return void
      * @since 1.0
      */
-    public static function vkDestroyShaderModule(CData $device, CData $shaderModule, ?CData $pAllocator): void
+    public function destroyShaderModule(CData $device, CData $shaderModule, ?CData $pAllocator): void
     {
-        assert(Version::make(1, 0) >= self::$version, 'VkAllocationCallbacks required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'VkAllocationCallbacks required Vulkan v1.0');
 
-        self::$ffi->vkDestroyShaderModule($device, $shaderModule, $pAllocator);
+        $this->ffi->vkDestroyShaderModule($device, $shaderModule, $pAllocator);
     }
 
     /**
      * @param CData|VkDevice $device
-     * @param CPointer<VkPipelineCacheCreateInfo>|null $pCreateInfo
-     * @param CPointer<VkAllocationCallbacks>|null $pAllocator
+     * @param CData<VkPipelineCacheCreateInfo>|null $pCreateInfo
+     * @param CData<VkAllocationCallbacks>|null $pAllocator
      * @param CData|null $pPipelineCache
      * @return int
      * @since 1.0
      */
-    public static function vkCreatePipelineCache(
+    public function createPipelineCache(
         CData $device,
         ?CData $pCreateInfo,
         ?CData $pAllocator,
         ?CData $pPipelineCache
     ): int {
-        assert(Version::make(1, 0) >= self::$version, 'VkPipelineCache required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'VkPipelineCache required Vulkan v1.0');
 
-        return self::$ffi->vkCreatePipelineCache($device, $pCreateInfo, $pAllocator, $pPipelineCache);
+        return $this->ffi->vkCreatePipelineCache($device, $pCreateInfo, $pAllocator, $pPipelineCache);
     }
 
     /**
      * @param CData|VkDevice $device
      * @param CData|VkPipelineCache $pipelineCache
-     * @param CPointer<VkAllocationCallbacks>|null $pAllocator
+     * @param CData<VkAllocationCallbacks>|null $pAllocator
      * @return void
      * @since 1.0
      */
-    public static function vkDestroyPipelineCache(CData $device, CData $pipelineCache, ?CData $pAllocator): void
+    public function destroyPipelineCache(CData $device, CData $pipelineCache, ?CData $pAllocator): void
     {
-        assert(Version::make(1, 0) >= self::$version, 'VkAllocationCallbacks required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'VkAllocationCallbacks required Vulkan v1.0');
 
-        self::$ffi->vkDestroyPipelineCache($device, $pipelineCache, $pAllocator);
+        $this->ffi->vkDestroyPipelineCache($device, $pipelineCache, $pAllocator);
     }
 
     /**
@@ -1142,15 +1141,15 @@ trait Vulkan10MethodsTrait
      * @return int
      * @since 1.0
      */
-    public static function vkGetPipelineCacheData(
+    public function getPipelineCacheData(
         CData $device,
         CData $pipelineCache,
         ?CData $pDataSize,
         ?CData $pData
     ): int {
-        assert(Version::make(1, 0) >= self::$version, 'void required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'void required Vulkan v1.0');
 
-        return self::$ffi->vkGetPipelineCacheData($device, $pipelineCache, $pDataSize, $pData);
+        return $this->ffi->vkGetPipelineCacheData($device, $pipelineCache, $pDataSize, $pData);
     }
 
     /**
@@ -1161,28 +1160,28 @@ trait Vulkan10MethodsTrait
      * @return int
      * @since 1.0
      */
-    public static function vkMergePipelineCaches(
+    public function mergePipelineCaches(
         CData $device,
         CData $dstCache,
         int $srcCacheCount,
         ?CData $pSrcCaches
     ): int {
-        assert(Version::make(1, 0) >= self::$version, 'VkPipelineCache required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'VkPipelineCache required Vulkan v1.0');
 
-        return self::$ffi->vkMergePipelineCaches($device, $dstCache, $srcCacheCount, $pSrcCaches);
+        return $this->ffi->vkMergePipelineCaches($device, $dstCache, $srcCacheCount, $pSrcCaches);
     }
 
     /**
      * @param CData|VkDevice $device
      * @param CData|VkPipelineCache $pipelineCache
      * @param int $createInfoCount
-     * @param CPointer<VkGraphicsPipelineCreateInfo>|null $pCreateInfos
-     * @param CPointer<VkAllocationCallbacks>|null $pAllocator
+     * @param CData<VkGraphicsPipelineCreateInfo>|null $pCreateInfos
+     * @param CData<VkAllocationCallbacks>|null $pAllocator
      * @param CData|null $pPipelines
      * @return int
      * @since 1.0
      */
-    public static function vkCreateGraphicsPipelines(
+    public function createGraphicsPipelines(
         CData $device,
         CData $pipelineCache,
         int $createInfoCount,
@@ -1190,9 +1189,9 @@ trait Vulkan10MethodsTrait
         ?CData $pAllocator,
         ?CData $pPipelines
     ): int {
-        assert(Version::make(1, 0) >= self::$version, 'VkPipeline required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'VkPipeline required Vulkan v1.0');
 
-        return self::$ffi->vkCreateGraphicsPipelines($device, $pipelineCache, $createInfoCount, $pCreateInfos,
+        return $this->ffi->vkCreateGraphicsPipelines($device, $pipelineCache, $createInfoCount, $pCreateInfos,
             $pAllocator, $pPipelines);
     }
 
@@ -1200,13 +1199,13 @@ trait Vulkan10MethodsTrait
      * @param CData|VkDevice $device
      * @param CData|VkPipelineCache $pipelineCache
      * @param int $createInfoCount
-     * @param CPointer<VkComputePipelineCreateInfo>|null $pCreateInfos
-     * @param CPointer<VkAllocationCallbacks>|null $pAllocator
+     * @param CData<VkComputePipelineCreateInfo>|null $pCreateInfos
+     * @param CData<VkAllocationCallbacks>|null $pAllocator
      * @param CData|null $pPipelines
      * @return int
      * @since 1.0
      */
-    public static function vkCreateComputePipelines(
+    public function createComputePipelines(
         CData $device,
         CData $pipelineCache,
         int $createInfoCount,
@@ -1214,159 +1213,159 @@ trait Vulkan10MethodsTrait
         ?CData $pAllocator,
         ?CData $pPipelines
     ): int {
-        assert(Version::make(1, 0) >= self::$version, 'VkPipeline required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'VkPipeline required Vulkan v1.0');
 
-        return self::$ffi->vkCreateComputePipelines($device, $pipelineCache, $createInfoCount, $pCreateInfos,
+        return $this->ffi->vkCreateComputePipelines($device, $pipelineCache, $createInfoCount, $pCreateInfos,
             $pAllocator, $pPipelines);
     }
 
     /**
      * @param CData|VkDevice $device
      * @param CData|VkPipeline $pipeline
-     * @param CPointer<VkAllocationCallbacks>|null $pAllocator
+     * @param CData<VkAllocationCallbacks>|null $pAllocator
      * @return void
      * @since 1.0
      */
-    public static function vkDestroyPipeline(CData $device, CData $pipeline, ?CData $pAllocator): void
+    public function destroyPipeline(CData $device, CData $pipeline, ?CData $pAllocator): void
     {
-        assert(Version::make(1, 0) >= self::$version, 'VkAllocationCallbacks required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'VkAllocationCallbacks required Vulkan v1.0');
 
-        self::$ffi->vkDestroyPipeline($device, $pipeline, $pAllocator);
+        $this->ffi->vkDestroyPipeline($device, $pipeline, $pAllocator);
     }
 
     /**
      * @param CData|VkDevice $device
-     * @param CPointer<VkPipelineLayoutCreateInfo>|null $pCreateInfo
-     * @param CPointer<VkAllocationCallbacks>|null $pAllocator
+     * @param CData<VkPipelineLayoutCreateInfo>|null $pCreateInfo
+     * @param CData<VkAllocationCallbacks>|null $pAllocator
      * @param CData|null $pPipelineLayout
      * @return int
      * @since 1.0
      */
-    public static function vkCreatePipelineLayout(
+    public function createPipelineLayout(
         CData $device,
         ?CData $pCreateInfo,
         ?CData $pAllocator,
         ?CData $pPipelineLayout
     ): int {
-        assert(Version::make(1, 0) >= self::$version, 'VkPipelineLayout required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'VkPipelineLayout required Vulkan v1.0');
 
-        return self::$ffi->vkCreatePipelineLayout($device, $pCreateInfo, $pAllocator, $pPipelineLayout);
+        return $this->ffi->vkCreatePipelineLayout($device, $pCreateInfo, $pAllocator, $pPipelineLayout);
     }
 
     /**
      * @param CData|VkDevice $device
      * @param CData|VkPipelineLayout $pipelineLayout
-     * @param CPointer<VkAllocationCallbacks>|null $pAllocator
+     * @param CData<VkAllocationCallbacks>|null $pAllocator
      * @return void
      * @since 1.0
      */
-    public static function vkDestroyPipelineLayout(CData $device, CData $pipelineLayout, ?CData $pAllocator): void
+    public function destroyPipelineLayout(CData $device, CData $pipelineLayout, ?CData $pAllocator): void
     {
-        assert(Version::make(1, 0) >= self::$version, 'VkAllocationCallbacks required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'VkAllocationCallbacks required Vulkan v1.0');
 
-        self::$ffi->vkDestroyPipelineLayout($device, $pipelineLayout, $pAllocator);
+        $this->ffi->vkDestroyPipelineLayout($device, $pipelineLayout, $pAllocator);
     }
 
     /**
      * @param CData|VkDevice $device
-     * @param CPointer<VkSamplerCreateInfo>|null $pCreateInfo
-     * @param CPointer<VkAllocationCallbacks>|null $pAllocator
+     * @param CData<VkSamplerCreateInfo>|null $pCreateInfo
+     * @param CData<VkAllocationCallbacks>|null $pAllocator
      * @param CData|null $pSampler
      * @return int
      * @since 1.0
      */
-    public static function vkCreateSampler(
+    public function createSampler(
         CData $device,
         ?CData $pCreateInfo,
         ?CData $pAllocator,
         ?CData $pSampler
     ): int {
-        assert(Version::make(1, 0) >= self::$version, 'VkSampler required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'VkSampler required Vulkan v1.0');
 
-        return self::$ffi->vkCreateSampler($device, $pCreateInfo, $pAllocator, $pSampler);
+        return $this->ffi->vkCreateSampler($device, $pCreateInfo, $pAllocator, $pSampler);
     }
 
     /**
      * @param CData|VkDevice $device
      * @param CData|VkSampler $sampler
-     * @param CPointer<VkAllocationCallbacks>|null $pAllocator
+     * @param CData<VkAllocationCallbacks>|null $pAllocator
      * @return void
      * @since 1.0
      */
-    public static function vkDestroySampler(CData $device, CData $sampler, ?CData $pAllocator): void
+    public function destroySampler(CData $device, CData $sampler, ?CData $pAllocator): void
     {
-        assert(Version::make(1, 0) >= self::$version, 'VkAllocationCallbacks required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'VkAllocationCallbacks required Vulkan v1.0');
 
-        self::$ffi->vkDestroySampler($device, $sampler, $pAllocator);
+        $this->ffi->vkDestroySampler($device, $sampler, $pAllocator);
     }
 
     /**
      * @param CData|VkDevice $device
-     * @param CPointer<VkDescriptorSetLayoutCreateInfo>|null $pCreateInfo
-     * @param CPointer<VkAllocationCallbacks>|null $pAllocator
+     * @param CData<VkDescriptorSetLayoutCreateInfo>|null $pCreateInfo
+     * @param CData<VkAllocationCallbacks>|null $pAllocator
      * @param CData|null $pSetLayout
      * @return int
      * @since 1.0
      */
-    public static function vkCreateDescriptorSetLayout(
+    public function createDescriptorSetLayout(
         CData $device,
         ?CData $pCreateInfo,
         ?CData $pAllocator,
         ?CData $pSetLayout
     ): int {
-        assert(Version::make(1, 0) >= self::$version, 'VkDescriptorSetLayout required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'VkDescriptorSetLayout required Vulkan v1.0');
 
-        return self::$ffi->vkCreateDescriptorSetLayout($device, $pCreateInfo, $pAllocator, $pSetLayout);
+        return $this->ffi->vkCreateDescriptorSetLayout($device, $pCreateInfo, $pAllocator, $pSetLayout);
     }
 
     /**
      * @param CData|VkDevice $device
      * @param CData|VkDescriptorSetLayout $descriptorSetLayout
-     * @param CPointer<VkAllocationCallbacks>|null $pAllocator
+     * @param CData<VkAllocationCallbacks>|null $pAllocator
      * @return void
      * @since 1.0
      */
-    public static function vkDestroyDescriptorSetLayout(
+    public function destroyDescriptorSetLayout(
         CData $device,
         CData $descriptorSetLayout,
         ?CData $pAllocator
     ): void {
-        assert(Version::make(1, 0) >= self::$version, 'VkAllocationCallbacks required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'VkAllocationCallbacks required Vulkan v1.0');
 
-        self::$ffi->vkDestroyDescriptorSetLayout($device, $descriptorSetLayout, $pAllocator);
+        $this->ffi->vkDestroyDescriptorSetLayout($device, $descriptorSetLayout, $pAllocator);
     }
 
     /**
      * @param CData|VkDevice $device
-     * @param CPointer<VkDescriptorPoolCreateInfo>|null $pCreateInfo
-     * @param CPointer<VkAllocationCallbacks>|null $pAllocator
+     * @param CData<VkDescriptorPoolCreateInfo>|null $pCreateInfo
+     * @param CData<VkAllocationCallbacks>|null $pAllocator
      * @param CData|null $pDescriptorPool
      * @return int
      * @since 1.0
      */
-    public static function vkCreateDescriptorPool(
+    public function createDescriptorPool(
         CData $device,
         ?CData $pCreateInfo,
         ?CData $pAllocator,
         ?CData $pDescriptorPool
     ): int {
-        assert(Version::make(1, 0) >= self::$version, 'VkDescriptorPool required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'VkDescriptorPool required Vulkan v1.0');
 
-        return self::$ffi->vkCreateDescriptorPool($device, $pCreateInfo, $pAllocator, $pDescriptorPool);
+        return $this->ffi->vkCreateDescriptorPool($device, $pCreateInfo, $pAllocator, $pDescriptorPool);
     }
 
     /**
      * @param CData|VkDevice $device
      * @param CData|VkDescriptorPool $descriptorPool
-     * @param CPointer<VkAllocationCallbacks>|null $pAllocator
+     * @param CData<VkAllocationCallbacks>|null $pAllocator
      * @return void
      * @since 1.0
      */
-    public static function vkDestroyDescriptorPool(CData $device, CData $descriptorPool, ?CData $pAllocator): void
+    public function destroyDescriptorPool(CData $device, CData $descriptorPool, ?CData $pAllocator): void
     {
-        assert(Version::make(1, 0) >= self::$version, 'VkAllocationCallbacks required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'VkAllocationCallbacks required Vulkan v1.0');
 
-        self::$ffi->vkDestroyDescriptorPool($device, $descriptorPool, $pAllocator);
+        $this->ffi->vkDestroyDescriptorPool($device, $descriptorPool, $pAllocator);
     }
 
     /**
@@ -1376,25 +1375,25 @@ trait Vulkan10MethodsTrait
      * @return int
      * @since 1.0
      */
-    public static function vkResetDescriptorPool(CData $device, CData $descriptorPool, int $flags): int
+    public function resetDescriptorPool(CData $device, CData $descriptorPool, int $flags): int
     {
-        assert(Version::make(1, 0) >= self::$version, 'vkResetDescriptorPool required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'vkResetDescriptorPool required Vulkan v1.0');
 
-        return self::$ffi->vkResetDescriptorPool($device, $descriptorPool, $flags);
+        return $this->ffi->vkResetDescriptorPool($device, $descriptorPool, $flags);
     }
 
     /**
      * @param CData|VkDevice $device
-     * @param CPointer<VkDescriptorSetAllocateInfo>|null $pAllocateInfo
+     * @param CData<VkDescriptorSetAllocateInfo>|null $pAllocateInfo
      * @param CData|null $pDescriptorSets
      * @return int
      * @since 1.0
      */
-    public static function vkAllocateDescriptorSets(CData $device, ?CData $pAllocateInfo, ?CData $pDescriptorSets): int
+    public function allocateDescriptorSets(CData $device, ?CData $pAllocateInfo, ?CData $pDescriptorSets): int
     {
-        assert(Version::make(1, 0) >= self::$version, 'VkDescriptorSet required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'VkDescriptorSet required Vulkan v1.0');
 
-        return self::$ffi->vkAllocateDescriptorSets($device, $pAllocateInfo, $pDescriptorSets);
+        return $this->ffi->vkAllocateDescriptorSets($device, $pAllocateInfo, $pDescriptorSets);
     }
 
     /**
@@ -1405,150 +1404,150 @@ trait Vulkan10MethodsTrait
      * @return int
      * @since 1.0
      */
-    public static function vkFreeDescriptorSets(
+    public function freeDescriptorSets(
         CData $device,
         CData $descriptorPool,
         int $descriptorSetCount,
         ?CData $pDescriptorSets
     ): int {
-        assert(Version::make(1, 0) >= self::$version, 'VkDescriptorSet required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'VkDescriptorSet required Vulkan v1.0');
 
-        return self::$ffi->vkFreeDescriptorSets($device, $descriptorPool, $descriptorSetCount, $pDescriptorSets);
+        return $this->ffi->vkFreeDescriptorSets($device, $descriptorPool, $descriptorSetCount, $pDescriptorSets);
     }
 
     /**
      * @param CData|VkDevice $device
      * @param int $descriptorWriteCount
-     * @param CPointer<VkWriteDescriptorSet>|null $pDescriptorWrites
+     * @param CData<VkWriteDescriptorSet>|null $pDescriptorWrites
      * @param int $descriptorCopyCount
-     * @param CPointer<VkCopyDescriptorSet>|null $pDescriptorCopies
+     * @param CData<VkCopyDescriptorSet>|null $pDescriptorCopies
      * @return void
      * @since 1.0
      */
-    public static function vkUpdateDescriptorSets(
+    public function updateDescriptorSets(
         CData $device,
         int $descriptorWriteCount,
         ?CData $pDescriptorWrites,
         int $descriptorCopyCount,
         ?CData $pDescriptorCopies
     ): void {
-        assert(Version::make(1, 0) >= self::$version, 'VkCopyDescriptorSet required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'VkCopyDescriptorSet required Vulkan v1.0');
 
-        self::$ffi->vkUpdateDescriptorSets($device, $descriptorWriteCount, $pDescriptorWrites, $descriptorCopyCount,
+        $this->ffi->vkUpdateDescriptorSets($device, $descriptorWriteCount, $pDescriptorWrites, $descriptorCopyCount,
             $pDescriptorCopies);
     }
 
     /**
      * @param CData|VkDevice $device
-     * @param CPointer<VkFramebufferCreateInfo>|null $pCreateInfo
-     * @param CPointer<VkAllocationCallbacks>|null $pAllocator
+     * @param CData<VkFramebufferCreateInfo>|null $pCreateInfo
+     * @param CData<VkAllocationCallbacks>|null $pAllocator
      * @param CData|null $pFramebuffer
      * @return int
      * @since 1.0
      */
-    public static function vkCreateFramebuffer(
+    public function createFramebuffer(
         CData $device,
         ?CData $pCreateInfo,
         ?CData $pAllocator,
         ?CData $pFramebuffer
     ): int {
-        assert(Version::make(1, 0) >= self::$version, 'VkFramebuffer required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'VkFramebuffer required Vulkan v1.0');
 
-        return self::$ffi->vkCreateFramebuffer($device, $pCreateInfo, $pAllocator, $pFramebuffer);
+        return $this->ffi->vkCreateFramebuffer($device, $pCreateInfo, $pAllocator, $pFramebuffer);
     }
 
     /**
      * @param CData|VkDevice $device
      * @param CData|VkFramebuffer $framebuffer
-     * @param CPointer<VkAllocationCallbacks>|null $pAllocator
+     * @param CData<VkAllocationCallbacks>|null $pAllocator
      * @return void
      * @since 1.0
      */
-    public static function vkDestroyFramebuffer(CData $device, CData $framebuffer, ?CData $pAllocator): void
+    public function destroyFramebuffer(CData $device, CData $framebuffer, ?CData $pAllocator): void
     {
-        assert(Version::make(1, 0) >= self::$version, 'VkAllocationCallbacks required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'VkAllocationCallbacks required Vulkan v1.0');
 
-        self::$ffi->vkDestroyFramebuffer($device, $framebuffer, $pAllocator);
+        $this->ffi->vkDestroyFramebuffer($device, $framebuffer, $pAllocator);
     }
 
     /**
      * @param CData|VkDevice $device
-     * @param CPointer<VkRenderPassCreateInfo>|null $pCreateInfo
-     * @param CPointer<VkAllocationCallbacks>|null $pAllocator
+     * @param CData<VkRenderPassCreateInfo>|null $pCreateInfo
+     * @param CData<VkAllocationCallbacks>|null $pAllocator
      * @param CData|null $pRenderPass
      * @return int
      * @since 1.0
      */
-    public static function vkCreateRenderPass(
+    public function createRenderPass(
         CData $device,
         ?CData $pCreateInfo,
         ?CData $pAllocator,
         ?CData $pRenderPass
     ): int {
-        assert(Version::make(1, 0) >= self::$version, 'VkRenderPass required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'VkRenderPass required Vulkan v1.0');
 
-        return self::$ffi->vkCreateRenderPass($device, $pCreateInfo, $pAllocator, $pRenderPass);
+        return $this->ffi->vkCreateRenderPass($device, $pCreateInfo, $pAllocator, $pRenderPass);
     }
 
     /**
      * @param CData|VkDevice $device
      * @param CData|VkRenderPass $renderPass
-     * @param CPointer<VkAllocationCallbacks>|null $pAllocator
+     * @param CData<VkAllocationCallbacks>|null $pAllocator
      * @return void
      * @since 1.0
      */
-    public static function vkDestroyRenderPass(CData $device, CData $renderPass, ?CData $pAllocator): void
+    public function destroyRenderPass(CData $device, CData $renderPass, ?CData $pAllocator): void
     {
-        assert(Version::make(1, 0) >= self::$version, 'VkAllocationCallbacks required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'VkAllocationCallbacks required Vulkan v1.0');
 
-        self::$ffi->vkDestroyRenderPass($device, $renderPass, $pAllocator);
+        $this->ffi->vkDestroyRenderPass($device, $renderPass, $pAllocator);
     }
 
     /**
      * @param CData|VkDevice $device
      * @param CData|VkRenderPass $renderPass
-     * @param CPointer<VkExtent2D>|null $pGranularity
+     * @param CData<VkExtent2D>|null $pGranularity
      * @return void
      * @since 1.0
      */
-    public static function vkGetRenderAreaGranularity(CData $device, CData $renderPass, ?CData $pGranularity): void
+    public function getRenderAreaGranularity(CData $device, CData $renderPass, ?CData $pGranularity): void
     {
-        assert(Version::make(1, 0) >= self::$version, 'VkExtent2D required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'VkExtent2D required Vulkan v1.0');
 
-        self::$ffi->vkGetRenderAreaGranularity($device, $renderPass, $pGranularity);
+        $this->ffi->vkGetRenderAreaGranularity($device, $renderPass, $pGranularity);
     }
 
     /**
      * @param CData|VkDevice $device
-     * @param CPointer<VkCommandPoolCreateInfo>|null $pCreateInfo
-     * @param CPointer<VkAllocationCallbacks>|null $pAllocator
+     * @param CData<VkCommandPoolCreateInfo>|null $pCreateInfo
+     * @param CData<VkAllocationCallbacks>|null $pAllocator
      * @param CData|null $pCommandPool
      * @return int
      * @since 1.0
      */
-    public static function vkCreateCommandPool(
+    public function createCommandPool(
         CData $device,
         ?CData $pCreateInfo,
         ?CData $pAllocator,
         ?CData $pCommandPool
     ): int {
-        assert(Version::make(1, 0) >= self::$version, 'VkCommandPool required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'VkCommandPool required Vulkan v1.0');
 
-        return self::$ffi->vkCreateCommandPool($device, $pCreateInfo, $pAllocator, $pCommandPool);
+        return $this->ffi->vkCreateCommandPool($device, $pCreateInfo, $pAllocator, $pCommandPool);
     }
 
     /**
      * @param CData|VkDevice $device
      * @param CData|VkCommandPool $commandPool
-     * @param CPointer<VkAllocationCallbacks>|null $pAllocator
+     * @param CData<VkAllocationCallbacks>|null $pAllocator
      * @return void
      * @since 1.0
      */
-    public static function vkDestroyCommandPool(CData $device, CData $commandPool, ?CData $pAllocator): void
+    public function destroyCommandPool(CData $device, CData $commandPool, ?CData $pAllocator): void
     {
-        assert(Version::make(1, 0) >= self::$version, 'VkAllocationCallbacks required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'VkAllocationCallbacks required Vulkan v1.0');
 
-        self::$ffi->vkDestroyCommandPool($device, $commandPool, $pAllocator);
+        $this->ffi->vkDestroyCommandPool($device, $commandPool, $pAllocator);
     }
 
     /**
@@ -1558,25 +1557,25 @@ trait Vulkan10MethodsTrait
      * @return int
      * @since 1.0
      */
-    public static function vkResetCommandPool(CData $device, CData $commandPool, int $flags): int
+    public function resetCommandPool(CData $device, CData $commandPool, int $flags): int
     {
-        assert(Version::make(1, 0) >= self::$version, 'vkResetCommandPool required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'vkResetCommandPool required Vulkan v1.0');
 
-        return self::$ffi->vkResetCommandPool($device, $commandPool, $flags);
+        return $this->ffi->vkResetCommandPool($device, $commandPool, $flags);
     }
 
     /**
      * @param CData|VkDevice $device
-     * @param CPointer<VkCommandBufferAllocateInfo>|null $pAllocateInfo
+     * @param CData<VkCommandBufferAllocateInfo>|null $pAllocateInfo
      * @param CData|null $pCommandBuffers
      * @return int
      * @since 1.0
      */
-    public static function vkAllocateCommandBuffers(CData $device, ?CData $pAllocateInfo, ?CData $pCommandBuffers): int
+    public function allocateCommandBuffers(CData $device, ?CData $pAllocateInfo, ?CData $pCommandBuffers): int
     {
-        assert(Version::make(1, 0) >= self::$version, 'VkCommandBuffer required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'VkCommandBuffer required Vulkan v1.0');
 
-        return self::$ffi->vkAllocateCommandBuffers($device, $pAllocateInfo, $pCommandBuffers);
+        return $this->ffi->vkAllocateCommandBuffers($device, $pAllocateInfo, $pCommandBuffers);
     }
 
     /**
@@ -1587,28 +1586,28 @@ trait Vulkan10MethodsTrait
      * @return void
      * @since 1.0
      */
-    public static function vkFreeCommandBuffers(
+    public function freeCommandBuffers(
         CData $device,
         CData $commandPool,
         int $commandBufferCount,
         ?CData $pCommandBuffers
     ): void {
-        assert(Version::make(1, 0) >= self::$version, 'VkCommandBuffer required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'VkCommandBuffer required Vulkan v1.0');
 
-        self::$ffi->vkFreeCommandBuffers($device, $commandPool, $commandBufferCount, $pCommandBuffers);
+        $this->ffi->vkFreeCommandBuffers($device, $commandPool, $commandBufferCount, $pCommandBuffers);
     }
 
     /**
      * @param CData|VkCommandBuffer $commandBuffer
-     * @param CPointer<VkCommandBufferBeginInfo>|null $pBeginInfo
+     * @param CData<VkCommandBufferBeginInfo>|null $pBeginInfo
      * @return int
      * @since 1.0
      */
-    public static function vkBeginCommandBuffer(CData $commandBuffer, ?CData $pBeginInfo): int
+    public function beginCommandBuffer(CData $commandBuffer, ?CData $pBeginInfo): int
     {
-        assert(Version::make(1, 0) >= self::$version, 'VkCommandBufferBeginInfo required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'VkCommandBufferBeginInfo required Vulkan v1.0');
 
-        return self::$ffi->vkBeginCommandBuffer($commandBuffer, $pBeginInfo);
+        return $this->ffi->vkBeginCommandBuffer($commandBuffer, $pBeginInfo);
     }
 
     /**
@@ -1616,11 +1615,11 @@ trait Vulkan10MethodsTrait
      * @return int
      * @since 1.0
      */
-    public static function vkEndCommandBuffer(CData $commandBuffer): int
+    public function endCommandBuffer(CData $commandBuffer): int
     {
-        assert(Version::make(1, 0) >= self::$version, 'vkEndCommandBuffer required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'vkEndCommandBuffer required Vulkan v1.0');
 
-        return self::$ffi->vkEndCommandBuffer($commandBuffer);
+        return $this->ffi->vkEndCommandBuffer($commandBuffer);
     }
 
     /**
@@ -1629,11 +1628,11 @@ trait Vulkan10MethodsTrait
      * @return int
      * @since 1.0
      */
-    public static function vkResetCommandBuffer(CData $commandBuffer, int $flags): int
+    public function resetCommandBuffer(CData $commandBuffer, int $flags): int
     {
-        assert(Version::make(1, 0) >= self::$version, 'vkResetCommandBuffer required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'vkResetCommandBuffer required Vulkan v1.0');
 
-        return self::$ffi->vkResetCommandBuffer($commandBuffer, $flags);
+        return $this->ffi->vkResetCommandBuffer($commandBuffer, $flags);
     }
 
     /**
@@ -1645,49 +1644,49 @@ trait Vulkan10MethodsTrait
      * @psalm-param VkPipelineBindPoint::* $pipelineBindPoint
      *
      */
-    public static function vkCmdBindPipeline(CData $commandBuffer, int $pipelineBindPoint, CData $pipeline): void
+    public function cmdBindPipeline(CData $commandBuffer, int $pipelineBindPoint, CData $pipeline): void
     {
-        assert(Version::make(1, 0) >= self::$version, 'vkCmdBindPipeline required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'vkCmdBindPipeline required Vulkan v1.0');
 
-        self::$ffi->vkCmdBindPipeline($commandBuffer, $pipelineBindPoint, $pipeline);
+        $this->ffi->vkCmdBindPipeline($commandBuffer, $pipelineBindPoint, $pipeline);
     }
 
     /**
      * @param CData|VkCommandBuffer $commandBuffer
      * @param int $firstViewport
      * @param int $viewportCount
-     * @param CPointer<VkViewport>|null $pViewports
+     * @param CData<VkViewport>|null $pViewports
      * @return void
      * @since 1.0
      */
-    public static function vkCmdSetViewport(
+    public function cmdSetViewport(
         CData $commandBuffer,
         int $firstViewport,
         int $viewportCount,
         ?CData $pViewports
     ): void {
-        assert(Version::make(1, 0) >= self::$version, 'VkViewport required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'VkViewport required Vulkan v1.0');
 
-        self::$ffi->vkCmdSetViewport($commandBuffer, $firstViewport, $viewportCount, $pViewports);
+        $this->ffi->vkCmdSetViewport($commandBuffer, $firstViewport, $viewportCount, $pViewports);
     }
 
     /**
      * @param CData|VkCommandBuffer $commandBuffer
      * @param int $firstScissor
      * @param int $scissorCount
-     * @param CPointer<VkRect2D>|null $pScissors
+     * @param CData<VkRect2D>|null $pScissors
      * @return void
      * @since 1.0
      */
-    public static function vkCmdSetScissor(
+    public function cmdSetScissor(
         CData $commandBuffer,
         int $firstScissor,
         int $scissorCount,
         ?CData $pScissors
     ): void {
-        assert(Version::make(1, 0) >= self::$version, 'VkRect2D required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'VkRect2D required Vulkan v1.0');
 
-        self::$ffi->vkCmdSetScissor($commandBuffer, $firstScissor, $scissorCount, $pScissors);
+        $this->ffi->vkCmdSetScissor($commandBuffer, $firstScissor, $scissorCount, $pScissors);
     }
 
     /**
@@ -1696,11 +1695,11 @@ trait Vulkan10MethodsTrait
      * @return void
      * @since 1.0
      */
-    public static function vkCmdSetLineWidth(CData $commandBuffer, float $lineWidth): void
+    public function cmdSetLineWidth(CData $commandBuffer, float $lineWidth): void
     {
-        assert(Version::make(1, 0) >= self::$version, 'vkCmdSetLineWidth required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'vkCmdSetLineWidth required Vulkan v1.0');
 
-        self::$ffi->vkCmdSetLineWidth($commandBuffer, $lineWidth);
+        $this->ffi->vkCmdSetLineWidth($commandBuffer, $lineWidth);
     }
 
     /**
@@ -1711,15 +1710,15 @@ trait Vulkan10MethodsTrait
      * @return void
      * @since 1.0
      */
-    public static function vkCmdSetDepthBias(
+    public function cmdSetDepthBias(
         CData $commandBuffer,
         float $depthBiasConstantFactor,
         float $depthBiasClamp,
         float $depthBiasSlopeFactor
     ): void {
-        assert(Version::make(1, 0) >= self::$version, 'vkCmdSetDepthBias required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'vkCmdSetDepthBias required Vulkan v1.0');
 
-        self::$ffi->vkCmdSetDepthBias($commandBuffer, $depthBiasConstantFactor, $depthBiasClamp, $depthBiasSlopeFactor);
+        $this->ffi->vkCmdSetDepthBias($commandBuffer, $depthBiasConstantFactor, $depthBiasClamp, $depthBiasSlopeFactor);
     }
 
     /**
@@ -1728,11 +1727,11 @@ trait Vulkan10MethodsTrait
      * @return void
      * @since 1.0
      */
-    public static function vkCmdSetBlendConstants(CData $commandBuffer, CData $blendConstants): void
+    public function cmdSetBlendConstants(CData $commandBuffer, CData $blendConstants): void
     {
-        assert(Version::make(1, 0) >= self::$version, 'vkCmdSetBlendConstants required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'vkCmdSetBlendConstants required Vulkan v1.0');
 
-        self::$ffi->vkCmdSetBlendConstants($commandBuffer, $blendConstants);
+        $this->ffi->vkCmdSetBlendConstants($commandBuffer, $blendConstants);
     }
 
     /**
@@ -1742,11 +1741,11 @@ trait Vulkan10MethodsTrait
      * @return void
      * @since 1.0
      */
-    public static function vkCmdSetDepthBounds(CData $commandBuffer, float $minDepthBounds, float $maxDepthBounds): void
+    public function cmdSetDepthBounds(CData $commandBuffer, float $minDepthBounds, float $maxDepthBounds): void
     {
-        assert(Version::make(1, 0) >= self::$version, 'vkCmdSetDepthBounds required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'vkCmdSetDepthBounds required Vulkan v1.0');
 
-        self::$ffi->vkCmdSetDepthBounds($commandBuffer, $minDepthBounds, $maxDepthBounds);
+        $this->ffi->vkCmdSetDepthBounds($commandBuffer, $minDepthBounds, $maxDepthBounds);
     }
 
     /**
@@ -1756,11 +1755,11 @@ trait Vulkan10MethodsTrait
      * @return void
      * @since 1.0
      */
-    public static function vkCmdSetStencilCompareMask(CData $commandBuffer, int $faceMask, int $compareMask): void
+    public function cmdSetStencilCompareMask(CData $commandBuffer, int $faceMask, int $compareMask): void
     {
-        assert(Version::make(1, 0) >= self::$version, 'vkCmdSetStencilCompareMask required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'vkCmdSetStencilCompareMask required Vulkan v1.0');
 
-        self::$ffi->vkCmdSetStencilCompareMask($commandBuffer, $faceMask, $compareMask);
+        $this->ffi->vkCmdSetStencilCompareMask($commandBuffer, $faceMask, $compareMask);
     }
 
     /**
@@ -1770,11 +1769,11 @@ trait Vulkan10MethodsTrait
      * @return void
      * @since 1.0
      */
-    public static function vkCmdSetStencilWriteMask(CData $commandBuffer, int $faceMask, int $writeMask): void
+    public function cmdSetStencilWriteMask(CData $commandBuffer, int $faceMask, int $writeMask): void
     {
-        assert(Version::make(1, 0) >= self::$version, 'vkCmdSetStencilWriteMask required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'vkCmdSetStencilWriteMask required Vulkan v1.0');
 
-        self::$ffi->vkCmdSetStencilWriteMask($commandBuffer, $faceMask, $writeMask);
+        $this->ffi->vkCmdSetStencilWriteMask($commandBuffer, $faceMask, $writeMask);
     }
 
     /**
@@ -1784,11 +1783,11 @@ trait Vulkan10MethodsTrait
      * @return void
      * @since 1.0
      */
-    public static function vkCmdSetStencilReference(CData $commandBuffer, int $faceMask, int $reference): void
+    public function cmdSetStencilReference(CData $commandBuffer, int $faceMask, int $reference): void
     {
-        assert(Version::make(1, 0) >= self::$version, 'vkCmdSetStencilReference required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'vkCmdSetStencilReference required Vulkan v1.0');
 
-        self::$ffi->vkCmdSetStencilReference($commandBuffer, $faceMask, $reference);
+        $this->ffi->vkCmdSetStencilReference($commandBuffer, $faceMask, $reference);
     }
 
     /**
@@ -1805,7 +1804,7 @@ trait Vulkan10MethodsTrait
      * @psalm-param VkPipelineBindPoint::* $pipelineBindPoint
      *
      */
-    public static function vkCmdBindDescriptorSets(
+    public function cmdBindDescriptorSets(
         CData $commandBuffer,
         int $pipelineBindPoint,
         CData $layout,
@@ -1815,9 +1814,9 @@ trait Vulkan10MethodsTrait
         int $dynamicOffsetCount,
         ?CData $pDynamicOffsets
     ): void {
-        assert(Version::make(1, 0) >= self::$version, 'uint32_t required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'uint32_t required Vulkan v1.0');
 
-        self::$ffi->vkCmdBindDescriptorSets($commandBuffer, $pipelineBindPoint, $layout, $firstSet, $descriptorSetCount,
+        $this->ffi->vkCmdBindDescriptorSets($commandBuffer, $pipelineBindPoint, $layout, $firstSet, $descriptorSetCount,
             $pDescriptorSets, $dynamicOffsetCount, $pDynamicOffsets);
     }
 
@@ -1831,11 +1830,11 @@ trait Vulkan10MethodsTrait
      * @psalm-param VkIndexType::* $indexType
      *
      */
-    public static function vkCmdBindIndexBuffer(CData $commandBuffer, CData $buffer, int $offset, int $indexType): void
+    public function cmdBindIndexBuffer(CData $commandBuffer, CData $buffer, int $offset, int $indexType): void
     {
-        assert(Version::make(1, 0) >= self::$version, 'vkCmdBindIndexBuffer required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'vkCmdBindIndexBuffer required Vulkan v1.0');
 
-        self::$ffi->vkCmdBindIndexBuffer($commandBuffer, $buffer, $offset, $indexType);
+        $this->ffi->vkCmdBindIndexBuffer($commandBuffer, $buffer, $offset, $indexType);
     }
 
     /**
@@ -1847,16 +1846,16 @@ trait Vulkan10MethodsTrait
      * @return void
      * @since 1.0
      */
-    public static function vkCmdBindVertexBuffers(
+    public function cmdBindVertexBuffers(
         CData $commandBuffer,
         int $firstBinding,
         int $bindingCount,
         ?CData $pBuffers,
         ?CData $pOffsets
     ): void {
-        assert(Version::make(1, 0) >= self::$version, 'VkDeviceSize required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'VkDeviceSize required Vulkan v1.0');
 
-        self::$ffi->vkCmdBindVertexBuffers($commandBuffer, $firstBinding, $bindingCount, $pBuffers, $pOffsets);
+        $this->ffi->vkCmdBindVertexBuffers($commandBuffer, $firstBinding, $bindingCount, $pBuffers, $pOffsets);
     }
 
     /**
@@ -1868,16 +1867,16 @@ trait Vulkan10MethodsTrait
      * @return void
      * @since 1.0
      */
-    public static function vkCmdDraw(
+    public function cmdDraw(
         CData $commandBuffer,
         int $vertexCount,
         int $instanceCount,
         int $firstVertex,
         int $firstInstance
     ): void {
-        assert(Version::make(1, 0) >= self::$version, 'vkCmdDraw required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'vkCmdDraw required Vulkan v1.0');
 
-        self::$ffi->vkCmdDraw($commandBuffer, $vertexCount, $instanceCount, $firstVertex, $firstInstance);
+        $this->ffi->vkCmdDraw($commandBuffer, $vertexCount, $instanceCount, $firstVertex, $firstInstance);
     }
 
     /**
@@ -1890,7 +1889,7 @@ trait Vulkan10MethodsTrait
      * @return void
      * @since 1.0
      */
-    public static function vkCmdDrawIndexed(
+    public function cmdDrawIndexed(
         CData $commandBuffer,
         int $indexCount,
         int $instanceCount,
@@ -1898,9 +1897,9 @@ trait Vulkan10MethodsTrait
         int $vertexOffset,
         int $firstInstance
     ): void {
-        assert(Version::make(1, 0) >= self::$version, 'vkCmdDrawIndexed required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'vkCmdDrawIndexed required Vulkan v1.0');
 
-        self::$ffi->vkCmdDrawIndexed($commandBuffer, $indexCount, $instanceCount, $firstIndex, $vertexOffset,
+        $this->ffi->vkCmdDrawIndexed($commandBuffer, $indexCount, $instanceCount, $firstIndex, $vertexOffset,
             $firstInstance);
     }
 
@@ -1913,16 +1912,16 @@ trait Vulkan10MethodsTrait
      * @return void
      * @since 1.0
      */
-    public static function vkCmdDrawIndirect(
+    public function cmdDrawIndirect(
         CData $commandBuffer,
         CData $buffer,
         int $offset,
         int $drawCount,
         int $stride
     ): void {
-        assert(Version::make(1, 0) >= self::$version, 'vkCmdDrawIndirect required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'vkCmdDrawIndirect required Vulkan v1.0');
 
-        self::$ffi->vkCmdDrawIndirect($commandBuffer, $buffer, $offset, $drawCount, $stride);
+        $this->ffi->vkCmdDrawIndirect($commandBuffer, $buffer, $offset, $drawCount, $stride);
     }
 
     /**
@@ -1934,16 +1933,16 @@ trait Vulkan10MethodsTrait
      * @return void
      * @since 1.0
      */
-    public static function vkCmdDrawIndexedIndirect(
+    public function cmdDrawIndexedIndirect(
         CData $commandBuffer,
         CData $buffer,
         int $offset,
         int $drawCount,
         int $stride
     ): void {
-        assert(Version::make(1, 0) >= self::$version, 'vkCmdDrawIndexedIndirect required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'vkCmdDrawIndexedIndirect required Vulkan v1.0');
 
-        self::$ffi->vkCmdDrawIndexedIndirect($commandBuffer, $buffer, $offset, $drawCount, $stride);
+        $this->ffi->vkCmdDrawIndexedIndirect($commandBuffer, $buffer, $offset, $drawCount, $stride);
     }
 
     /**
@@ -1954,15 +1953,15 @@ trait Vulkan10MethodsTrait
      * @return void
      * @since 1.0
      */
-    public static function vkCmdDispatch(
+    public function cmdDispatch(
         CData $commandBuffer,
         int $groupCountX,
         int $groupCountY,
         int $groupCountZ
     ): void {
-        assert(Version::make(1, 0) >= self::$version, 'vkCmdDispatch required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'vkCmdDispatch required Vulkan v1.0');
 
-        self::$ffi->vkCmdDispatch($commandBuffer, $groupCountX, $groupCountY, $groupCountZ);
+        $this->ffi->vkCmdDispatch($commandBuffer, $groupCountX, $groupCountY, $groupCountZ);
     }
 
     /**
@@ -1972,11 +1971,11 @@ trait Vulkan10MethodsTrait
      * @return void
      * @since 1.0
      */
-    public static function vkCmdDispatchIndirect(CData $commandBuffer, CData $buffer, int $offset): void
+    public function cmdDispatchIndirect(CData $commandBuffer, CData $buffer, int $offset): void
     {
-        assert(Version::make(1, 0) >= self::$version, 'vkCmdDispatchIndirect required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'vkCmdDispatchIndirect required Vulkan v1.0');
 
-        self::$ffi->vkCmdDispatchIndirect($commandBuffer, $buffer, $offset);
+        $this->ffi->vkCmdDispatchIndirect($commandBuffer, $buffer, $offset);
     }
 
     /**
@@ -1984,20 +1983,20 @@ trait Vulkan10MethodsTrait
      * @param CData|VkBuffer $srcBuffer
      * @param CData|VkBuffer $dstBuffer
      * @param int $regionCount
-     * @param CPointer<VkBufferCopy>|null $pRegions
+     * @param CData<VkBufferCopy>|null $pRegions
      * @return void
      * @since 1.0
      */
-    public static function vkCmdCopyBuffer(
+    public function cmdCopyBuffer(
         CData $commandBuffer,
         CData $srcBuffer,
         CData $dstBuffer,
         int $regionCount,
         ?CData $pRegions
     ): void {
-        assert(Version::make(1, 0) >= self::$version, 'VkBufferCopy required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'VkBufferCopy required Vulkan v1.0');
 
-        self::$ffi->vkCmdCopyBuffer($commandBuffer, $srcBuffer, $dstBuffer, $regionCount, $pRegions);
+        $this->ffi->vkCmdCopyBuffer($commandBuffer, $srcBuffer, $dstBuffer, $regionCount, $pRegions);
     }
 
     /**
@@ -2007,14 +2006,14 @@ trait Vulkan10MethodsTrait
      * @param CData|VkImage $dstImage
      * @param int $dstImageLayout
      * @param int $regionCount
-     * @param CPointer<VkImageCopy>|null $pRegions
+     * @param CData<VkImageCopy>|null $pRegions
      * @return void
      * @since 1.0
      * @psalm-param VkImageLayout::* $srcImageLayout
      * @psalm-param VkImageLayout::* $dstImageLayout
      *
      */
-    public static function vkCmdCopyImage(
+    public function cmdCopyImage(
         CData $commandBuffer,
         CData $srcImage,
         int $srcImageLayout,
@@ -2023,9 +2022,9 @@ trait Vulkan10MethodsTrait
         int $regionCount,
         ?CData $pRegions
     ): void {
-        assert(Version::make(1, 0) >= self::$version, 'VkImageCopy required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'VkImageCopy required Vulkan v1.0');
 
-        self::$ffi->vkCmdCopyImage($commandBuffer, $srcImage, $srcImageLayout, $dstImage, $dstImageLayout, $regionCount,
+        $this->ffi->vkCmdCopyImage($commandBuffer, $srcImage, $srcImageLayout, $dstImage, $dstImageLayout, $regionCount,
             $pRegions);
     }
 
@@ -2036,7 +2035,7 @@ trait Vulkan10MethodsTrait
      * @param CData|VkImage $dstImage
      * @param int $dstImageLayout
      * @param int $regionCount
-     * @param CPointer<VkImageBlit>|null $pRegions
+     * @param CData<VkImageBlit>|null $pRegions
      * @param int $filter
      * @return void
      * @since 1.0
@@ -2045,7 +2044,7 @@ trait Vulkan10MethodsTrait
      * @psalm-param VkFilter::* $filter
      *
      */
-    public static function vkCmdBlitImage(
+    public function cmdBlitImage(
         CData $commandBuffer,
         CData $srcImage,
         int $srcImageLayout,
@@ -2055,9 +2054,9 @@ trait Vulkan10MethodsTrait
         ?CData $pRegions,
         int $filter
     ): void {
-        assert(Version::make(1, 0) >= self::$version, 'VkImageBlit required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'VkImageBlit required Vulkan v1.0');
 
-        self::$ffi->vkCmdBlitImage($commandBuffer, $srcImage, $srcImageLayout, $dstImage, $dstImageLayout, $regionCount,
+        $this->ffi->vkCmdBlitImage($commandBuffer, $srcImage, $srcImageLayout, $dstImage, $dstImageLayout, $regionCount,
             $pRegions, $filter);
     }
 
@@ -2067,13 +2066,13 @@ trait Vulkan10MethodsTrait
      * @param CData|VkImage $dstImage
      * @param int $dstImageLayout
      * @param int $regionCount
-     * @param CPointer<VkBufferImageCopy>|null $pRegions
+     * @param CData<VkBufferImageCopy>|null $pRegions
      * @return void
      * @since 1.0
      * @psalm-param VkImageLayout::* $dstImageLayout
      *
      */
-    public static function vkCmdCopyBufferToImage(
+    public function cmdCopyBufferToImage(
         CData $commandBuffer,
         CData $srcBuffer,
         CData $dstImage,
@@ -2081,9 +2080,9 @@ trait Vulkan10MethodsTrait
         int $regionCount,
         ?CData $pRegions
     ): void {
-        assert(Version::make(1, 0) >= self::$version, 'VkBufferImageCopy required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'VkBufferImageCopy required Vulkan v1.0');
 
-        self::$ffi->vkCmdCopyBufferToImage($commandBuffer, $srcBuffer, $dstImage, $dstImageLayout, $regionCount,
+        $this->ffi->vkCmdCopyBufferToImage($commandBuffer, $srcBuffer, $dstImage, $dstImageLayout, $regionCount,
             $pRegions);
     }
 
@@ -2093,13 +2092,13 @@ trait Vulkan10MethodsTrait
      * @param int $srcImageLayout
      * @param CData|VkBuffer $dstBuffer
      * @param int $regionCount
-     * @param CPointer<VkBufferImageCopy>|null $pRegions
+     * @param CData<VkBufferImageCopy>|null $pRegions
      * @return void
      * @since 1.0
      * @psalm-param VkImageLayout::* $srcImageLayout
      *
      */
-    public static function vkCmdCopyImageToBuffer(
+    public function cmdCopyImageToBuffer(
         CData $commandBuffer,
         CData $srcImage,
         int $srcImageLayout,
@@ -2107,9 +2106,9 @@ trait Vulkan10MethodsTrait
         int $regionCount,
         ?CData $pRegions
     ): void {
-        assert(Version::make(1, 0) >= self::$version, 'VkBufferImageCopy required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'VkBufferImageCopy required Vulkan v1.0');
 
-        self::$ffi->vkCmdCopyImageToBuffer($commandBuffer, $srcImage, $srcImageLayout, $dstBuffer, $regionCount,
+        $this->ffi->vkCmdCopyImageToBuffer($commandBuffer, $srcImage, $srcImageLayout, $dstBuffer, $regionCount,
             $pRegions);
     }
 
@@ -2122,16 +2121,16 @@ trait Vulkan10MethodsTrait
      * @return void
      * @since 1.0
      */
-    public static function vkCmdUpdateBuffer(
+    public function cmdUpdateBuffer(
         CData $commandBuffer,
         CData $dstBuffer,
         int $dstOffset,
         int $dataSize,
         ?CData $pData
     ): void {
-        assert(Version::make(1, 0) >= self::$version, 'void required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'void required Vulkan v1.0');
 
-        self::$ffi->vkCmdUpdateBuffer($commandBuffer, $dstBuffer, $dstOffset, $dataSize, $pData);
+        $this->ffi->vkCmdUpdateBuffer($commandBuffer, $dstBuffer, $dstOffset, $dataSize, $pData);
     }
 
     /**
@@ -2143,16 +2142,16 @@ trait Vulkan10MethodsTrait
      * @return void
      * @since 1.0
      */
-    public static function vkCmdFillBuffer(
+    public function cmdFillBuffer(
         CData $commandBuffer,
         CData $dstBuffer,
         int $dstOffset,
         int $size,
         int $data
     ): void {
-        assert(Version::make(1, 0) >= self::$version, 'vkCmdFillBuffer required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'vkCmdFillBuffer required Vulkan v1.0');
 
-        self::$ffi->vkCmdFillBuffer($commandBuffer, $dstBuffer, $dstOffset, $size, $data);
+        $this->ffi->vkCmdFillBuffer($commandBuffer, $dstBuffer, $dstOffset, $size, $data);
     }
 
     /**
@@ -2161,13 +2160,13 @@ trait Vulkan10MethodsTrait
      * @param int $imageLayout
      * @param CData|null $pColor
      * @param int $rangeCount
-     * @param CPointer<VkImageSubresourceRange>|null $pRanges
+     * @param CData<VkImageSubresourceRange>|null $pRanges
      * @return void
      * @since 1.0
      * @psalm-param VkImageLayout::* $imageLayout
      *
      */
-    public static function vkCmdClearColorImage(
+    public function cmdClearColorImage(
         CData $commandBuffer,
         CData $image,
         int $imageLayout,
@@ -2175,24 +2174,24 @@ trait Vulkan10MethodsTrait
         int $rangeCount,
         ?CData $pRanges
     ): void {
-        assert(Version::make(1, 0) >= self::$version, 'VkImageSubresourceRange required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'VkImageSubresourceRange required Vulkan v1.0');
 
-        self::$ffi->vkCmdClearColorImage($commandBuffer, $image, $imageLayout, $pColor, $rangeCount, $pRanges);
+        $this->ffi->vkCmdClearColorImage($commandBuffer, $image, $imageLayout, $pColor, $rangeCount, $pRanges);
     }
 
     /**
      * @param CData|VkCommandBuffer $commandBuffer
      * @param CData|VkImage $image
      * @param int $imageLayout
-     * @param CPointer<VkClearDepthStencilValue>|null $pDepthStencil
+     * @param CData<VkClearDepthStencilValue>|null $pDepthStencil
      * @param int $rangeCount
-     * @param CPointer<VkImageSubresourceRange>|null $pRanges
+     * @param CData<VkImageSubresourceRange>|null $pRanges
      * @return void
      * @since 1.0
      * @psalm-param VkImageLayout::* $imageLayout
      *
      */
-    public static function vkCmdClearDepthStencilImage(
+    public function cmdClearDepthStencilImage(
         CData $commandBuffer,
         CData $image,
         int $imageLayout,
@@ -2200,31 +2199,31 @@ trait Vulkan10MethodsTrait
         int $rangeCount,
         ?CData $pRanges
     ): void {
-        assert(Version::make(1, 0) >= self::$version, 'VkImageSubresourceRange required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'VkImageSubresourceRange required Vulkan v1.0');
 
-        self::$ffi->vkCmdClearDepthStencilImage($commandBuffer, $image, $imageLayout, $pDepthStencil, $rangeCount,
+        $this->ffi->vkCmdClearDepthStencilImage($commandBuffer, $image, $imageLayout, $pDepthStencil, $rangeCount,
             $pRanges);
     }
 
     /**
      * @param CData|VkCommandBuffer $commandBuffer
      * @param int $attachmentCount
-     * @param CPointer<VkClearAttachment>|null $pAttachments
+     * @param CData<VkClearAttachment>|null $pAttachments
      * @param int $rectCount
-     * @param CPointer<VkClearRect>|null $pRects
+     * @param CData<VkClearRect>|null $pRects
      * @return void
      * @since 1.0
      */
-    public static function vkCmdClearAttachments(
+    public function cmdClearAttachments(
         CData $commandBuffer,
         int $attachmentCount,
         ?CData $pAttachments,
         int $rectCount,
         ?CData $pRects
     ): void {
-        assert(Version::make(1, 0) >= self::$version, 'VkClearRect required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'VkClearRect required Vulkan v1.0');
 
-        self::$ffi->vkCmdClearAttachments($commandBuffer, $attachmentCount, $pAttachments, $rectCount, $pRects);
+        $this->ffi->vkCmdClearAttachments($commandBuffer, $attachmentCount, $pAttachments, $rectCount, $pRects);
     }
 
     /**
@@ -2234,14 +2233,14 @@ trait Vulkan10MethodsTrait
      * @param CData|VkImage $dstImage
      * @param int $dstImageLayout
      * @param int $regionCount
-     * @param CPointer<VkImageResolve>|null $pRegions
+     * @param CData<VkImageResolve>|null $pRegions
      * @return void
      * @since 1.0
      * @psalm-param VkImageLayout::* $srcImageLayout
      * @psalm-param VkImageLayout::* $dstImageLayout
      *
      */
-    public static function vkCmdResolveImage(
+    public function cmdResolveImage(
         CData $commandBuffer,
         CData $srcImage,
         int $srcImageLayout,
@@ -2250,9 +2249,9 @@ trait Vulkan10MethodsTrait
         int $regionCount,
         ?CData $pRegions
     ): void {
-        assert(Version::make(1, 0) >= self::$version, 'VkImageResolve required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'VkImageResolve required Vulkan v1.0');
 
-        self::$ffi->vkCmdResolveImage($commandBuffer, $srcImage, $srcImageLayout, $dstImage, $dstImageLayout,
+        $this->ffi->vkCmdResolveImage($commandBuffer, $srcImage, $srcImageLayout, $dstImage, $dstImageLayout,
             $regionCount, $pRegions);
     }
 
@@ -2263,11 +2262,11 @@ trait Vulkan10MethodsTrait
      * @return void
      * @since 1.0
      */
-    public static function vkCmdSetEvent(CData $commandBuffer, CData $event, int $stageMask): void
+    public function cmdSetEvent(CData $commandBuffer, CData $event, int $stageMask): void
     {
-        assert(Version::make(1, 0) >= self::$version, 'vkCmdSetEvent required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'vkCmdSetEvent required Vulkan v1.0');
 
-        self::$ffi->vkCmdSetEvent($commandBuffer, $event, $stageMask);
+        $this->ffi->vkCmdSetEvent($commandBuffer, $event, $stageMask);
     }
 
     /**
@@ -2277,11 +2276,11 @@ trait Vulkan10MethodsTrait
      * @return void
      * @since 1.0
      */
-    public static function vkCmdResetEvent(CData $commandBuffer, CData $event, int $stageMask): void
+    public function cmdResetEvent(CData $commandBuffer, CData $event, int $stageMask): void
     {
-        assert(Version::make(1, 0) >= self::$version, 'vkCmdResetEvent required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'vkCmdResetEvent required Vulkan v1.0');
 
-        self::$ffi->vkCmdResetEvent($commandBuffer, $event, $stageMask);
+        $this->ffi->vkCmdResetEvent($commandBuffer, $event, $stageMask);
     }
 
     /**
@@ -2291,15 +2290,15 @@ trait Vulkan10MethodsTrait
      * @param int $srcStageMask
      * @param int $dstStageMask
      * @param int $memoryBarrierCount
-     * @param CPointer<VkMemoryBarrier>|null $pMemoryBarriers
+     * @param CData<VkMemoryBarrier>|null $pMemoryBarriers
      * @param int $bufferMemoryBarrierCount
-     * @param CPointer<VkBufferMemoryBarrier>|null $pBufferMemoryBarriers
+     * @param CData<VkBufferMemoryBarrier>|null $pBufferMemoryBarriers
      * @param int $imageMemoryBarrierCount
-     * @param CPointer<VkImageMemoryBarrier>|null $pImageMemoryBarriers
+     * @param CData<VkImageMemoryBarrier>|null $pImageMemoryBarriers
      * @return void
      * @since 1.0
      */
-    public static function vkCmdWaitEvents(
+    public function cmdWaitEvents(
         CData $commandBuffer,
         int $eventCount,
         ?CData $pEvents,
@@ -2312,9 +2311,9 @@ trait Vulkan10MethodsTrait
         int $imageMemoryBarrierCount,
         ?CData $pImageMemoryBarriers
     ): void {
-        assert(Version::make(1, 0) >= self::$version, 'VkImageMemoryBarrier required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'VkImageMemoryBarrier required Vulkan v1.0');
 
-        self::$ffi->vkCmdWaitEvents($commandBuffer, $eventCount, $pEvents, $srcStageMask, $dstStageMask,
+        $this->ffi->vkCmdWaitEvents($commandBuffer, $eventCount, $pEvents, $srcStageMask, $dstStageMask,
             $memoryBarrierCount, $pMemoryBarriers, $bufferMemoryBarrierCount, $pBufferMemoryBarriers,
             $imageMemoryBarrierCount, $pImageMemoryBarriers);
     }
@@ -2325,15 +2324,15 @@ trait Vulkan10MethodsTrait
      * @param int $dstStageMask
      * @param int $dependencyFlags
      * @param int $memoryBarrierCount
-     * @param CPointer<VkMemoryBarrier>|null $pMemoryBarriers
+     * @param CData<VkMemoryBarrier>|null $pMemoryBarriers
      * @param int $bufferMemoryBarrierCount
-     * @param CPointer<VkBufferMemoryBarrier>|null $pBufferMemoryBarriers
+     * @param CData<VkBufferMemoryBarrier>|null $pBufferMemoryBarriers
      * @param int $imageMemoryBarrierCount
-     * @param CPointer<VkImageMemoryBarrier>|null $pImageMemoryBarriers
+     * @param CData<VkImageMemoryBarrier>|null $pImageMemoryBarriers
      * @return void
      * @since 1.0
      */
-    public static function vkCmdPipelineBarrier(
+    public function cmdPipelineBarrier(
         CData $commandBuffer,
         int $srcStageMask,
         int $dstStageMask,
@@ -2345,9 +2344,9 @@ trait Vulkan10MethodsTrait
         int $imageMemoryBarrierCount,
         ?CData $pImageMemoryBarriers
     ): void {
-        assert(Version::make(1, 0) >= self::$version, 'VkImageMemoryBarrier required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'VkImageMemoryBarrier required Vulkan v1.0');
 
-        self::$ffi->vkCmdPipelineBarrier($commandBuffer, $srcStageMask, $dstStageMask, $dependencyFlags,
+        $this->ffi->vkCmdPipelineBarrier($commandBuffer, $srcStageMask, $dstStageMask, $dependencyFlags,
             $memoryBarrierCount, $pMemoryBarriers, $bufferMemoryBarrierCount, $pBufferMemoryBarriers,
             $imageMemoryBarrierCount, $pImageMemoryBarriers);
     }
@@ -2360,11 +2359,11 @@ trait Vulkan10MethodsTrait
      * @return void
      * @since 1.0
      */
-    public static function vkCmdBeginQuery(CData $commandBuffer, CData $queryPool, int $query, int $flags): void
+    public function cmdBeginQuery(CData $commandBuffer, CData $queryPool, int $query, int $flags): void
     {
-        assert(Version::make(1, 0) >= self::$version, 'vkCmdBeginQuery required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'vkCmdBeginQuery required Vulkan v1.0');
 
-        self::$ffi->vkCmdBeginQuery($commandBuffer, $queryPool, $query, $flags);
+        $this->ffi->vkCmdBeginQuery($commandBuffer, $queryPool, $query, $flags);
     }
 
     /**
@@ -2374,11 +2373,11 @@ trait Vulkan10MethodsTrait
      * @return void
      * @since 1.0
      */
-    public static function vkCmdEndQuery(CData $commandBuffer, CData $queryPool, int $query): void
+    public function cmdEndQuery(CData $commandBuffer, CData $queryPool, int $query): void
     {
-        assert(Version::make(1, 0) >= self::$version, 'vkCmdEndQuery required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'vkCmdEndQuery required Vulkan v1.0');
 
-        self::$ffi->vkCmdEndQuery($commandBuffer, $queryPool, $query);
+        $this->ffi->vkCmdEndQuery($commandBuffer, $queryPool, $query);
     }
 
     /**
@@ -2389,15 +2388,15 @@ trait Vulkan10MethodsTrait
      * @return void
      * @since 1.0
      */
-    public static function vkCmdResetQueryPool(
+    public function cmdResetQueryPool(
         CData $commandBuffer,
         CData $queryPool,
         int $firstQuery,
         int $queryCount
     ): void {
-        assert(Version::make(1, 0) >= self::$version, 'vkCmdResetQueryPool required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'vkCmdResetQueryPool required Vulkan v1.0');
 
-        self::$ffi->vkCmdResetQueryPool($commandBuffer, $queryPool, $firstQuery, $queryCount);
+        $this->ffi->vkCmdResetQueryPool($commandBuffer, $queryPool, $firstQuery, $queryCount);
     }
 
     /**
@@ -2410,15 +2409,15 @@ trait Vulkan10MethodsTrait
      * @psalm-param VkPipelineStageFlagBits::* $pipelineStage
      *
      */
-    public static function vkCmdWriteTimestamp(
+    public function cmdWriteTimestamp(
         CData $commandBuffer,
         int $pipelineStage,
         CData $queryPool,
         int $query
     ): void {
-        assert(Version::make(1, 0) >= self::$version, 'vkCmdWriteTimestamp required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'vkCmdWriteTimestamp required Vulkan v1.0');
 
-        self::$ffi->vkCmdWriteTimestamp($commandBuffer, $pipelineStage, $queryPool, $query);
+        $this->ffi->vkCmdWriteTimestamp($commandBuffer, $pipelineStage, $queryPool, $query);
     }
 
     /**
@@ -2433,7 +2432,7 @@ trait Vulkan10MethodsTrait
      * @return void
      * @since 1.0
      */
-    public static function vkCmdCopyQueryPoolResults(
+    public function cmdCopyQueryPoolResults(
         CData $commandBuffer,
         CData $queryPool,
         int $firstQuery,
@@ -2443,9 +2442,9 @@ trait Vulkan10MethodsTrait
         int $stride,
         int $flags
     ): void {
-        assert(Version::make(1, 0) >= self::$version, 'vkCmdCopyQueryPoolResults required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'vkCmdCopyQueryPoolResults required Vulkan v1.0');
 
-        self::$ffi->vkCmdCopyQueryPoolResults($commandBuffer, $queryPool, $firstQuery, $queryCount, $dstBuffer,
+        $this->ffi->vkCmdCopyQueryPoolResults($commandBuffer, $queryPool, $firstQuery, $queryCount, $dstBuffer,
             $dstOffset, $stride, $flags);
     }
 
@@ -2459,7 +2458,7 @@ trait Vulkan10MethodsTrait
      * @return void
      * @since 1.0
      */
-    public static function vkCmdPushConstants(
+    public function cmdPushConstants(
         CData $commandBuffer,
         CData $layout,
         int $stageFlags,
@@ -2467,25 +2466,25 @@ trait Vulkan10MethodsTrait
         int $size,
         ?CData $pValues
     ): void {
-        assert(Version::make(1, 0) >= self::$version, 'void required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'void required Vulkan v1.0');
 
-        self::$ffi->vkCmdPushConstants($commandBuffer, $layout, $stageFlags, $offset, $size, $pValues);
+        $this->ffi->vkCmdPushConstants($commandBuffer, $layout, $stageFlags, $offset, $size, $pValues);
     }
 
     /**
      * @param CData|VkCommandBuffer $commandBuffer
-     * @param CPointer<VkRenderPassBeginInfo>|null $pRenderPassBegin
+     * @param CData<VkRenderPassBeginInfo>|null $pRenderPassBegin
      * @param int $contents
      * @return void
      * @since 1.0
      * @psalm-param VkSubpassContents::* $contents
      *
      */
-    public static function vkCmdBeginRenderPass(CData $commandBuffer, ?CData $pRenderPassBegin, int $contents): void
+    public function cmdBeginRenderPass(CData $commandBuffer, ?CData $pRenderPassBegin, int $contents): void
     {
-        assert(Version::make(1, 0) >= self::$version, 'VkRenderPassBeginInfo required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'VkRenderPassBeginInfo required Vulkan v1.0');
 
-        self::$ffi->vkCmdBeginRenderPass($commandBuffer, $pRenderPassBegin, $contents);
+        $this->ffi->vkCmdBeginRenderPass($commandBuffer, $pRenderPassBegin, $contents);
     }
 
     /**
@@ -2496,11 +2495,11 @@ trait Vulkan10MethodsTrait
      * @psalm-param VkSubpassContents::* $contents
      *
      */
-    public static function vkCmdNextSubpass(CData $commandBuffer, int $contents): void
+    public function cmdNextSubpass(CData $commandBuffer, int $contents): void
     {
-        assert(Version::make(1, 0) >= self::$version, 'vkCmdNextSubpass required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'vkCmdNextSubpass required Vulkan v1.0');
 
-        self::$ffi->vkCmdNextSubpass($commandBuffer, $contents);
+        $this->ffi->vkCmdNextSubpass($commandBuffer, $contents);
     }
 
     /**
@@ -2508,11 +2507,11 @@ trait Vulkan10MethodsTrait
      * @return void
      * @since 1.0
      */
-    public static function vkCmdEndRenderPass(CData $commandBuffer): void
+    public function cmdEndRenderPass(CData $commandBuffer): void
     {
-        assert(Version::make(1, 0) >= self::$version, 'vkCmdEndRenderPass required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'vkCmdEndRenderPass required Vulkan v1.0');
 
-        self::$ffi->vkCmdEndRenderPass($commandBuffer);
+        $this->ffi->vkCmdEndRenderPass($commandBuffer);
     }
 
     /**
@@ -2522,13 +2521,13 @@ trait Vulkan10MethodsTrait
      * @return void
      * @since 1.0
      */
-    public static function vkCmdExecuteCommands(
+    public function cmdExecuteCommands(
         CData $commandBuffer,
         int $commandBufferCount,
         ?CData $pCommandBuffers
     ): void {
-        assert(Version::make(1, 0) >= self::$version, 'VkCommandBuffer required Vulkan v1.0');
+        assert(Version::make(1, 0) >= $this->version, 'VkCommandBuffer required Vulkan v1.0');
 
-        self::$ffi->vkCmdExecuteCommands($commandBuffer, $commandBufferCount, $pCommandBuffers);
+        $this->ffi->vkCmdExecuteCommands($commandBuffer, $commandBufferCount, $pCommandBuffers);
     }
 }
