@@ -164,6 +164,10 @@ final class Vulkan implements Vulkan10Interface, Vulkan11Interface, Vulkan12Inte
      */
     public function new($type, bool $owned = true, bool $persistent = false): CData
     {
+        if (\is_string($type)) {
+            $type = \str_replace(__NAMESPACE__ . '\\', '', $type);
+        }
+        
         return $this->ffi->new($type, $owned, $persistent);
     }
 
@@ -176,6 +180,10 @@ final class Vulkan implements Vulkan10Interface, Vulkan11Interface, Vulkan12Inte
      */
     public function cast($type, CData $pointer): CData
     {
+        if (\is_string($type)) {
+            $type = \str_replace(__NAMESPACE__ . '\\', '', $type);
+        }
+        
         return $this->ffi->cast($type, $pointer);
     }
 }
